@@ -1,50 +1,51 @@
 module Api
   class LabelsController < ApplicationController
 
-  def create
-    @label = Label.new(label_params)
+    def create
+      @label = Label.new(label_params)
 
-    if @label.save
-      render json: @label
-    else
-      render json: @label.errors.full_messages, status: 422
+      if @label.save
+        render json: @label
+      else
+        render json: @label.errors.full_messages, status: 422
+      end
     end
-  end
 
-  def update
-    @label = Label.find(params[:id])
+    def update
+      @label = Label.find(params[:id])
 
-    if @label.update(label_params)
-      render json: @label
-    else
-      render json @label.errors.full_messages, status: 422
+      if @label.update(label_params)
+        render json: @label
+      else
+        render json @label.errors.full_messages, status: 422
+      end
     end
-  end
 
-  def destroy
-    @label = Label.find(params[:id])
-    @label.destroy!
+    def destroy
+      @label = Label.find(params[:id])
+      @label.destroy!
 
-    render json: @label
-  end
+      render json: @label
+    end
 
-  def show
-    @label = Label.find(params[:id])
+    def show
+      @label = Label.find(params[:id])
 
-    render json: @label
-  end
+      render json: @label
+    end
 
-  def index
-    @label = Label.all
+    def index
+      @label = Label.all
 
-    render json: @label
-  end
+      render json: @label
+    end
 
-  private
+    private
 
-  def label_params
-    params
-      .require(:label)
-      .permit(:title, :profile)
+    def label_params
+      params
+        .require(:label)
+        .permit(:title, :profile)
+    end
   end
 end
