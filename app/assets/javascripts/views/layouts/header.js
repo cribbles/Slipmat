@@ -1,5 +1,7 @@
 Slipmat.Views.Header = Backbone.View.extend({
 
+  tagName: "header",
+  className: "header",
   template: JST["layouts/header/header"],
 
   render: function () {

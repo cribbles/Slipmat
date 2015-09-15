@@ -10,8 +10,8 @@ window.Slipmat = {
     $("body").prepend(header.render().$el);
     $("body").append(footer.render().$el);
 
-    var router = Slipmat.Routers.Router({
-      $rootEl: $("main#content")
+    var router = new Slipmat.Routers.Router({
+      $rootEl: $("main.content")
     });
 
     Backbone.history.start();

@@ -1,5 +1,7 @@
 Slipmat.Views.Footer = Backbone.View.extend({
 
+  tagName: "footer",
+  className: "footer",
   template: JST["layouts/footer/footer"],
 
   render: function () {

@@ -1,0 +1,63 @@
+<figure class="form record-form">
+  <div class="form-header">
+    <%= record.isNew() ? "Add New Record" : "Edit Record" %>
+  </div>
+  <div class="form-main record-form-main">
+    <label for="record_title"><b>Artist</b> (required)</label>
+    <input
+      type="text"
+      name="record[artist]"
+      value="<%= record.get("artist") %>"
+      id="record_title"
+      class="form record-form">
+
+    <label for="record_title"><b>Title</b> (required)</label>
+    <input
+      type="text"
+      name="record[title]"
+      value="<%= record.get("title") %>"
+      id="record_title"
+      class="form record-form">
+
+    <label for="record_label">Label</label>
+    <input
+      type="text"
+      name="record[label]"
+      value="<%= record.get("label") %>"
+      id="record_label"
+      class="form record-form">
+
+    <label for="record_catno">Cat #</label>
+    <input
+      type="text"
+      name="record[catno]"
+      value="<%= record.get("catno") %>"
+      id="record_catno"
+      class="form record-form">
+
+    <label for="record_year">Year</label>
+    <input
+      type="text"
+      name="record[year]"
+      value="<%= record.get("year") %>"
+      id="record_year"
+      class="form record-form">
+
+    <label for="record_image_url">Image URL</label>
+    <input
+      type="text"
+      name="record[image_url]"
+      value="<%= record.get("image_url") %>"
+      id="record_image_url"
+      class="form record-form">
+
+    <label for="record_notes">Notes</label>
+    <textarea
+      name="record[notes]"
+      id="record_notes"
+      class="form record-form"><%= record.get("notes") %></textarea>
+
+    <button class="button button-data">
+      <%= record.isNew() ? "Add Record" : "Update Record" %>
+    </button>
+</figure>
