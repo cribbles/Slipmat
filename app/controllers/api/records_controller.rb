@@ -47,11 +47,15 @@ module Api
         .require(:record)
         .permit(
           :title,
-          :label_id,
+          :artist_name,
           :artist_id,
+          :label_name,
+          :label_id,
           :cat_no,
           :country,
-          :year
+          :image_url,
+          :year,
+          :notes
         )
     end
   end
