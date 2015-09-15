@@ -4,7 +4,17 @@ window.Slipmat = {
   Views: {},
   Routers: {},
   initialize: function() {
-    alert('Hello from Backbone!');
+    var header = new Slipmat.Views.Header();
+    var footer = new Slipmat.Views.Footer();
+
+    $("body").prepend(header.render().$el);
+    $("body").append(footer.render().$el);
+
+    var router = Slipmat.Routers.Router({
+      $rootEl: $("main#content")
+    });
+
+    Backbone.history.start();
   }
 };
 
