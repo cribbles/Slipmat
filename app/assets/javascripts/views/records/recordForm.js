@@ -5,6 +5,7 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
   template: JST["records/form"],
 
   events: {
+    "click .new-selector": "replaceInputField",
     "submit": "submit"
   },
 
@@ -35,11 +36,26 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
     e.preventDefault();
 
     var attributes = this.$el.serializeJSON();
+
     this.model.save(attributes, {
       success: function (model) {
         Backbone.history.navigate("records/" + model.id, { trigger: true });
       }
     });
+  },
+
+  replaceInputField: function (e) {
+    e.preventDefault();
+
+    var $el = $(e.currentTarget);
+    var id = $el.data("id");
+    var template = JST["records/formInput"]({
+      id: id,
+      name: $el.data("name")
+    });
+
+    $el.remove();
+    this.$("#" + id).replaceWith(template);
   }
 
 });

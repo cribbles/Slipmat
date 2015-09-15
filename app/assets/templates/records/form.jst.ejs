@@ -8,10 +8,11 @@
       <a
         href="#"
         class="new-selector"
-        data-id="#record_artist">New artist</a>
+        data-name="record[artist]"
+        data-id="record_artist">New artist</a>
     </label>
     <select
-      name="record[artist]"
+      name="record[artist_id]"
       id="record_artist"
       class="form record-form">
       <% artists.forEach(function (artist) { %>
@@ -32,10 +33,11 @@
       <a
         href="#"
         class="new-selector"
-        data-id="#record_label">New label</a>
+        data-name="record[label]"
+        data-id="record_label">New label</a>
     </label>
     <select
-      name="record[label]"
+      name="record[label_id]"
       id="record_label"
       class="form record-form">
       <option value="">None / Unknown</option>
