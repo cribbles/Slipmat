@@ -1,15 +1,777 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+/* reset */
+
+html, body, header, nav, h1, ul, li, div,
+a, input, textarea, button, small,
+main, section, footer, hr, strong, b, p {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  outline: 0px;
+
+  background: transparent;
+  font: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+  color: inherit;
+  vertical-align: inherit;
+  box-sizing: inherit;
+}
+
+body {
+  line-height: 20px;
+  font-family: "Helvetica Neue", "Nimbus Sans", sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+input[type="password"],
+input[type="email"],
+input[type="text"],
+input[type="submit"],
+textarea,
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  border: none;
+  box-shadow: none;
+  vertical-align: middle;
+  color: #000;
+  background: #eee;
+  border-radius: 2px;
+  border: 1px solid #e5e5e5;
+}
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+}
+
+b {
+  font-weight: 700;
+}
+
+/* common elements */
+
+button.button {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 5px 10px;
+  border-radius: 2px;
+  text-shadow: 1px 0px 1px #777;
+}
+
+button.button:hover {
+  color: white;
+}
+
+button.button:active {
+  box-shadow: 0 0 10px #37b;
+}
+
+button.button-main {
+  background: #5b2;
+  border-left: 1px solid #4a3;
+  border-right: 1px solid #4a3;
+  border-top: 1px solid #5a3;
+  border-bottom: 1px solid #592;
+}
+
+button.button-main:hover {
+  background: #6c4;
+}
+
+button.button-facebook {
+  background: #37c;
+  border-left: 1px solid #37a;
+  border-right: 1px solid #37a;
+  border-top: 1px solid #48a;
+  border-bottom: 1px solid #379;
+}
+
+button.button-facebook:hover {
+  background: #48d;
+}
+
+button.button-google {
+  background: #b33;
+  border-left: 1px solid #922;
+  border-right: 1px solid #922;
+  border-top: 1px solid #a33;
+  border-bottom: 1px solid #922;
+}
+
+button.button-google:hover {
+  background: #c44;
+}
+
+hr {
+  height: 1px;
+  background: #ccc;
+}
+
+/* header */
+
+.header {
+  height: 56px;
+  width: 100%;
+  background: #333;
+  margin: 0 auto;
+  padding: 0 auto;
+  border: 0;
+  border-bottom: 1px solid black;
+  position: relative;
+  z-index: 1;
+}
+
+.header-nav {
+  height: 100%;
+  margin: 0 auto;
+}
+
+.header-nav, main.content, .footer {
+  max-width: 1230px;
+  min-width: 840px;
+  padding: 0 30px;
+}
+
+.header-logo {
+  width: 124px;
+  height: inherit;
+  font-size: 32px;
+  color: white;
+  float: left;
+  margin: 0 auto;
+  font-weight: 700;
+}
+
+.header-logo a {
+  color: white;
+  display: block;
+  text-decoration: none;
+  padding: 19px 0;
+}
+
+.header-search {
+  font-size: 14px;
+  line-height: 24px;
+  width: 325px;
+  float: left;
+  margin-top: 14px;
+  margin-left: 24px;
+  margin-right: 12px;
+  padding: 2px 7px;
+}
+
+.header-search-list {
+  display: block;
+  float: left;
+  position: relative;
+}
+
+a.menu:after {
+  content: "\00a0 ▾";
+  font-size: 12px;
+  text-decoration: none;
+}
+
+li.menu:hover {
+  background: black;
+}
+
+.header-user-list {
+  display: block;
+  float: right;
+}
+
+.header-user-list button {
+  display: block;
+  float: left;
+  padding: 14px 10px;
+}
+
+.header-user-list img {
+  display: block;
+  float: left;
+  height: 30px;
+  width: 30px;
+  position: relative;
+  right: 5px;
+  bottom: 7px;
+  padding: 2px;
+  border: 1px solid #333;
+}
+
+.header-search-list > li, .header-user-list > li {
+  float: left;
+  position: relative;
+}
+
+.header-search-list a, .header-user-list a {
+  display: block;
+  vertical-align: middle;
+  font-size: 15px;
+  color: #f2f2f2;
+}
+
+.header-search-list > li > a, .header-user-list > li > a {
+  padding: 18px 10px;
+}
+
+.header-user-list button {
+  margin-top: 12px;
+  margin-left: 10px;
+}
+
+.header-search-list > li > a:hover, .header-user-list > li > a:hover {
+  color: white;
+}
+
+.header-menu, .header-user-menu {
+  display: none;
+  position: absolute;
+  white-space: nowrap;
+  background: black;
+}
+
+.header-user-menu {
+  display: none;
+  position: absolute;
+  white-space: nowrap;
+  background: black;
+}
+
+li:hover .header-menu, li:hover .header-user-menu {
+  display: block;
+  background: black;
+}
+
+.header-menu a, .header-user-menu a {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.header-menu a {
+  padding-left: 10px;
+  padding-right: 65px;
+}
+
+.header-user-menu a {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.header-menu a:hover, .header-user-menu a:hover {
+  color: #4dd2ff;
+  text-decoration: underline;
+}
+
+/* body */
+
+.content {
+  margin: 7px auto;
+}
+
+.content:before {
+  content: "";
+  display: block;
+  position: absolute;
+}
+
+.content-sidebar, .content-main {
+  display: block;
+  float: left;
+}
+
+.content-sidebar {
+  width: 15%;
+  margin-right: 2%;
+}
+
+.content-sidebar > h2, .profile-sidebar > h2 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.content-main {
+  width: 83%;
+  display: block;
+  position: relative;
+}
+
+.sidebar-filters > li {
+  display: block;
+}
+
+.sidebar-filters > li > a, .sidebar-items > li > a {
+  display: block;
+  line-height: 15px;
+  font-size: 14px;
+}
+
+.sidebar-filters > li > a {
+  padding: 6px;
+  color: white;
+  background: #7ad;
+  border: 1px solid white;
+  border-radius: 2px;
+  margin: 3px 0;
+}
+
+.sidebar-filters > li > a:hover {
+  background: #37b;
+}
+
+.sidebar-filter:after {
+  display: inline-block;
+  float: right;
+  content: "×";
+  font-size: 15px;
+  position: relative;
+  bottom: 2px;
+}
+
+.sidebar-items > li > a {
+  padding: 6px 6px 6px 0;
+  color: #03b;
+}
+
+.sidebar-items > li > a:hover {
+  background: #eee;
+}
+
+.sidebar-items > li > .sidebar-item:hover {
+  text-decoration: underline;
+}
+
+li:hover > a > .sidebar-item-count {
+  color: #aaa;
+  text-decoration: none;
+}
+
+.sidebar-item-count {
+  display: inline-block;
+  float: right;
+  color: #aaa;
+  font-size: 13px;
+}
+
+.content-tabs {
+  margin-top: 10px;
+  border-bottom: 1px solid #e5e5e5;
+  position: relative;
+}
+
+.content-tabs > .tabs {
+  display: block;
+  float: left;
+  position: relative;
+  top: 1px;
+  left: 10px;
+}
+
+.tabs > li {
+  display: block;
+  float: left;
+}
+
+.tabs > li > a {
+  display: block;
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #03b;
+}
+
+.tabs > li > a:hover {
+  text-decoration: underline;
+}
+
+.tabs > .selected {
+  border-top: 1px solid #e5e5e5;
+  border-left: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+  border-bottom: 1px solid white;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.tabs > .selected > a, .tabs > .selected > a:hover {
+  font-weight: 700;
+  color: black;
+  text-decoration: none;
+}
+
+.tabs > .selected > small {
+  display: none;
+}
+
+.tabs > li > a > .tabs-count {
+  color: #aaa;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 5px;
+  color: #aaa;
+  font-size: 13px;
+}
+
+.tabs > .selected > a > .tabs-count {
+  display: none;
+}
+
+.tabs-aside {
+  position: relative;
+  top: 10px;
+  display: block;
+  float: right;
+}
+
+.tabs-aside a {
+  padding: 5px 0;
+  font-size: 14px;
+  color: #03b;
+}
+
+.tabs-aside a:hover {
+  text-decoration: underline;
+}
+
+.content-pages {
+  display: block;
+  float: left;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.content-tabs > small {
+  display: block;
+  float: left;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.content-tabs > .prev-page {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.content-tabs > .next-page {
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.content-tabs > small > a {
+  color: #03b;
+  padding: 13px 0;
+}
+
+.content-tabs > small > a:hover {
+  color: #37b;
+}
+
+.content-tabs > small > .prev-page:before {
+  content: "←";
+  font-weight: 700;
+}
+
+.content-tabs > small > .next-page:after {
+  content: "→";
+  font-weight: 700;
+}
+
+.content-sort {
+  display: block;
+  float: right;
+  font-size: 14px;
+}
+
+.content-sort > label {
+  margin-right: 5px;
+}
+
+.content-sort > select {
+  font-size: 16px;
+}
+
+.content-records {
+  margin-top: 15px;
+}
+
+.content-records > .record {
+  display: block;
+  float: left;
+  width: 150px;
+  height: 200px;
+  margin: 7px;
+}
+
+.content-records > .record > img, .content-records > .record > a {
+  display: inline-block;
+}
+
+.content-records > .record > img {
+  width: 150px;
+  height: 150px;
+}
+
+.content-records > .record > a {
+  font-size: 13px;
+  color: #03b;
+}
+
+.content-records > .record > a:hover {
+  text-decoration: underline;
+  color: #37b;
+}
+
+.content-records > .record > .artist {
+  font-weight: 700;
+}
+
+/* footer */
+
+.footer {
+  display: block;
+  border-top: 1px solid #eee;
+  margin: 15px auto 30px auto;
+  height: 100%;
+}
+
+.footer-copy {
+  display: block;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #777;
+}
+
+.footer-copy > a {
+  color: #555;
+  text-decoration: underline;
+}
+
+.footer-copy > a:hover {
+  color: #222;
+  text-decoration: none;
+}
+
+/* login */
+
+.user-form {
+  display: block;
+  width: 350px;
+  margin: 30px auto;
+  border: 1px solid #ddd;
+}
+
+.user-form-header {
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+  font-weight: 700;
+  padding: 7px 10px;
+}
+
+.user-form-main > label, .user-form-main > span {
+  display: block;
+  font-size: 15px;
+}
+
+.user-form-main > label {
+  margin: 15px 15px 5px 15px;
+}
+
+.user-form-main > span {
+  margin: 15px;
+}
+
+input[type="text"].user-form,
+input[type="password"].user-form {
+  font-size: 16px;
+  margin: 0 15px;
+  background: white;
+  border: 1px solid #333;
+  box-shadow: inset 1px 1px 2px #ccc;
+  width: 310px;
+  height: 20px;
+  line-height: 30px;
+  padding: 5px;
+}
+
+input[type="text"].user-form:focus,
+input[type="password"].user-form:focus {
+  box-shadow: 0 0 4px #37b;
+}
+
+.user-form-main button {
+  display: block;
+  margin: 10px auto;
+}
+
+.user-form-main > hr {
+  margin: 5px 14px 0 14px;
+}
+
+a.link {
+  color: #03b;
+}
+
+a.link:hover {
+  text-decoration: underline;
+}
+
+a.link:active {
+  text-decoration: none;
+}
+
+/* profile */
+
+.profile-sidebar, .profile-main {
+  min-height: 200px;
+  display: block;
+  float: left;
+  font-size: 14px;
+}
+
+.profile-sidebar {
+  width: 20%;
+  margin-right: 2%;
+  z-index: 4;
+}
+
+.profile-sidebar > hr {
+  margin: 10px 0;
+}
+
+.profile-sidebar > span {
+  display: block;
+  margin: 3px 0;
+}
+
+.profile-main {
+  width: 78%;
+  display: block;
+  float: left;
+  position: relative;
+}
+
+.profile-sidebar > .sidebar-items {
+  font-size: 14px;
+}
+
+.profile-sidebar > .sidebar-items > li {
+  padding: 2px 0;
+}
+
+.profile-header {
+  height: 200px;
+  position: relative;
+  background: #222;
+  margin: 0;
+}
+
+.profile-navbar {
+  height: 50px;
+  width: 100%;
+  position: absolute;
+  background: #111;
+  bottom: 0px;
+  color: white;
+}
+
+.profile-navbar > .navbar {
+  max-width: 1280px;
+  min-width: 890px;
+  margin: auto;
+}
+
+.navbar-sidebar, .navbar-main {
+  display: block;
+  float: left;
+  height: 1px;
+}
+
+.navbar-sidebar > .user-pic {
+  display: inline-block;
+  position: relative;
+  bottom: 140px;
+  z-index: 3;
+}
+
+.navbar-sidebar > .user-pic > img {
+  width: 150px;
+  height: 150px;
+  border: 3px solid white;
+  border-radius: 2px;
+}
+
+.navbar-main > h2 {
+  color: white;
+  font-size: 21px;
+  display: block;
+  float: left;
+  position: relative;
+  bottom: 3px;
+  right: 10px;
+  width: 225px;
+}
+
+.navbar-main > .navbar-tabs {
+  display: block;
+  float: left;
+  position: relative;
+  top: 14px;
+  height: 50px;
+}
+
+.navbar-main > .navbar-tabs > li {
+  display: block;
+  float: left;
+}
+
+.navbar-tabs > li:first-child > a {
+  border-left: 1px solid #333;
+}
+
+.navbar-tabs > li > a {
+  padding: 17px 25px;
+  font-size: 14px;
+  color: #eee;
+  border-right: 1px solid #333;
+}
+
+.navbar-tabs > li > a:hover {
+  background: #1c1c1c;
+  text-decoration: underline;
+}
+
+.profile-main > div {
+  display: block;
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 2px 5px;
+  margin: 10px 0;
+}
+
+.profile-main > p {
+  margin: 5px;
+}
