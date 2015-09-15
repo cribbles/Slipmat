@@ -15,9 +15,6 @@
       name="record[artist_id]"
       id="record_artist"
       class="form record-form">
-      <% artists.forEach(function (artist) { %>
-        <option value="<%= artist.id %>"><%= artist.get("name") %></option>
-      <% }); %>
     </select>
 
     <label for="record_title"><b>Title</b> (required)</label>
@@ -41,9 +38,6 @@
       id="record_label"
       class="form record-form">
       <option value="">None / Unknown</option>
-      <% labels.forEach(function (label) { %>
-        <option value="<%= label.id %>"><%= label.get("title") %></option>
-      <% }); %>
     </select>
 
     <label for="record_cat_no">Cat #</label>

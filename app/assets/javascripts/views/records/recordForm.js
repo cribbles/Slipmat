@@ -4,32 +4,26 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
   id: "recordForm",
   template: JST["records/form"],
 
+  initialize: function () {
+    this.artists = new Slipmat.Collections.Artists();
+    this.labels = new Slipmat.Collections.Labels();
+    this.artists.fetch();
+    this.labels.fetch();
+
+    this.listenTo(this.artists, "sync", this.addArtists);
+    this.listenTo(this.labels, "sync", this.addLabels);
+  },
+
   events: {
     "click .new-selector": "replaceInputField",
     "submit": "submit"
   },
 
   render: function () {
-    var view = this;
-    var artists = new Slipmat.Collections.Artists();
-    var labels = new Slipmat.Collections.Labels();
-
-    artists.fetch({ success: function (artists) {
-      labels.fetch({ success: function (labels) {
-        view._render({
-          artists: artists,
-          labels: labels,
-          record: view.model
-        });
-      }});
-    }});
+    var content = this.template({ record: this.model });
+    this.$el.html(content);
 
     return this;
-  },
-
-  _render: function (options) {
-    var content = this.template(options);
-    this.$el.html(content);
   },
 
   submit: function (e) {
@@ -42,6 +36,30 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
         Backbone.history.navigate("records/" + model.id, { trigger: true });
       }
     });
+  },
+
+  addArtists: function (artists) {
+    artists.forEach(function (artist) {
+      var selected = (artist.id === this.model.get("artist_id"));
+      var template = JST["records/artistOption"]({
+        artist: artist,
+        selected: selected
+      });
+
+      this.$("#record_artist").append(template);
+    }, this);
+  },
+
+  addLabels: function (labels) {
+    labels.forEach(function (label) {
+      var selected = (label.id === this.model.get("label_id"));
+      var template = JST["records/labelOption"]({
+        label: label,
+        selected: selected
+      });
+
+      this.$("#record_label").append(template);
+    }, this);
   },
 
   replaceInputField: function (e) {
