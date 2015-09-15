@@ -69,65 +69,6 @@ b {
   font-weight: 700;
 }
 
-/* common elements */
-
-button.button {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 5px 10px;
-  border-radius: 2px;
-  text-shadow: 1px 0px 1px #777;
-}
-
-button.button:hover {
-  color: white;
-}
-
-button.button:active {
-  box-shadow: 0 0 10px #37b;
-}
-
-button.button-main {
-  background: #5b2;
-  border-left: 1px solid #4a3;
-  border-right: 1px solid #4a3;
-  border-top: 1px solid #5a3;
-  border-bottom: 1px solid #592;
-}
-
-button.button-main:hover {
-  background: #6c4;
-}
-
-button.button-facebook {
-  background: #37c;
-  border-left: 1px solid #37a;
-  border-right: 1px solid #37a;
-  border-top: 1px solid #48a;
-  border-bottom: 1px solid #379;
-}
-
-button.button-facebook:hover {
-  background: #48d;
-}
-
-button.button-google {
-  background: #b33;
-  border-left: 1px solid #922;
-  border-right: 1px solid #922;
-  border-top: 1px solid #a33;
-  border-bottom: 1px solid #922;
-}
-
-button.button-google:hover {
-  background: #c44;
-}
-
-hr {
-  height: 1px;
-  background: #ccc;
-}
-
 /* header */
 
 .header {
@@ -188,7 +129,7 @@ hr {
 }
 
 a.menu:after {
-  content: "\00a0 ▾";
+  content: "\00a0 â–¾";
   font-size: 12px;
   text-decoration: none;
 }
@@ -205,7 +146,7 @@ li.menu:hover {
 .header-user-list button {
   display: block;
   float: left;
-  padding: 5px 10px;
+  padding: 14px 10px;
 }
 
 .header-user-list img {
@@ -284,7 +225,77 @@ li:hover .header-menu, li:hover .header-user-menu {
   text-decoration: underline;
 }
 
-/* body */
+button.button {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 5px 10px;
+  border-radius: 2px;
+  text-shadow: 1px 0px 1px #777;
+}
+
+button.button:hover {
+  color: white;
+}
+
+button.button:active {
+  box-shadow: 0 0 10px #37b;
+}
+
+button.button-main {
+  background: #5b2;
+  border-left: 1px solid #4a3;
+  border-right: 1px solid #4a3;
+  border-top: 1px solid #5a3;
+  border-bottom: 1px solid #592;
+}
+
+button.button-main:hover {
+  background: #6c4;
+}
+
+button.button-data {
+  color: #333;
+  background: #f2f2f2;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  border-bottom: 2px solid #d3d3d3;
+  text-shadow: 1px 0px 1px #ccc;
+}
+
+button.button-data:hover {
+  color: #333;
+  background: #f7f7f7;
+}
+
+button.button-facebook {
+  background: #37c;
+  border-left: 1px solid #37a;
+  border-right: 1px solid #37a;
+  border-top: 1px solid #48a;
+  border-bottom: 1px solid #379;
+}
+
+button.button-facebook:hover {
+  background: #48d;
+}
+
+button.button-google {
+  background: #b33;
+  border-left: 1px solid #922;
+  border-right: 1px solid #922;
+  border-top: 1px solid #a33;
+  border-bottom: 1px solid #922;
+}
+
+button.button-google:hover {
+  background: #c44;
+}
+
+hr {
+  height: 1px;
+  background: #ccc;
+}
 
 .content {
   margin: 7px auto;
@@ -344,7 +355,7 @@ li:hover .header-menu, li:hover .header-user-menu {
 .sidebar-filter:after {
   display: inline-block;
   float: right;
-  content: "×";
+  content: "Ã—";
   font-size: 15px;
   position: relative;
   bottom: 2px;
@@ -489,12 +500,12 @@ li:hover > a > .sidebar-item-count {
 }
 
 .content-tabs > small > .prev-page:before {
-  content: "←";
+  content: "â†";
   font-weight: 700;
 }
 
 .content-tabs > small > .next-page:after {
-  content: "→";
+  content: "â†’";
   font-weight: 700;
 }
 
@@ -575,57 +586,87 @@ li:hover > a > .sidebar-item-count {
 
 /* login */
 
-.user-form {
+.form {
   display: block;
-  width: 350px;
   margin: 30px auto;
   border: 1px solid #ddd;
 }
 
-.user-form-header {
+.user-form {
+  width: 350px;
+}
+
+.record-form {
+  width: 400px;
+}
+
+.form-header {
   background: #eee;
   border-bottom: 1px solid #ddd;
   font-weight: 700;
   padding: 7px 10px;
 }
 
-.user-form-main > label, .user-form-main > span {
+.form-main > label, .form-main > span {
   display: block;
   font-size: 15px;
 }
 
-.user-form-main > label {
+.form-main > label {
   margin: 15px 15px 5px 15px;
 }
 
-.user-form-main > span {
+.form-main > span {
   margin: 15px;
 }
 
-input[type="text"].user-form,
-input[type="password"].user-form {
+input[type="text"].form,
+input[type="password"].form {
   font-size: 16px;
   margin: 0 15px;
   background: white;
   border: 1px solid #333;
   box-shadow: inset 1px 1px 2px #ccc;
-  width: 310px;
   height: 20px;
   line-height: 30px;
   padding: 5px;
 }
 
-input[type="text"].user-form:focus,
-input[type="password"].user-form:focus {
+textarea.form {
+  font-size: 14px;
+  margin: 0 15px;
+  background: white;
+  border: 1px solid #333;
+  box-shadow: inset 1px 1px 2px #ccc;
+  line-height: 20px;
+  padding: 5px;
+}
+
+textarea.record-form {
+  height: 100px;
+  width: 360px;
+}
+
+input[type="text"].user-form,
+input[type="password"].user-form {
+  width: 310px;
+}
+
+input[type="text"].record-form{
+  width: 360px;
+}
+
+input[type="text"].form:focus,
+input[type="password"].form:focus {
   box-shadow: 0 0 4px #37b;
 }
 
-.user-form-main button {
+.form-main button {
   display: block;
   margin: 10px auto;
 }
 
-.user-form-main > hr {
+.form-main > hr {
   margin: 5px 14px 0 14px;
 }
 
@@ -775,3 +816,23 @@ a.link:active {
 .profile-main > p {
   margin: 5px;
 }
+
+/* record show */
+
+.record-main, .record-sidebar {
+  min-height: 200px;
+  display: block;
+  float: left;
+  font-size: 14px;
+}
+
+.record-main {
+  width: 68%;
+  margin-right: 2%;
+}
+
+.record-sidebar {
+  width: 30%;
+}
+
+/* record form */
