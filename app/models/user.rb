@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
   def password=(password)
     @password = password
-    self.password_digest = BCrypt::Password.new(password)
+    self.password_digest = BCrypt::Password.create(password)
   end
 
   def is_password?(password)
@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   end
 
   def password_digest
-    BCrypt::Password.create(super)
+    BCrypt::Password.new(super)
   end
 
   def reset_session_token!
