@@ -2,12 +2,12 @@
 
 ## Rails
 ### Models
-User
+* User
 
 ### Controllers
-Api::UsersController (new, show)
-UsersController (create)
-SessionsController (create, destroy)
+* Api::UsersController (new, show)
+* UsersController (create)
+* SessionsController (create, destroy)
 
 ### Views
 
