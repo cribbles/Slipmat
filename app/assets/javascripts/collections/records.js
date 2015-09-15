@@ -4,4 +4,4 @@ Slipmat.Collections.Records = Backbone.Collection.extend({
 
   model: Slipmat.Models.Record
 
-})
+});
