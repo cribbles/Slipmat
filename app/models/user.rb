@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
@@ -11,8 +12,11 @@ class User < ActiveRecord::Base
   end
 
   attr_reader :password
-  validates :username, presence: true
-  validates :email, presence: true
+  validates :username, presence: true, uniqueness: true
+  validates :email, presence: true,
+                    length: { maximum: 255 },
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
   validates :password_digest, presence: true
   validates :session_token, presence: true
   validates :password, length: { minimum: 8, allow_nil: true }
