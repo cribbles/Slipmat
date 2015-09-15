@@ -1,7 +1,7 @@
 /* reset */
 
 html, body, header, nav, h1, ul, li, div,
-a, input, textarea, button, small,
+a, input, textarea, button, small, select,
 main, section, footer, hr, strong, b, p {
   margin: 0px;
   padding: 0px;
@@ -129,7 +129,7 @@ b {
 }
 
 a.menu:after {
-  content: "\00a0 â–¾";
+  content: "\00a0 ▾";
   font-size: 12px;
   text-decoration: none;
 }
@@ -225,6 +225,8 @@ li:hover .header-menu, li:hover .header-user-menu {
   text-decoration: underline;
 }
 
+/* common assets */
+
 button.button {
   color: #f2f2f2;
   font-size: 15px;
@@ -297,6 +299,20 @@ hr {
   background: #ccc;
 }
 
+a.link {
+  color: #03b;
+}
+
+a.link:hover {
+  text-decoration: underline;
+}
+
+a.link:active {
+  text-decoration: none;
+}
+
+/* content */
+
 .content {
   margin: 7px auto;
 }
@@ -355,7 +371,7 @@ hr {
 .sidebar-filter:after {
   display: inline-block;
   float: right;
-  content: "Ã—";
+  content: "×";
   font-size: 15px;
   position: relative;
   bottom: 2px;
@@ -500,12 +516,12 @@ li:hover > a > .sidebar-item-count {
 }
 
 .content-tabs > small > .prev-page:before {
-  content: "â†";
+  content: "←";
   font-weight: 700;
 }
 
 .content-tabs > small > .next-page:after {
-  content: "â†’";
+  content: "→";
   font-weight: 700;
 }
 
@@ -584,7 +600,7 @@ li:hover > a > .sidebar-item-count {
   text-decoration: none;
 }
 
-/* login */
+/* forms */
 
 .form {
   display: block;
@@ -661,6 +677,21 @@ input[type="password"].form:focus {
   box-shadow: 0 0 4px #37b;
 }
 
+select.form {
+  margin: 10px 15px;
+  background: white;
+  padding: 5px;
+  font-size: 16px;
+  box-shadow: inset 1px 1px 2px #ccc;
+  border: 1px solid #333;
+  border-radius: 2px;
+  height: 30px;
+}
+
+select.record-form {
+  width: 370px;
+}
+
 .form-main button {
   display: block;
   margin: 10px auto;
@@ -670,16 +701,14 @@ input[type="password"].form:focus {
   margin: 5px 14px 0 14px;
 }
 
-a.link {
-  color: #03b;
+.form a.new-selector {
+  display: inline-block;
+  float: right;
+  color: #37b;
 }
 
-a.link:hover {
+.form a.new-selector:hover {
   text-decoration: underline;
-}
-
-a.link:active {
-  text-decoration: none;
 }
 
 /* profile */
@@ -834,5 +863,3 @@ a.link:active {
 .record-sidebar {
   width: 30%;
 }
-
-/* record form */
