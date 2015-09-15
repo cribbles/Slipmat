@@ -9,10 +9,26 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
   },
 
   render: function () {
-    var content = this.template({ record: this.model });
-    this.$el.html(content);
+    var view = this;
+    var artists = new Slipmat.Collections.Artists();
+    var labels = new Slipmat.Collections.Labels();
+
+    artists.fetch({ success: function (artists) {
+      labels.fetch({ success: function (labels) {
+        view._render({
+          artists: artists,
+          labels: labels,
+          record: view.model
+        });
+      }});
+    }});
 
     return this;
+  },
+
+  _render: function (options) {
+    var content = this.template(options);
+    this.$el.html(content);
   },
 
   submit: function (e) {
@@ -23,7 +39,7 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
       success: function (model) {
         Backbone.history.navigate("records/" + model.id, { trigger: true });
       }
-    })
+    });
   }
 
 });

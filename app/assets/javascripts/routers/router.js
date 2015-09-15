@@ -10,9 +10,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
   recordNew: function () {
     var record = new Slipmat.Models.Record();
-    var view = new Slipmat.Views.RecordForm({
-      model: record
-    });
+    var view = new Slipmat.Views.RecordForm({ model: record });
 
     this._swapView(view);
   },
