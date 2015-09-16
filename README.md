@@ -7,8 +7,8 @@
 ## Minimum Viable Product
 Slipmat is a clone of Discogs built on Rails and Backbone. Users can:
 
-- [ ] View records
-- [ ] Add and update records
+- [X] View records
+- [X] Add and update records
 - [ ] Create accounts
 - [ ] Create sessions (log in)
 - [ ] Update their profile
