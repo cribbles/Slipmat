@@ -10,6 +10,7 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
     this.artists.fetch();
     this.labels.fetch();
 
+    this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.artists, "sync", this.addArtists);
     this.listenTo(this.labels, "sync", this.addLabels);
   },
