@@ -14,7 +14,7 @@ module Api
     def update
       @record = Record.find(params[:id])
 
-      if @record.update(record_params)
+      if @record.update(record_update_params)
         render json: @record
       else
         render json @record.errors.full_messages, status: 422
@@ -49,6 +49,20 @@ module Api
           :title,
           :artist_name,
           :artist_id,
+          :label_name,
+          :label_id,
+          :cat_no,
+          :country,
+          :image_url,
+          :year,
+          :notes
+        )
+    end
+
+    def record_update_params
+      params
+        .require(:record)
+        .permit(
           :label_name,
           :label_id,
           :cat_no,

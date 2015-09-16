@@ -754,6 +754,14 @@ select.record-form {
   text-decoration: underline;
 }
 
+input[type="text"]:disabled,
+input[type="password"]:disabled,
+textarea:disabled,
+select:disabled {
+  background: #EEE;
+  color: #777;
+}
+
 input[type="text"].highlight,
 input[type="password"].highlight,
 textarea.highlight {
