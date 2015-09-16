@@ -111,6 +111,10 @@ b {
   padding: 19px 0;
 }
 
+.header-logo a:hover {
+  text-decoration: none;
+}
+
 .header-search {
   font-size: 14px;
   line-height: 24px;
@@ -126,6 +130,15 @@ b {
   display: block;
   float: left;
   position: relative;
+}
+
+a.menu, a.menu:hover,
+li.link > a, li.link > a:hover,
+.header-logo > a, .header-logo > a:hover,
+a.sidebar-filter, a.sidebar-filter:hover,
+a.next-page, a.next-page:hover,
+a.prev-page, a.prev-page:hover {
+  text-decoration: none;
 }
 
 a.menu:after {
@@ -227,11 +240,16 @@ li:hover .header-menu, li:hover .header-user-menu {
 
 /* common assets */
 
-button.button {
-  color: #f2f2f2;
+button {
   font-size: 15px;
   padding: 5px 10px;
+}
+
+button.button {
+  color: #f2f2f2;
   border-radius: 2px;
+  font-size: 15px;
+  padding: 5px 10px;
   text-shadow: 1px 0px 1px #777;
 }
 
@@ -270,6 +288,11 @@ button.button-data:hover {
   background: #f7f7f7;
 }
 
+button.button-mini {
+  font-size: 12px;
+  padding: 3px 8px;
+}
+
 button.button-facebook {
   background: #37c;
   border-left: 1px solid #37a;
@@ -299,15 +322,15 @@ hr {
   background: #ccc;
 }
 
-a.link {
+a {
   color: #03b;
 }
 
-a.link:hover {
+a:hover {
   text-decoration: underline;
 }
 
-a.link:active {
+a:active {
   text-decoration: none;
 }
 
@@ -543,12 +566,19 @@ li:hover > a > .sidebar-item-count {
   margin-top: 15px;
 }
 
-.content-records > .record {
+.content-records > .record, .record-info > .record {
   display: block;
   float: left;
   width: 150px;
-  height: 200px;
   margin: 7px;
+}
+
+.content-records > .record {
+  height: 200px;
+}
+
+.record-info > .record {
+  height: 150px;
 }
 
 .content-records > .record > img, .content-records > .record > a {
@@ -678,14 +708,27 @@ input[type="password"].form:focus {
 }
 
 select.form {
-  margin: 10px 15px;
   background: white;
-  padding: 5px;
-  font-size: 16px;
   box-shadow: inset 1px 1px 2px #ccc;
   border: 1px solid #333;
   border-radius: 2px;
+  padding: 5px;
+  font-size: 16px;
+  margin: 10px 15px;
   height: 30px;
+}
+
+select.form-mini {
+  background: white:
+  display: block;
+  position: relative;
+  bottom: 1px;
+  float: right;
+  border: 1px solid #CCC;
+  padding: 5px;
+  font-size: 14px;
+  margin: 0 0 0 10px;
+  height: 20px;
 }
 
 select.record-form {
@@ -715,7 +758,6 @@ input[type="text"].highlight,
 input[type="password"].highlight,
 textarea.highlight {
   background: #FEB;
-  box-shadow: 0 0 2px #37b;
 }
 
 /* profile */
@@ -860,6 +902,7 @@ textarea.highlight {
   display: block;
   float: left;
   font-size: 14px;
+  margin-top: 10px;
 }
 
 .record-main {
@@ -867,6 +910,133 @@ textarea.highlight {
   margin-right: 2%;
 }
 
+.record-main > section {
+  margin-bottom: 15px;
+}
+
 .record-sidebar {
   width: 30%;
+}
+
+.record-info {
+  display: block;
+  position: relative;
+  right: 5px;
+}
+
+.record-info > .info {
+  display: block;
+  float: left;
+  position: relative;
+  top: 2px;
+  margin-left: 10px;
+}
+
+.record-info > .info > h2 {
+  font-size: 20px;
+  margin: 5px 0;
+}
+
+.record-attr > .key, .record-attr > .value {
+  display: block;
+  float: left;
+  margin: 2px 0;
+}
+
+.record-attr > .key {
+  width: 85px;
+}
+
+.record-main h3, .record-sidebar h3 {
+  font-size: 15px;
+  margin: 2px 0;
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.tracklist > .track {
+  border-bottom: 1px solid #eee;
+  padding: 1px 0;
+  display: block;
+  position: relative;
+}
+
+.tracklist > .track:last-child {
+  border-bottom: none;
+}
+
+.tracklist > .track > span {
+  display: block;
+  float: left;
+  position: relative;
+}
+
+.tracklist > .track > .ord {
+  width: 10%;
+  left: 3px;
+}
+
+.tracklist > .track > .title {
+  width: 85%;
+}
+
+.tracklist > .track > .length {
+  width: 5%;
+  right: 3px;
+}
+
+.record-main > .notes > p {
+  margin: 5px 0;
+  line-height: 20px;
+}
+
+.release-container > span > a {
+  display: block;
+  margin: 5px 0 10px 0;
+  padding: 3px;
+}
+
+.release-container > .list-buttons {
+  margin-top: 5px;
+  position: relative;
+}
+
+.release-container > .list-buttons > li {
+  margin: 0 auto;
+  float: left;
+  width: 50%;
+}
+
+.list-buttons > li > button {
+  text-align: center;
+  width: 80%;
+  margin: 0 5px;
+}
+
+.statistics, .contributors {
+  display: block;
+  margin-top: 15px;
+}
+
+.statistics-container, .contributors-container {
+  display: block;
+  margin-top: 5px;
+}
+
+.statistics-container > .statistic {
+  display: block;
+  position: relative;
+}
+
+.statistics-container > .statistic > span {
+  display: block;
+  float: left;
+}
+
+.statistics-container > .statistic > .key {
+  width: 40%;
+}
+
+.statistics-container > .statistic > .value {
+  width: 60%;
 }
