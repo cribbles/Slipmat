@@ -711,6 +711,13 @@ select.record-form {
   text-decoration: underline;
 }
 
+input[type="text"].highlight,
+input[type="password"].highlight,
+textarea.highlight {
+  background: #FEB;
+  box-shadow: 0 0 2px #37b;
+}
+
 /* profile */
 
 .profile-sidebar, .profile-main {
