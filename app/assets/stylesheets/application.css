@@ -963,33 +963,33 @@ textarea.highlight {
   border-bottom: 1px solid #eee;
 }
 
-.tracklist > .track {
+.tracklist-container > .track {
   border-bottom: 1px solid #eee;
   padding: 1px 0;
   display: block;
   position: relative;
 }
 
-.tracklist > .track:last-child {
+.tracklist-container > .track:last-child {
   border-bottom: none;
 }
 
-.tracklist > .track > span {
+.tracklist-container > .track > span {
   display: block;
   float: left;
   position: relative;
 }
 
-.tracklist > .track > .ord {
+.tracklist-container > .track > .ord {
   width: 10%;
   left: 3px;
 }
 
-.tracklist > .track > .title {
+.tracklist-container > .track > .title {
   width: 85%;
 }
 
-.tracklist > .track > .length {
+.tracklist-container > .track > .length {
   width: 5%;
   right: 3px;
 }

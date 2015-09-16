@@ -42,7 +42,7 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
   addArtists: function (artists) {
     artists.forEach(function (artist) {
       var selected = (artist.id === this.model.artist().id);
-      var template = JST["records/formOption"]({
+      var template = JST["records/_formOption"]({
         model: artist,
         attribute: "name",
         selected: selected
@@ -55,7 +55,7 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
   addLabels: function (labels) {
     labels.forEach(function (label) {
       var selected = (label.id === this.model.label().id);
-      var template = JST["records/formOption"]({
+      var template = JST["records/_formOption"]({
         model: label,
         attribute: "title",
         selected: selected
@@ -70,7 +70,7 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
 
     var $el = $(e.currentTarget);
     var id = $el.data("id");
-    var template = JST["records/formInput"]({
+    var template = JST["records/_formInput"]({
       id: id,
       name: $el.data("name")
     });
