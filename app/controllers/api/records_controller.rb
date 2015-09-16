@@ -35,9 +35,9 @@ module Api
     end
 
     def index
-      @record = Record.all
+      @records = Record.all
 
-      render json: @record
+      render :index
     end
 
     private

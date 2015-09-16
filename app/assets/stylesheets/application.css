@@ -602,7 +602,7 @@ li:hover > a > .sidebar-item-count {
 }
 
 .content-records > .record > .artist {
-  font-weight: 700;
+  display: block;
 }
 
 /* footer */

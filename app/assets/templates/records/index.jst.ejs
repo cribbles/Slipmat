@@ -51,7 +51,9 @@
     <% records.forEach(function (record) { %>
       <figure class="record">
         <!-- placeholder -->
-        <img src="<%= Slipmat.defaultRecordImg %>" class="cover">
+        <a href="#/records/<%= record.id %>">
+          <img src="<%= Slipmat.defaultRecordImg %>" class="cover">
+        </a>
         <a href="#/artists/<%= record.artist().id %>" class="artist">
           <b><%= record.artist().escape("name") %></b>
         </a>

@@ -10,11 +10,9 @@ json.extract!(
   :updated_at
 )
 
-if @record.artist
-  json.artist do
-    json.id @record.artist.id
-    json.name @record.artist.name
-  end
+json.artist do
+  json.id @record.artist.id
+  json.name @record.artist.name
 end
 
 if @record.label
