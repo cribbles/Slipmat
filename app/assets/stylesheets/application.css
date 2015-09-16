@@ -2,7 +2,8 @@
 
 html, body, header, nav, h1, ul, li, div,
 a, input, textarea, button, small, select,
-main, section, footer, hr, strong, b, p {
+main, section, footer, hr, strong, b, p,
+table, th, tr, td {
   margin: 0px;
   padding: 0px;
   border: 0px;
@@ -259,6 +260,13 @@ button.button:hover {
 
 button.button:active {
   box-shadow: 0 0 10px #37b;
+}
+
+button.button-submit {
+  display: block;
+  margin: 15px auto;
+  text-align: center;
+  width: 150px;
 }
 
 button.button-main {
@@ -603,6 +611,7 @@ li:hover > a > .sidebar-item-count {
 
 .content-records > .record > .artist {
   display: block;
+  font-weight: 700;
 }
 
 /* footer */
@@ -645,6 +654,32 @@ li:hover > a > .sidebar-item-count {
 
 .record-form {
   width: 400px;
+  /*width: 802px;*/
+}
+
+.record-form-main {
+  border-bottom: 1px solid #ddd;
+}
+
+.record-form-info, .record-form-assoc {
+  display: block;
+  float: left;
+  width: 400px;
+  padding-bottom: 15px;
+}
+
+.record-form-info {
+  position: relative;
+  left: 1px;
+  border-right: 1px solid #ddd;
+}
+
+.record-form-assoc {
+  border-left: 1px solid #ddd;
+}
+
+.genre-container > .genre-form {
+  margin: 10px 15px;
 }
 
 .form-header {
@@ -654,17 +689,17 @@ li:hover > a > .sidebar-item-count {
   padding: 7px 10px;
 }
 
-.form-main > label, .form-main > span {
+.form-main label, .form-main span {
   display: block;
   font-size: 15px;
 }
 
-.form-main > label {
-  margin: 15px 15px 5px 15px;
+.form-main label {
+  padding: 15px 15px 5px 15px;
 }
 
-.form-main > span {
-  margin: 15px;
+.form-main span {
+  padding: 15px;
 }
 
 input[type="text"].form,
@@ -715,7 +750,7 @@ select.form {
   border-radius: 2px;
   padding: 5px;
   font-size: 16px;
-  margin: 10px 15px;
+  margin: 0 15px;
   height: 30px;
 }
 
@@ -741,7 +776,7 @@ select.record-form {
   margin: 10px auto;
 }
 
-.form-main > hr {
+.form-main hr {
   margin: 5px 14px 0 14px;
 }
 
@@ -767,6 +802,78 @@ input[type="text"].highlight,
 input[type="password"].highlight,
 textarea.highlight {
   background: #FEB;
+}
+
+/* tracklist form */
+
+.record-form-assoc > .tracklist-form {
+  padding: 2px 0 0 0;
+  position: relative;
+  bottom: 12px;
+}
+
+.tracklist-tr, .tracklist-th {
+  display: block;
+  position: relative;
+  margin: 5px 0px;
+}
+
+.tracklist-tr span, .tracklist-tr input, .tracklist-tr button {
+  margin: 0;
+}
+
+.tracklist-tr span, .tracklist-th span {
+  position: relative;
+  display: block;
+  float: left;
+  right: 25px;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.tracklist-tr > .ord {
+  display: block;
+  position: relative;
+  top: 5px;
+  width: 10px;
+}
+
+.tracklist-th > .title {
+  display: block;
+  position: relative;
+  left: 0px;
+}
+
+.tracklist-th > .length {
+  display: block;
+  position: relative;
+  left: 225px;
+}
+
+.tracklist-tr > .title {
+  width: 160px;
+}
+
+.tracklist-tr > .length {
+  width: 20px;
+}
+
+.tracklist-tr > .remove {
+  width: 10px;
+  display: block;
+  position: relative;
+  left: 130px;
+}
+
+.track-form-title {
+  width: 225px;
+}
+
+.track-form-length {
+  width: 43px;
+  position: relative;
+  left: 92px;
 }
 
 /* profile */
