@@ -7,19 +7,20 @@
     <div class="info">
       <h2 id="name">
         <b>
-          <a href="#/artists/<%= record.get("artist_id") %>" class="link">
-            <%= record.escape("artist_name") %>
+          <a href="#/artists/<%= record.artist().id %>" class="link">
+            <%= record.artist().get("name") %>
           </a> – <%= record.escape("title") %>
         </b>
       </h2>
-      <% if (record.has("label_id")) { %>
+      <% if (record.label().id) { %>
         <div class="record-attr group" id="label">
           <span class="key">
             Label:
           </span>
           <span class="value">
-            <a href="#/labels/<%= record.get("label_id") %>" class="link">
-              Label Name</a> – <%= record.escape("cat_no") %>
+            <a href="#/labels/<%= record.label().id %>" class="link">
+              <%= record.label().escape("title") %></a>
+              – <%= record.escape("cat_no") %>
           </span>
         </div>
       <% } %>
@@ -56,6 +57,7 @@
     <section class="notes">
       <h3>Notes</h3>
       <p class="notes" id="notes">
+        <%= record.escape("notes").replace(/\n/g, "<br>") %>
       </p>
     </section>
   <% } %>

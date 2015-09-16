@@ -18,4 +18,12 @@ class Record < ActiveRecord::Base
 
     self.label_id = label.id
   end
+
+  def created_at
+    super.strftime("%B %-d, %Y")
+  end
+
+  def updated_at
+    super.strftime("%B %-d, %Y")
+  end
 end

@@ -31,7 +31,7 @@ module Api
     def show
       @record = Record.find(params[:id])
 
-      render json: @record
+      render :show
     end
 
     def index
