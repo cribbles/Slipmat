@@ -354,6 +354,7 @@ a:active {
 .content-sidebar {
   width: 15%;
   margin-right: 2%;
+  min-height: 200px;
 }
 
 .content-sidebar > h2, .profile-sidebar > h2 {
