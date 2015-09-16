@@ -1,0 +1,129 @@
+<section class="record-main">
+  <section class="record-info group">
+    <figure class="record">
+      <!-- placeholder -->
+      <img src="<%= Slipmat.defaultRecordImg %>" class="cover">
+    </figure>
+    <div class="info">
+      <h2 id="name">
+        <b>
+          <a href="#/artists/<%= record.get("artist_id") %>" class="link">
+            <%= record.escape("artist_name") %>
+          </a> – <%= record.escape("title") %>
+        </b>
+      </h2>
+      <% if (record.has("label_id")) { %>
+        <div class="record-attr group" id="label">
+          <span class="key">
+            Label:
+          </span>
+          <span class="value">
+            <a href="#/labels/<%= record.get("label_id") %>" class="link">
+              Label Name</a> – <%= record.escape("cat_no") %>
+          </span>
+        </div>
+      <% } %>
+      <% if (record.has("country")) { %>
+      <div class="record-attr group" id="country">
+        <span class="key">
+          Country:
+        </span>
+        <span class="value">
+          <a href="#" class="link">
+            <%= record.get("country") %>
+          </a>
+        </span>
+      </div>
+      <% } %>
+      <% if (record.has("year")) { %>
+      <div class="record-attr group" id="year">
+        <span class="key">
+          Released:
+        </span>
+        <span class="value">
+          <a href="#" class="link">
+            <%= record.get("year") %>
+          </a>
+        </span>
+      </div>
+      <% } %>
+    </div>
+  </section>
+  <section class="tracklist">
+    <h3>Tracklist</h3>
+  </section>
+  <% if (record.has("notes")) { %>
+    <section class="notes">
+      <h3>Notes</h3>
+      <p class="notes" id="notes">
+      </p>
+    </section>
+  <% } %>
+</section>
+
+<section class="record-sidebar">
+  <section class="release">
+    <h3>Release</h3>
+    <div class="release-container">
+      <span>
+        <a href="#/records/<%= record.id %>/edit" class="link">
+          Edit Release
+        </a>
+      </span>
+      <ul class="list-buttons group">
+        <li>
+          <button class="button button-data button-mini">
+            Add to Collection
+          </button>
+        </li>
+        <li>
+          <button class="button button-data button-mini">
+            Add to Wantlist
+          </button>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <section class="statistics">
+    <h3>Statistics</h3>
+    <div class="statistics-container">
+      <div class="statistic group" id="collected">
+        <span class="key">
+          Have:
+        </span>
+        <span class="value">
+          0
+        </span>
+      </div>
+      <div class="statistic group" id="wanted">
+        <span class="key">
+          Want:
+        </span>
+        <span class="value">
+          0
+        </span>
+      </div>
+      <div class="statistic group" id="created_at">
+        <span class="key">
+          Added:
+        </span>
+        <span class="value">
+          <%= record.get("created_at") %>
+        </span>
+      </div>
+      <div class="statistic group" id="updated_at">
+        <span class="key">
+          Last Updated:
+        </span>
+        <span class="value">
+          <%= record.get("updated_at") %>
+        </span>
+      </div>
+    </div>
+  </section>
+  <section class="contributors">
+    <h3>Contributors</h3>
+    <div class="contributors-container">
+    </div>
+  </section>
+</section>

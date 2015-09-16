@@ -14,9 +14,9 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   recordIndex: function () {
     var records = new Slipmat.Collections.Records();
     records.fetch();
-    var view = new Slipmat.Views.RecordIndex({ collection: records });
-
-    this._swapView(view);
+    // var view = new Slipmat.Views.RecordIndex({ collection: records });
+    //
+    // this._swapView(view);
   },
 
   recordNew: function () {
@@ -29,7 +29,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   recordShow: function (id) {
     var record = new Slipmat.Models.Record({ id: id });
     record.fetch();
-    var view = new Slipmat.Views.RecordNew({ model: record });
+    var view = new Slipmat.Views.RecordShow({ model: record });
 
     this._swapView(view);
   },
