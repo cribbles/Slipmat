@@ -1,7 +1,7 @@
 Slipmat.Views.RecordForm = Backbone.View.extend({
 
   tagName: "form",
-  id: "recordForm",
+  id: "record-form",
   template: JST["records/form"],
 
   initialize: function (options) {
