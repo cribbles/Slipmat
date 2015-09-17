@@ -3,7 +3,7 @@ module Api
 
     def create
       @want = UserWant.new({
-        user_id: params[:user_want][:user_id]
+        user_id: params[:user_want][:user_id],
         record_id: params[:user_want][:record_id]
       })
 

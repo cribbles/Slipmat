@@ -17,11 +17,15 @@
   <ul class="sidebar-items">
     <li>
       In Collection
-      <small class="sidebar-item-count">73</small>
+      <small class="sidebar-item-count">
+        <%= user.collectedRecords().length %>
+      </small>
     </li>
     <li>
       In Wantlist
-      <small class="sidebar-item-count">59</small>
+      <small class="sidebar-item-count">
+        <%= user.wantedRecords().length %>
+      </small>
     </li>
     <li>
       Contributions

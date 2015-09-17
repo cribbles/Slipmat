@@ -4,6 +4,35 @@ Slipmat.Models.User = Backbone.Model.extend({
 
   toJSON: function () {
     return { user: _.clone(this.attributes) };
+  },
+
+  parse: function (payload) {
+    if (payload.collection) {
+      this.collectedRecords().set(payload.collection);
+      delete payload.collection;
+    }
+    if (payload.wantlist) {
+      this.wantedRecords().set(payload.wantlist);
+      delete payload.wantlist;
+    }
+
+    return payload;
+  },
+
+  collectedRecords: function () {
+    if (!this._collectedRecords) {
+      this._collectedRecords = new Slipmat.Collections.Records();
+    }
+
+    return this._collectedRecords;
+  },
+
+  wantedRecords: function () {
+    if (!this._wantedRecords) {
+      this._wantedRecords = new Slipmat.Collections.Records();
+    }
+
+    return this._wantedRecords;
   }
 
 });
