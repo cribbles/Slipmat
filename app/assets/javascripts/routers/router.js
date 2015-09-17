@@ -24,6 +24,8 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   recordNew: function () {
+    if (!this._ensureSignedIn()) { return; }
+
     var record = new Slipmat.Models.Record();
     var view = new Slipmat.Views.RecordForm({
       model: record,
@@ -42,6 +44,8 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   recordEdit: function (id) {
+    if (!this._ensureSignedIn()) { return; }
+
     var record = new Slipmat.Models.Record({ id: id });
     record.fetch();
 
@@ -83,7 +87,9 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
   _ensureSignedIn: function (callback) {
     if (!Slipmat.currentUser.isSignedIn()) {
-      callback = callback || this._goHome.bind(this);
+      if (!callback) {
+        callback = Backbone.history.navigate("login", { trigger: true });
+      }
       this.signIn(callback);
 
       return false;
