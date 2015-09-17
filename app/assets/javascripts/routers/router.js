@@ -20,7 +20,6 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     records.fetch();
 
     var view = new Slipmat.Views.RecordIndex({ collection: records });
-
     this._swapView(view);
   },
 
@@ -55,9 +54,11 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   userNew: function () {
-    var user = new Slipmat.Models.User();
-    var view = new Slipmat.Views.UserForm({ model: user });
+    if (!this._ensureSignedOut()) { return; }
 
+    var user = new Slipmat.Models.User();
+
+    var view = new Slipmat.Views.UserForm({ model: user });
     this._swapView(view);
   },
 
@@ -74,9 +75,34 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   sessionNew: function () {
-    var view = new Slipmat.Views.SessionForm();
+    if (!this._ensureSignedOut()) { return; }
 
+    var view = new Slipmat.Views.SessionForm();
     this._swapView(view);
+  },
+
+  _ensureSignedIn: function (callback) {
+    if (!Slipmat.currentUser.isSignedIn()) {
+      callback = callback || this._goHome.bind(this);
+      this.signIn(callback);
+
+      return false;
+    }
+    return true;
+  },
+
+  _ensureSignedOut: function (callback) {
+    if (Slipmat.currentUser.isSignedIn()) {
+      callback = callback || this._goHome.bind(this);
+      callback();
+
+      return false;
+    }
+    return true;
+  },
+
+  _goHome: function () {
+    Backbone.history.navigate("", { trigger: true });
   },
 
   _swapView: function (view) {
