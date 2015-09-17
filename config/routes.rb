@@ -10,5 +10,7 @@ Rails.application.routes.draw do
     resources :artists, only: [:create, :update, :destroy, :show, :index]
     resources :labels,  only: [:create, :update, :destroy, :show, :index]
     resources :records, only: [:create, :update, :destroy, :show, :index]
+    resources :user_collections, only: [:create, :destroy]
+    resources :user_wants, only: [:create, :destroy]
   end
 end
