@@ -2,7 +2,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
   initialize: function (options) {
     this.$rootEl = options.$rootEl;
-    this.countries = options.countries
+    this.countries = options.countries;
   },
 
   routes: {
