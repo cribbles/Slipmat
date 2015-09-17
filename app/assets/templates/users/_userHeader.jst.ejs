@@ -1,0 +1,25 @@
+<header class="profile-header">
+  <section class="profile-navbar">
+    <section class="navbar group">
+      <section class="navbar-sidebar">
+        <figure class="user-pic">
+          <img src="<%= Slipmat.defaultUserImg %>" class="cover">
+        </figure>
+      </section>
+      <section class="navbar-main group">
+        <h2><%= user.escape("username") %></h2>
+        <ul class="navbar-tabs group">
+          <li>
+            <a href="#">Recent Activity</a>
+          </li>
+          <li>
+            <a href="#">Collection</a>
+          </li>
+          <li>
+            <a href="#">Wantlist</a>
+          </li>
+        </ul>
+      </section>
+    </section>
+  </section>
+</header>

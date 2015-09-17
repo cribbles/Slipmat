@@ -1,0 +1,56 @@
+<section class="profile-sidebar">
+  <% if (user.has("location")) { %>
+    <span><%= user.escape("location") %></span>
+  <% } %>
+  <span>Joined on <%= user.get("created_at") %></span>
+  <% if (user.has("url")) { %>
+    <span>
+      <a href="<%= user.escape("url") %>">
+        <%= user.escape("url") %>
+      </a>
+    </span>
+  <% } %>
+  <hr>
+
+  <!-- placeholder -->
+  <h2>Contributor Stats</h2>
+  <ul class="sidebar-items">
+    <li>
+      In Collection
+      <small class="sidebar-item-count">73</small>
+    </li>
+    <li>
+      In Wantlist
+      <small class="sidebar-item-count">59</small>
+    </li>
+    <li>
+      Contributions
+      <small class="sidebar-item-count">12</small>
+    </li>
+    <li>
+      Reviews
+      <small class="sidebar-item-count">28</small>
+    </li>
+  </ul>
+</section>
+
+<section class="profile-main">
+  <div>
+    <b>Profile</b>
+  </div>
+  <p>
+    <% if (user.has("profile")) { %>
+      <%= user.escape("profile").replace(/\n/g, "<br>") %>
+    <% } else { %>
+      This user hasn't yet filled out their profile.
+    <% } %>
+  </p>
+
+  <!-- placeholder -->
+  <div>
+    <b>Recent Activity</b>
+  </div>
+  <p>
+    This user doesn't have any recent activity.
+  </p>
+</section>
