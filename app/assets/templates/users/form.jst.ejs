@@ -14,7 +14,7 @@
       <label for="user_username">Username</label>
       <input
         type="text"
-        name="username"
+        name="user[username]"
         id="user_username"
         value="<%= user.escape("username") %>"
         class="form user-form">
@@ -22,7 +22,7 @@
       <label for="user_email">Email Address</label>
       <input
         type="text"
-        name="email"
+        name="user[email]"
         id="user_email"
         value="<%= user.escape("email") %>"
         class="form user-form">
@@ -30,7 +30,7 @@
       <label for="user_password">Password</label>
       <input
         type="password"
-        name="password"
+        name="user[password]"
         id="user_password"
         class="form user-form">
 
