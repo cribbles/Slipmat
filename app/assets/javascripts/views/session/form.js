@@ -7,7 +7,7 @@ Slipmat.Views.SessionForm = Backbone.View.extend({
   },
 
   render: function () {
-    var content = this.template({ user: this.model });
+    var content = this.template();
     this.$el.html(content);
 
     return this;
@@ -17,9 +17,11 @@ Slipmat.Views.SessionForm = Backbone.View.extend({
     e.preventDefault();
 
     var $form = $(e.currentTarget);
-    var attributes = $form.serializeJSON().user;
+    var credentials = $form.serializeJSON();
 
-    this.model.fetch(attributes, {
+    Slipmat.currentUser.signIn({
+      username: credentials.username,
+      password: credentials.password,
       success: function (user) {
         Backbone.history.navigate("#/users/" + user.id, { trigger: true });
       }

@@ -10,9 +10,9 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     "records/new": "recordNew",
     "records/:id": "recordShow",
     "records/:id/edit": "recordEdit",
-    "users/new": "userNew",
-    "users/:id": "userShow",
-    "login": "sessionNew"
+    "login": "sessionNew",
+    "register": "userNew",
+    "users/:id": "userShow"
   },
 
   recordIndex: function () {
@@ -74,8 +74,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   sessionNew: function () {
-    var user = new Slipmat.Models.User();
-    var view = new Slipmat.Views.SessionForm({ model: user });
+    var view = new Slipmat.Views.SessionForm();
 
     this._swapView(view);
   },
