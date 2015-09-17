@@ -21,6 +21,7 @@ Slipmat.Views.UserForm = Backbone.View.extend({
 
     this.model.save(attributes, {
       success: function (user) {
+        Slipmat.currentUser.fetch();
         Backbone.history.navigate("#/users/" + user.id, { trigger: true });
       }
     });
