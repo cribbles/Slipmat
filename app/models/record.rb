@@ -1,4 +1,6 @@
 class Record < ActiveRecord::Base
+  include Formattable
+
   belongs_to :artist
   belongs_to :label
   has_many :tracks
@@ -17,13 +19,5 @@ class Record < ActiveRecord::Base
     label.save!
 
     self.label_id = label.id
-  end
-
-  def created_at
-    super.strftime("%B %-d, %Y")
-  end
-
-  def updated_at
-    super.strftime("%B %-d, %Y")
   end
 end
