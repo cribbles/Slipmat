@@ -1,11 +1,9 @@
 Slipmat.Views.UserForm = Backbone.View.extend({
 
-  tagName: "form",
-  id: "user-form",
   template: JST["users/form"],
 
   events: {
-    "submit .button-main": "submit"
+    "submit .new-user": "submit"
   },
 
   render: function () {
@@ -18,7 +16,7 @@ Slipmat.Views.UserForm = Backbone.View.extend({
   submit: function (e) {
     e.preventDefault();
 
-    var attributes = this.$el.serializeJSON();
+    var attributes = this.$(e.currentTarget).serializeJSON();
 
     this.model.save(attributes, {
       success: function (user) {

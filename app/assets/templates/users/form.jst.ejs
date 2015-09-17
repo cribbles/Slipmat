@@ -10,30 +10,32 @@
 
     <span><b>Or...</b></span>
 
-    <label for="user_username">Username</label>
-    <input
-      type="text"
-      name="user[username]"
-      id="user_username"
-      value="<%= user.escape("username") %>"
-      class="form user-form">
+    <form class="new-user">
+      <label for="user_username">Username</label>
+      <input
+        type="text"
+        name="username"
+        id="user_username"
+        value="<%= user.escape("username") %>"
+        class="form user-form">
 
-    <label for="user_email">Email Address</label>
-    <input
-      type="text"
-      name="user[email]"
-      id="user_email"
-      value="<%= user.escape("email") %>"
-      class="form user-form">
+      <label for="user_email">Email Address</label>
+      <input
+        type="text"
+        name="email"
+        id="user_email"
+        value="<%= user.escape("email") %>"
+        class="form user-form">
 
-    <label for="user_password">Password</label>
-    <input
-      type="password"
-      name="user[password]"
-      id="user_password"
-      class="form user-form">
+      <label for="user_password">Password</label>
+      <input
+        type="password"
+        name="password"
+        id="user_password"
+        class="form user-form">
 
-    <button class="button button-main">Create Account</button>
+      <button class="button button-main">Create Account</button>
+    </form>
 
     <span>
       Already have an account?
