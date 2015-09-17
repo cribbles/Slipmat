@@ -21,6 +21,8 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
   },
 
   signIn: function (options) {
+    options = options || {};
+
     var credentials = {
       "user[username]": options.username,
       "user[password]": options.password
@@ -42,6 +44,8 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
   },
 
   signOut: function (options) {
+    options = options || {};
+
     $.ajax({
       url: this.url,
       type: "DELETE",

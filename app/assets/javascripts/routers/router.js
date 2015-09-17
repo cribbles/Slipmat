@@ -11,6 +11,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     "records/:id": "recordShow",
     "records/:id/edit": "recordEdit",
     "login": "sessionNew",
+    "logout": "sessionDelete",
     "register": "userNew",
     "users/:id": "userShow"
   },
@@ -83,6 +84,11 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
     var view = new Slipmat.Views.SessionForm();
     this._swapView(view);
+  },
+
+  sessionDelete: function () {
+    Slipmat.currentUser.signOut();
+    Backbone.history.navigate("", { trigger: true });
   },
 
   _ensureSignedIn: function (callback) {
