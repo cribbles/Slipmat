@@ -1,9 +1,9 @@
-Slipmat.Views.UserForm = Backbone.View.extend({
+Slipmat.Views.SessionForm = Backbone.View.extend({
 
-  template: JST["users/form"],
+  template: JST["session/form"],
 
   events: {
-    "submit .new-user": "submit"
+    "submit #new-session": "submit"
   },
 
   render: function () {
@@ -16,9 +16,10 @@ Slipmat.Views.UserForm = Backbone.View.extend({
   submit: function (e) {
     e.preventDefault();
 
-    var attributes = this.$(e.currentTarget).serializeJSON().user;
+    var $form = $(e.currentTarget);
+    var attributes = $form.serializeJSON().user;
 
-    this.model.save(attributes, {
+    this.model.fetch(attributes, {
       success: function (user) {
         Backbone.history.navigate("#/users/" + user.id, { trigger: true });
       }
