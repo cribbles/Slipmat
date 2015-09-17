@@ -4,6 +4,11 @@ class Record < ActiveRecord::Base
   belongs_to :artist
   belongs_to :label
   has_many :tracks
+  has_many :user_collections
+  has_many :collected, through: :user_collections, source: :user
+  has_many :user_wants
+  has_many :wanted, through: :user_wants, source: :user
+
   validates :title, presence: true
   validates :artist_id, presence: true
 

@@ -14,7 +14,13 @@ class User < ActiveRecord::Base
   end
 
   attr_reader :password
-  validates :username, presence: true, uniqueness: true
+
+  has_many :user_collections
+  has_many :collection, through: :user_collections, source: :record
+  has_many :user_wants
+  has_many :wantlist, through: :user_wants, source: :record
+
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :email, presence: true,
                     length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
@@ -22,6 +28,7 @@ class User < ActiveRecord::Base
   validates :password_digest, presence: true
   validates :session_token, presence: true
   validates :password, length: { minimum: 8, allow_nil: true }
+
   after_initialize :ensure_session_token
 
   def password=(password)
