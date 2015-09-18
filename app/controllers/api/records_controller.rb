@@ -5,6 +5,11 @@ module Api
       @record = Record.new(record_params)
 
       if @record.save
+        UserContribution.create(
+          user_id: current_user.id,
+          record_id: @record.id
+        )
+
         render json: @record
       else
         render json: @record.errors.full_messages, status: 422
@@ -15,6 +20,11 @@ module Api
       @record = Record.find(params[:id])
 
       if @record.update(record_update_params)
+        UserContribution.create(
+          user_id: current_user.id,
+          record_id: @record.id
+        )
+
         render json: @record
       else
         render json @record.errors.full_messages, status: 422
