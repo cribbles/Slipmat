@@ -14,7 +14,7 @@ module Api
 
     def show
       @user = User
-                .joins(:authored_comments)
+                .includes(:authored_comments)
                 .includes(:contributions)
                 .includes(:collection)
                 .includes(:wantlist)
