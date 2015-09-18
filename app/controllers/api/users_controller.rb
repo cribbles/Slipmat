@@ -13,7 +13,12 @@ module Api
     end
 
     def show
-      @user = User.find(params[:id])
+      @user = User
+                .joins(:authored_comments)
+                .includes(:contributions)
+                .includes(:collection)
+                .includes(:wantlist)
+                .find(params[:id])
 
       render :show
     end

@@ -42,6 +42,7 @@ module Api
 
     def show
       @record = Record
+                  .includes(:comments)
                   .includes(:contributors)
                   .includes(:collected)
                   .includes(:wanted)

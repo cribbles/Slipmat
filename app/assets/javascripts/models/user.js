@@ -23,6 +23,10 @@ Slipmat.Models.User = Backbone.Model.extend({
       this._associations = payload.associations;
       delete payload.associations;
     }
+    if (payload.num_reviews) {
+      this._numReviews = payload.num_reviews;
+      delete payload.num_reviews;
+    }
 
     return payload;
   },
@@ -55,6 +59,10 @@ Slipmat.Models.User = Backbone.Model.extend({
     this._associations = this._associations || [];
 
     return this._associations;
+  },
+
+  numReviews: function () {
+    return this._numReviews || 0;
   },
 
   addToList: function (listType, record, callback) {

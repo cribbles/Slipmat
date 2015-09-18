@@ -9,6 +9,7 @@ json.extract!(
   :created_at
 )
 
+json.num_reviews user.authored_comments.where(commentable_type: "Record").count
 associations = [];
 
 unless user.contributions.empty?
