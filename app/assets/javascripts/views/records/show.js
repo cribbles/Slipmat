@@ -24,15 +24,10 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
   },
 
   toggleListButtons: function () {
+    if (!Slipmat.currentUser.isSignedIn()) { return; }
+
     var $want = this.$("button#want");
     var $collect = this.$("button#collection");
-
-    if (!Slipmat.currentUser.isSignedIn()) {
-      this._toggleButton($collect, "add");
-      this._toggleButton($want, "add");
-      return;
-    }
-
     var wantlist = Slipmat.currentUser.wantedRecords();
     var collection = Slipmat.currentUser.collectedRecords();
 
