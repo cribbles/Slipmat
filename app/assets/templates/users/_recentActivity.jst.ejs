@@ -1,0 +1,18 @@
+<div>
+  <b>Profile</b>
+</div>
+<p>
+  <% if (user.has("profile")) { %>
+    <%= user.escape("profile").replace(/\n/g, "<br>") %>
+  <% } else { %>
+    This user hasn't yet filled out their profile.
+  <% } %>
+</p>
+
+<!-- placeholder -->
+<div>
+  <b>Recent Activity</b>
+</div>
+<p>
+  This user doesn't have any recent activity.
+</p>

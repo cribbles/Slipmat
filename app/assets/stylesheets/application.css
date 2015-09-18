@@ -990,6 +990,7 @@ textarea.highlight {
   font-size: 14px;
   color: #eee;
   border-right: 1px solid #333;
+  cursor: pointer;
 }
 
 .navbar-tabs > li > a:hover {
