@@ -12,20 +12,18 @@ Slipmat.Views.UserShow = Backbone.CompositeView.extend({
     this.listenTo(this.model, "sync", this.render);
   },
 
-  events: {
-    "click #tab": "switchTab"
-  },
-
   render: function () {
     $(".profile-header").remove();
 
     var header = this.headerTemplate({ user: this.model });
     var content = this.template({ user: this.model });
-    var recentActivity = JST["users/_recentActivity"]({ user: this.model });
+    var profile = JST["users/_profile"]({ user: this.model });
+
     this.$rootEl.before(header);
     this.$el.html(content);
-    this.$(".profile-main").html(recentActivity);
+    this.$(".profile-main").html(profile);
 
+    $(".tab").on("click", this.switchTab.bind(this));
     return this;
   },
 
@@ -35,7 +33,12 @@ Slipmat.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   switchTab: function (e) {
+    e.preventDefault();
 
+    var template = $(e.currentTarget).data("id");
+    var content = JST["users/_" + template]({ user: this.model });
+
+    this.$(".profile-main").html(content);
   }
 
 });
