@@ -8,7 +8,7 @@
     </a>
     <span class="date"><%= comment.created_at %></span>
     <p class="comment">
-      <%= _.escape(comment.body.replace(/\n/g, "<br>")) %>
+      <%= _.escape(comment.body).replace(/\n/g, "<br>") %>
     </p>
   </div>
 </div>
