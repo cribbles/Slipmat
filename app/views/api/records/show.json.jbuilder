@@ -21,3 +21,10 @@ if @record.label
     json.title @record.label.title
   end
 end
+
+if @record.contributors.any?
+  json.contributors @record.contributors do |contributor|
+    json.id contributor.id
+    json.username contributor.username
+  end
+end
