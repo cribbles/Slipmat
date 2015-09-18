@@ -8,15 +8,15 @@ Slipmat.Models.User = Backbone.Model.extend({
 
   parse: function (payload) {
     if (payload.contributions) {
-      this.contributedRecords().set(payload.contributions);
+      this.contributedRecords().set(payload.contributions, { parse: true });
       delete payload.contributions;
     }
     if (payload.collection) {
-      this.collectedRecords().set(payload.collection);
+      this.collectedRecords().set(payload.collection, { parse: true });
       delete payload.collection;
     }
     if (payload.wantlist) {
-      this.wantedRecords().set(payload.wantlist);
+      this.wantedRecords().set(payload.wantlist, { parse: true });
       delete payload.wantlist;
     }
     if (payload.associations) {
