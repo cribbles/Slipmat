@@ -13,6 +13,11 @@ Slipmat.Models.Record = Backbone.Model.extend({
       delete payload.label;
     }
 
+    if (payload.contributors) {
+      this._contributors = payload.contributors;
+      delete payload.contributors;
+    }
+
     return payload;
   },
 
@@ -30,6 +35,12 @@ Slipmat.Models.Record = Backbone.Model.extend({
     }
 
     return this._label;
+  },
+
+  contributors: function () {
+    this._contributors = this._contributors || [];
+
+    return this._contributors;
   }
 
 });

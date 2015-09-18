@@ -5,9 +5,7 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
   template: JST["records/show"],
 
   initialize: function () {
-    this.toggleListButtons();
-
-    this.listenTo(this.model, "sync", this.render);
+    this.listenTo(this.model, "sync change", this.render);
     this.listenTo(Slipmat.currentUser, "sync", this.toggleListButtons);
   },
 
@@ -18,9 +16,24 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
   render: function () {
     var content = this.template({ record: this.model });
     this.$el.html(content);
+    this.listContributors();
     this.toggleListButtons();
 
     return this;
+  },
+
+  listContributors: function () {
+    if (this.model.contributors().length === 0) { return; }
+
+    var contributors = [];
+    var $contributors = $(".contributors-container");
+
+    this.model.contributors().forEach(function (contributor) {
+      var $contributor = $('<a href="' + contributor.id + '">')
+      $contributor.text(_.escape(contributor.username));
+
+      $contributors.append($contributor);
+    });
   },
 
   toggleListButtons: function () {
