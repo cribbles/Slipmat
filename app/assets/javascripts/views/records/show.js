@@ -5,13 +5,15 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
   template: JST["records/show"],
 
   initialize: function () {
+    this.commentTemplate = JST["shared/_comment"];
+
     this.listenTo(this.model, "sync change", this.render);
     this.listenTo(Slipmat.currentUser, "sync", this.toggleListButtons);
   },
 
   events: {
     "click .list": "toggleList",
-    "submit #new-comment": "addComment"
+    "submit": "addComment"
   },
 
   render: function () {
@@ -46,13 +48,9 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
     var comments = this.model.comments();
     if (!comments.length) { return; }
 
-    var view = this;
-    var template = JST["shared/_comment"];
     comments.forEach(function(comment) {
-      var content = template({ comment: comment });
-
-      view.$("section.comments").append(content);
-    });
+      this._addComment(comment);
+    }, this);
   },
 
   addComment: function (e) {
@@ -72,8 +70,8 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
       dataType: "json",
       data: comment,
       success: function (comment) {
-        console.log(comment);
-      }
+        this._addComment(comment);
+      }.bind(this)
     });
   },
 
@@ -138,6 +136,12 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
     } else if (listType === "want") {
       $button.text(prependText + "Wantlist");
     }
+  },
+
+  _addComment: function (comment) {
+    var content = this.commentTemplate({ comment: comment });
+
+    this.$(".comments-container").prepend(content);
   },
 
   _ensureSignedIn: function (callback) {
