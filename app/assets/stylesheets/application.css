@@ -968,6 +968,11 @@ textarea.highlight {
   width: 225px;
 }
 
+.navbar-main > h2 > a, .navbar-main > h2 > a:hover {
+  color: white;
+  text-decoration: none;
+}
+
 .navbar-main > .navbar-tabs {
   display: block;
   float: left;

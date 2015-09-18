@@ -13,7 +13,7 @@ Slipmat is a clone of Discogs built on Rails and Backbone. Users can:
 - [X] Create sessions (log in)
 - [ ] Update their profile
 - [X] Add records to their wantlist and collection
-- [ ] View other users' profiles, wantlists, and collections
+- [X] View other users' profiles, wantlists, and collections
 - [ ] See their own and others' recent activity
 - [ ] View artists and labels
 - [ ] Comment on records, artists and labels

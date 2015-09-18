@@ -7,7 +7,14 @@
         </figure>
       </section>
       <section class="navbar-main group">
-        <h2><%= user.escape("username") %></h2>
+        <h2>
+          <a
+            id="profile"
+            class="tab"
+            href="#/users/<%= user.id %>">
+            <%= user.escape("username") %>
+          </a>
+        </h2>
         <ul class="navbar-tabs group">
           <li>
             <a
