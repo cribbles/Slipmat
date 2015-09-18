@@ -13,17 +13,17 @@ Slipmat.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   render: function () {
+    $(".profile-header").remove();
+
     var header = this.headerTemplate({ user: this.model });
     var content = this.template({ user: this.model });
     var profile = JST["users/_profile"]({ user: this.model });
 
     this.$rootEl.before(header);
     this.$el.html(content);
-
-    $(".profile-header").remove();
     this.$(".profile-main").html(profile);
-    $(".tab").on("click", this.switchTab.bind(this));
 
+    $(".tab").on("click", this.switchTab.bind(this));
     return this;
   },
 

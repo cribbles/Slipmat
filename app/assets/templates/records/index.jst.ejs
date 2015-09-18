@@ -22,45 +22,9 @@
     </ul>
   </nav>
 
-  <nav class="content-tabs group">
-    <div class="content-pages">
-      1 – 50 of <%= records.length %>
-    </div>
-    <small class="prev-page">
-      <span class="prev-page">
-        Prev
-      </span>
-    </small>
-    <small class="next-page">
-      <a href="#" class="next-page">
-        Next
-      </a>
-    </small>
-    <div class="content-sort">
-      <label for="content-sort" id="content-sort">Sort</label>
-      <select
-        class="form-mini"
-        name="content-sort"
-        id="content-sort">
-        <option value="created_at,asc">Latest Additions</option>
-      </select>
-    </div>
+  <nav class="content-tabs group pagination-header">
   </nav>
 
   <section class="content-records">
-    <% records.forEach(function (record) { %>
-      <figure class="record">
-        <!-- placeholder -->
-        <a href="#/records/<%= record.id %>">
-          <img src="<%= Slipmat.defaultRecordImg %>" class="cover">
-        </a>
-        <a href="#/artists/<%= record.artist().id %>" class="artist">
-          <b><%= record.artist().escape("name") %></b>
-        </a>
-        <a href="#/records/<%= record.id %>" class="title">
-          <%= record.escape("title") %>
-        </a>
-      </figure>
-    <% }); %>
   </section>
 </section>

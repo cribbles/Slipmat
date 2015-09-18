@@ -1,0 +1,11 @@
+<figure class="record">
+  <a href="#/records/<%= record.id %>">
+    <img src="<%= Slipmat.defaultRecordImg %>" class="cover">
+  </a>
+  <a href="#/artists/<%= record.artist().id %>" class="artist">
+    <b><%= record.artist().escape("name") %></b>
+  </a>
+  <a href="#/records/<%= record.id %>" class="title">
+    <%= record.escape("title") %>
+  </a>
+</figure>
