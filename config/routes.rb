@@ -12,5 +12,6 @@ Rails.application.routes.draw do
     resources :records, only: [:create, :update, :destroy, :show, :index]
     resources :user_collections, only: [:create, :destroy, :show]
     resources :user_wants, only: [:create, :destroy, :show]
+    resources :comments, only: [:create, :destroy]
   end
 end

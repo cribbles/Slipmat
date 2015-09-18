@@ -723,17 +723,25 @@ input[type="password"].form {
 
 textarea.form {
   font-size: 14px;
-  margin: 0 15px;
   background: white;
   border: 1px solid #333;
   box-shadow: inset 1px 1px 2px #ccc;
+  border-radius: 2px;
   line-height: 20px;
-  padding: 5px;
 }
 
 textarea.record-form {
+  margin: 0 15px;
   height: 100px;
   width: 360px;
+  padding: 5px;
+}
+
+textarea.comment-form {
+  margin: 10px 0;
+  height: 125px;
+  width: 500px;
+  padding: 10px;
 }
 
 input[type="text"].user-form,
@@ -746,7 +754,8 @@ input[type="text"].record-form{
 }
 
 input[type="text"].form:focus,
-input[type="password"].form:focus {
+input[type="password"].form:focus
+textarea.form:focus {
   box-shadow: 0 0 4px #37b;
 }
 

@@ -10,12 +10,18 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
   },
 
   events: {
-    "click .list": "toggleList"
+    "click .list": "toggleList",
+    "submit #new-comment": "addComment"
   },
 
   render: function () {
     var content = this.template({ record: this.model });
     this.$el.html(content);
+
+    if (Slipmat.currentUser.isSignedIn()) {
+      $textarea = $('<textarea class="form comment-form">');
+      this.$("#new-comment").prepend($textarea);
+    }
     this.listContributors();
     this.renderComments();
     this.toggleListButtons();
@@ -27,7 +33,7 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
     var contributors = this.model.contributors();
     if (!contributors.length) { return; }
 
-    var $contributors = $(".contributors-container");
+    var $contributors = this.$(".contributors-container");
     contributors.forEach(function (contributor) {
       var $contributor = $('<a href="#/users/' + contributor.id + '">')
       $contributor.text(_.escape(contributor.username));
@@ -46,6 +52,28 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
       var content = template({ comment: comment });
 
       view.$("section.comments").append(content);
+    });
+  },
+
+  addComment: function (e) {
+    e.preventDefault();
+    if (!this._ensureSignedIn()) { return; }
+
+    var comment = {
+      "comment[author_id]": Slipmat.currentUser.id,
+      "comment[body]": this.$(".comment-form").val(),
+      "comment[commentable_id]": this.model.id,
+      "comment[commentable_type]": "Record"
+    };
+
+    $.ajax({
+      url: "/api/comments",
+      type: "POST",
+      dataType: "json",
+      data: comment,
+      success: function (comment) {
+        console.log(comment);
+      }
     });
   },
 
