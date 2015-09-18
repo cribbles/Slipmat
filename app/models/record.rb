@@ -8,6 +8,8 @@ class Record < ActiveRecord::Base
   has_many :collected, through: :user_collections, source: :user
   has_many :user_wants
   has_many :wanted, through: :user_wants, source: :user
+  has_many :user_contributions
+  has_many :contributors, through: :user_contributions, source: :user
 
   validates :title, presence: true
   validates :artist_id, presence: true

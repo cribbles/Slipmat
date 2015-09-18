@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   has_many :collection, through: :user_collections, source: :record
   has_many :user_wants
   has_many :wantlist, through: :user_wants, source: :record
+  has_many :user_contributions
+  has_many :contributions, through: :user_contributions, source: :record
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :email, presence: true,
