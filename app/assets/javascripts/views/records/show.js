@@ -29,7 +29,7 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
     var $contributors = $(".contributors-container");
 
     this.model.contributors().forEach(function (contributor) {
-      var $contributor = $('<a href="' + contributor.id + '">')
+      var $contributor = $('<a href="#/users/' + contributor.id + '">')
       $contributor.text(_.escape(contributor.username));
 
       $contributors.append($contributor);
