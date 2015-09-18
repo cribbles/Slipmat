@@ -15,6 +15,10 @@ Slipmat.Models.User = Backbone.Model.extend({
       this.wantedRecords().set(payload.wantlist);
       delete payload.wantlist;
     }
+    if (payload.associations) {
+      this._associations = payload.associations;
+      delete payload.associations;
+    }
 
     return payload;
   },
@@ -33,6 +37,22 @@ Slipmat.Models.User = Backbone.Model.extend({
     }
 
     return this._wantedRecords;
+  },
+
+  associations: function () {
+    return _.clone(this._associations);
+  },
+
+  addAssociation: function (attributes) {
+    this._associations.push(attributes);
+  },
+
+  removeAssociation: function (id) {
+    var i = this._associations.findIndex(function (assoc) {
+      return assoc.id === id
+    });
+
+    this._associations.splice(i, 1);
   }
 
 });

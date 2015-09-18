@@ -8,7 +8,7 @@ module Api
       })
 
       if @want.save
-        render json: @want
+        render :show
       else
         render json: @want.errors.full_messages, status: 422
       end
@@ -19,6 +19,10 @@ module Api
       want.destroy!
 
       render json: {}
+    end
+
+    def show
+      @want = UserWant.find(params[:id])
     end
   end
 end

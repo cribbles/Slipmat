@@ -8,7 +8,7 @@ module Api
       })
 
       if @collection.save
-        render json: @collection
+        render :show
       else
         render json: @collection.errors.full_messages, status: 422
       end
@@ -19,6 +19,10 @@ module Api
       collection.destroy!
 
       render json: {}
+    end
+
+    def show
+      @collection = UserCollection.find(params[:id])
     end
   end
 end
