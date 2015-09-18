@@ -70,6 +70,7 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
       dataType: "json",
       data: comment,
       success: function (comment) {
+        this.$(".comment-form").val("");
         this._addComment(comment);
       }.bind(this)
     });
