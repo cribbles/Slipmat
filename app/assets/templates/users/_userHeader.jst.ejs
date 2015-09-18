@@ -11,20 +11,21 @@
         <ul class="navbar-tabs group">
           <li>
             <a
+              id="profile"
               class="tab"
-              data-id="profile">Profile</a>
+              href="#/users/<%= user.id %>">Profile</a>
           </li>
           <li>
             <a
+              id="collection"
               class="tab"
-              data-id="collection"
-              data-list="collectedRecords">Collection</a>
+              href="#/users/<%= user.id %>/collection">Collection</a>
           </li>
           <li>
             <a
+              id="wantlist"
               class="tab"
-              data-id="wantlist"
-              data-list="wantedRecords">Wantlist</a>
+              href="#/users/<%= user.id %>/wantlist">Wantlist</a>
           </li>
         </ul>
       </section>

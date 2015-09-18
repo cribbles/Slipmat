@@ -13,7 +13,8 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     "login": "sessionNew",
     "logout": "sessionDelete",
     "register": "userNew",
-    "users/:id": "userShow"
+    "users/:id": "userShow",
+    "users/:id/:tab": "userShow"
   },
 
   recordIndex: function () {
@@ -67,13 +68,14 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     this._swapView(view);
   },
 
-  userShow: function (id) {
+  userShow: function (id, tab) {
     var user = new Slipmat.Models.User({ id: id });
     user.fetch();
 
     var view = new Slipmat.Views.UserShow({
       $rootEl: this.$rootEl,
-      model: user
+      model: user,
+      tab: (tab || "profile")
     });
 
     this._swapView(view);

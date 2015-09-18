@@ -7,6 +7,7 @@ Slipmat.Views.UserShow = Backbone.CompositeView.extend({
   initialize: function (options) {
     options = options || {};
     this.$rootEl = options.$rootEl;
+    this.tab = options.tab || "profile";
     this.headerTemplate = JST["users/_userHeader"];
 
     this.listenTo(this.model, "sync", this.render);
@@ -17,14 +18,47 @@ Slipmat.Views.UserShow = Backbone.CompositeView.extend({
 
     var header = this.headerTemplate({ user: this.model });
     var content = this.template({ user: this.model });
-    var profile = JST["users/_profile"]({ user: this.model });
 
     this.$rootEl.before(header);
     this.$el.html(content);
-    this.$(".profile-main").html(profile);
+    this.renderTab();
 
     $(".tab").on("click", this.switchTab.bind(this));
     return this;
+  },
+
+  switchTab: function (e) {
+    e.preventDefault();
+
+    this.tab = $(e.currentTarget).attr("id");
+    this.renderTab();
+
+    var queryString = "users/" + this.model.id + "/" + this.tab;
+    Backbone.history.navigate(queryString);
+  },
+
+  renderTab: function () {
+    var content = JST["users/_" + this.tab]({ user: this.model });
+    this.$(".profile-main").html(content);
+
+    if (this.tab === "wantlist") {
+      this.renderCollection(this.model.wantedRecords());
+    } else if (this.tab === "collection") {
+      this.renderCollection(this.model.collectedRecords());
+    }
+  },
+
+  renderCollection: function (collection) {
+    var view = this;
+    var recordSubview = JST["records/_record"];
+    var header = JST["records/_paginationHeader"]({ records: collection });
+    this.$(".pagination-header").append(header);
+
+    collection.each(function(record) {
+      var subview = recordSubview({ record: record });
+
+      view.$(".content-records").append(subview);
+    });
   },
 
   remove: function () {
@@ -32,33 +66,6 @@ Slipmat.Views.UserShow = Backbone.CompositeView.extend({
     $(".tab").off("click");
 
     Backbone.View.prototype.remove.call(this);
-  },
-
-  switchTab: function (e) {
-    e.preventDefault();
-
-    var template = $(e.currentTarget).data("id");
-    var content = JST["users/_" + template]({ user: this.model });
-
-    this.$(".profile-main").html(content);
-
-    if (list = $(e.currentTarget).data("list")) {
-      this.renderList(list);
-    }
-  },
-
-  renderList: function (list) {
-    var view = this;
-    var records = this.model[list]();
-    var recordSubview = JST["records/_record"];
-    var header = JST["records/_paginationHeader"]({ records: records });
-    this.$(".pagination-header").append(header);
-
-    records.each(function(record) {
-      var subview = recordSubview({ record: record });
-
-      view.$(".content-records").append(subview);
-    });
   }
 
 });
