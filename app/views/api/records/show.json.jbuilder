@@ -23,8 +23,18 @@ if @record.label
 end
 
 if @record.contributors.any?
-  json.contributors @record.contributors do |contributor|
-    json.id contributor.id
-    json.username contributor.username
+  json.contributors @record.contributors do |user|
+    json.id user.id
+    json.username user.username
   end
+end
+
+json.in_collection @record.collected do |user|
+  json.id user.id
+  json.username user.username
+end
+
+json.in_wantlist @record.wanted do |user|
+  json.id user.id
+  json.username user.username
 end

@@ -41,7 +41,11 @@ module Api
     end
 
     def show
-      @record = Record.includes(:contributors).find(params[:id])
+      @record = Record
+                  .includes(:contributors)
+                  .includes(:collected)
+                  .includes(:wanted)
+                  .find(params[:id])
 
       render :show
     end

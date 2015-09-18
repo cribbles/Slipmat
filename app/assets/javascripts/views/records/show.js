@@ -64,15 +64,22 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
     var view = this;
     var $el = $(e.currentTarget);
     var list = $el.attr("id");
+    var listCount = this.$("#" + list + "Count");
     var action = $el.data("action");
 
     if (action === "add") {
       var callback = function () {
+        var newCount = Number(listCount.text()) + 1;
+        listCount.html(newCount);
+
         view._toggleButton($el, "remove");
       }
       Slipmat.currentUser.addToList(list, view.model, callback);
     } else if (action === "remove") {
       var callback = function () {
+        var newCount = Number(listCount.text()) - 1;
+        listCount.html(newCount);
+
         view._toggleButton($el, "add");
       }
       Slipmat.currentUser.removeFromList(list, view.model, callback);

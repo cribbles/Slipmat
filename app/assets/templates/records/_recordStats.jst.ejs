@@ -1,20 +1,20 @@
 <section class="statistics">
   <h3>Statistics</h3>
   <div class="statistics-container">
-    <div class="statistic group" id="collected">
+    <div class="statistic group">
       <span class="key">
         Have:
       </span>
-      <span class="value">
-        0
+      <span class="value" id="collectionCount">
+        <%= record.inCollection().length %>
       </span>
     </div>
-    <div class="statistic group" id="wanted">
+    <div class="statistic group">
       <span class="key">
         Want:
       </span>
-      <span class="value">
-        0
+      <span class="value" id="wantCount">
+        <%= record.inWantlist().length %>
       </span>
     </div>
     <div class="statistic group" id="created_at">
