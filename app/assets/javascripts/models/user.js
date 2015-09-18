@@ -40,19 +40,56 @@ Slipmat.Models.User = Backbone.Model.extend({
   },
 
   associations: function () {
-    return _.clone(this._associations);
+    this._associations = this._associations || [];
+
+    return this._associations;
   },
 
-  addAssociation: function (attributes) {
-    this._associations.push(attributes);
+  addToList: function (listType, record, callback) {
+    var list, collection;
+    var associations = this.associations();
+    var relationship = {
+      user_id: this.id,
+      record_id: record.id
+    }
+
+    if (listType === "collection") {
+      list = new Slipmat.Models.UserCollection();
+      collection = this.collectedRecords();
+    } else if (listType === "want") {
+      list = new Slipmat.Models.UserWant();
+      collection = this.wantedRecords();
+    }
+
+    list.save(relationship, {
+      success: function (data) {
+        var association = data.attributes;
+
+        collection.add(record);
+        associations.push(association);
+        callback && callback();
+      }
+    });
   },
 
-  removeAssociation: function (id) {
-    var i = this._associations.findIndex(function (assoc) {
+  removeFromList: function (listType, record, callback) {
+    var id = this.associations().find(function (assoc) {
+      return assoc.record_id === record.id && assoc.type === listType;
+    }).id;
+
+    var index = this.associations().findIndex(function (assoc) {
       return assoc.id === id
     });
+    this._associations.splice(index, 1);
 
-    this._associations.splice(i, 1);
+    $.ajax({
+      url: "/api/user_" + listType + "s/" + id,
+      type: "DELETE",
+      dataType: "json",
+      success: function () {
+        callback && callback();
+      }
+    });
   }
 
 });

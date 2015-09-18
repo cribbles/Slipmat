@@ -53,52 +53,21 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
     e.preventDefault();
     if (!this._ensureSignedIn()) { return; }
 
-    var list;
     var view = this;
     var $el = $(e.currentTarget);
-    var listType = $el.attr("id");
+    var list = $el.attr("id");
     var action = $el.data("action");
 
-    if (listType === "collection") {
-      list = new Slipmat.Models.UserCollection();
-      collection = Slipmat.currentUser.collectedRecords();
-    } else if (listType === "want") {
-      list = new Slipmat.Models.UserWant();
-      collection = Slipmat.currentUser.wantedRecords();
-    } else {
-      return;
-    }
-
     if (action === "add") {
-      var relationship = {
-        user_id: Slipmat.currentUser.id,
-        record_id: view.model.id
-      };
-
-      list.save(relationship, {
-        success: function (association) {
-          collection.add(this.model);
-          Slipmat.currentUser.addAssociation(association.attributes);
-          view._toggleButton($el, "remove");
-        }
-      });
+      var callback = function () {
+        view._toggleButton($el, "remove");
+      }
+      Slipmat.currentUser.addToList(list, view.model, callback);
     } else if (action === "remove") {
-      debugger
-      var associations = Slipmat.currentUser.associations();
-      var id = associations.find(function (assoc) {
-        return assoc.record_id === view.model.id && assoc.type === listType;
-      }).id;
-
-      $.ajax({
-        url: "/api/user_" + listType + "s/" + id,
-        type: "DELETE",
-        dataType: "json",
-        success: function () {
-          view._toggleButton($el, "add");
-        }
-      });
-
-      Slipmat.currentUser.removeAssociation(id);
+      var callback = function () {
+        view._toggleButton($el, "add");
+      }
+      Slipmat.currentUser.removeFromList(list, view.model, callback);
     }
   },
 
