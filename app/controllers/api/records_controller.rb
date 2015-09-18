@@ -20,10 +20,12 @@ module Api
       @record = Record.find(params[:id])
 
       if @record.update(record_update_params)
-        UserContribution.create(
-          user_id: current_user.id,
-          record_id: @record.id
-        )
+        unless current_user.contributions.include?(@record)
+          UserContribution.create(
+            user_id: current_user.id,
+            record_id: @record.id
+          )
+        end
 
         render json: @record
       else
