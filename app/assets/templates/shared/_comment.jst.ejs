@@ -1,0 +1,14 @@
+<div class="comment group">
+  <a href="/users/<%= comment.author.id %>" class="author-img">
+    <img src="<%= Slipmat.defaultUserImg %>">
+  </a>
+  <div class="comment-main">
+    <a href="/users/<%= comment.author.id %>" class="author">
+      <%= _.escape(comment.author.username) %>
+    </a>
+    <span class="date"><%= comment.created_at %></span>
+    <p class="comment">
+      <%= _.escape(comment.body.replace(/\n/g, "<br>")) %>
+    </p>
+  </div>
+</div>
