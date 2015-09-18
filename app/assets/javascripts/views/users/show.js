@@ -41,6 +41,24 @@ Slipmat.Views.UserShow = Backbone.CompositeView.extend({
     var content = JST["users/_" + template]({ user: this.model });
 
     this.$(".profile-main").html(content);
+
+    if (list = $(e.currentTarget).data("list")) {
+      this.renderList(list);
+    }
+  },
+
+  renderList: function (list) {
+    var view = this;
+    var records = this.model[list]();
+    var recordSubview = JST["records/_record"];
+    var header = JST["records/_paginationHeader"]({ records: records });
+    this.$(".pagination-header").append(header);
+
+    records.each(function(record) {
+      var subview = recordSubview({ record: record });
+
+      view.$(".content-records").append(subview);
+    });
   }
 
 });
