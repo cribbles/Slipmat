@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   has_many :wantlist, through: :user_wants, source: :record
   has_many :user_contributions
   has_many :contributions, through: :user_contributions, source: :record
+  has_many :authored_comments, class_name: "Comment", foreign_key: :author_id
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :email, presence: true,

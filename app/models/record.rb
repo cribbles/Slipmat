@@ -10,6 +10,7 @@ class Record < ActiveRecord::Base
   has_many :wanted, through: :user_wants, source: :user
   has_many :user_contributions
   has_many :contributors, through: :user_contributions, source: :user
+  has_many :comments, as: :commentable
 
   validates :title, presence: true
   validates :artist_id, presence: true
