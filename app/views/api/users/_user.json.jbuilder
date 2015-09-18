@@ -6,7 +6,8 @@ json.extract!(
   :url,
   :location,
   :profile,
-  :created_at
+  :created_at,
+  :contributions
 )
 
 associations = [];
