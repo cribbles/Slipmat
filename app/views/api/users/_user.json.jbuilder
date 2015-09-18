@@ -6,14 +6,18 @@ json.extract!(
   :url,
   :location,
   :profile,
-  :created_at,
-  :contributions
+  :created_at
 )
 
 associations = [];
 
+unless user.contributions.empty?
+  json.contributions user.contributions, partial: 'api/records/record', as: :record
+end
+
 unless user.wantlist.empty?
-  json.wantlist user.wantlist
+  json.wantlist user.wantlist, partial: 'api/records/record', as: :record
+
   user.user_wants.each do |want|
     assocation = {
       id: want.id,
@@ -25,7 +29,8 @@ unless user.wantlist.empty?
 end
 
 unless user.collection.empty?
-  json.collection user.collection
+  json.collection user.collection, partial: 'api/records/record', as: :record
+
   user.user_collections.each do |want|
     assocation = {
       id: want.id,
