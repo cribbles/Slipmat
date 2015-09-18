@@ -7,6 +7,10 @@ Slipmat.Models.User = Backbone.Model.extend({
   },
 
   parse: function (payload) {
+    if (payload.contributions) {
+      this.contributedRecords().set(payload.contributions);
+      delete payload.contributions;
+    }
     if (payload.collection) {
       this.collectedRecords().set(payload.collection);
       delete payload.collection;
@@ -21,6 +25,14 @@ Slipmat.Models.User = Backbone.Model.extend({
     }
 
     return payload;
+  },
+
+  contributedRecords: function () {
+    if (!this._contributedRecords) {
+      this._contributedRecords = new Slipmat.Collections.Records();
+    }
+
+    return this._contributedRecords;
   },
 
   collectedRecords: function () {
