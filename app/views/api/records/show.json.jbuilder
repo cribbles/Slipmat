@@ -22,7 +22,7 @@ if @record.label
   end
 end
 
-json.comments @record.comments, partial: 'api/comments/comment', as: :comment
+json.comments @record.comments.reverse, partial: 'api/comments/comment', as: :comment
 
 json.contributors @record.contributors do |user|
   json.id user.id
