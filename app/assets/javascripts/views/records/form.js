@@ -93,8 +93,8 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
     var content = JST["tracks/form"]();
     this.$(".tracklist-form").html(content);
 
-    // iterate over all the tracks, or display an initial blank input
-    var numTracks = this.model.tracks().length || 1;
+    // display all the tracks, or some initial blank fields
+    var numTracks = this.model.tracks().length || 4;
     for (var i = 0; i < numTracks; i++) {
       var track = tracks[i] || {};
       this._addTrack(track);
