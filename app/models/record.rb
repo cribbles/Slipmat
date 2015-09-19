@@ -4,7 +4,7 @@ class Record < ActiveRecord::Base
   belongs_to :artist
   belongs_to :label
   belongs_to :country
-  has_many :tracks
+  has_many :tracks, dependent: :destroy
   has_many :user_collections
   has_many :collected, through: :user_collections, source: :user
   has_many :user_wants
