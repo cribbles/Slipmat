@@ -9,6 +9,7 @@ gem 'jbuilder'
 gem 'sdoc'
 gem 'bcrypt'
 gem 'puma'
+gem 'rails_12factor'
 
 group :development, :test do
   gem 'byebug'
