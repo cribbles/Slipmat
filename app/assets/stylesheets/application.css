@@ -661,6 +661,9 @@ li:hover > a > .sidebar-item-count {
 
 .record-form {
   width: 400px;
+}
+
+.record-form:not(:last-child) {
   padding-bottom: 15px;
 }
 

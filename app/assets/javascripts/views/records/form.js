@@ -93,9 +93,12 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
     var content = JST["tracks/form"]();
     this.$(".tracklist-form").html(content);
 
-    this.model.tracks().forEach(function (track) {
+    // iterate over all the tracks, or display some blank inputs
+    var numTracks = this.model.tracks().length || 4;
+    for (var i = 0; i < numTracks; i++) {
+      var track = tracks[i] || {};
       this._addTrack(track);
-    }, this);
+    }
 
     this.$(".tracks-container").sortable({ handle: "small" });
   },
