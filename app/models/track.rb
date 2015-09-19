@@ -9,7 +9,7 @@ class Track < ActiveRecord::Base
 
   def ensure_ord
     if ord.blank?
-      highest_previous_ord = record.tracks.max_by(&:ord).ord
+      highest_previous_ord = record.tracks.max_by(&:ord).try(:ord) || 0
       self.ord = highest_previous_ord + 1
     end
   end
