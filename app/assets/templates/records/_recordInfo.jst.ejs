@@ -24,14 +24,14 @@
         </span>
       </div>
     <% } %>
-    <% if (record.has("country")) { %>
+    <% if (record.country().name) { %>
     <div class="record-attr group" id="country">
       <span class="key">
         Country:
       </span>
       <span class="value">
         <a href="#" class="link">
-          <%= record.get("country") %>
+          <%= record.country().name %>
         </a>
       </span>
     </div>

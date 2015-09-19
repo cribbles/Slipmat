@@ -69,7 +69,7 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
 
   addCountries: function () {
     Slipmat.countries.forEach(function (country) {
-      var selected = (country.id === this.model.country_id);
+      var selected = (country.id === this.model.country().id);
       var template = JST["records/_formOption"]({
         model: country,
         attribute: "name",

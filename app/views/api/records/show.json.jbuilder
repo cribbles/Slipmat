@@ -22,6 +22,11 @@ if @record.label
   end
 end
 
+json.country do
+  json.id @record.country.id
+  json.name @record.country.name
+end
+
 json.comments @record.comments.reverse, partial: 'api/comments/comment', as: :comment
 
 json.contributors @record.contributors do |user|
