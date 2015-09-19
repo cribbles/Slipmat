@@ -1,12 +1,10 @@
 <div
   class="tracklist-form-track group"
-  id="track_<%= track.id %>">
-  <% if (track.id) { %>
-    <input
-      type="hidden"
-      name="record[tracks_attributes][][id]"
-      value="<%= track.id %>">
-  <% } %>
+  id="track_<%= item %>">
+  <input
+    type="hidden"
+    name="record[tracks_attributes][][id]"
+    value="<%= track.id %>">
   <span class="ord">
     <small class="draggable"></small>
     <input

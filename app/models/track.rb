@@ -1,11 +1,6 @@
 class Track < ActiveRecord::Base
-  VALID_DURATION_REGEX = /\A([0-9]+):[0-5][0-9]\z/
-
   belongs_to :record
-
   validates :title, :ord, presence: true
-  validates :duration, with: { format: VALID_DURATION_REGEX }
-
   before_validation :ensure_ord
 
   default_scope { order(:ord) }
