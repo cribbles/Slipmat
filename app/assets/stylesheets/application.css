@@ -754,8 +754,8 @@ input[type="text"].record-form{
 }
 
 input[type="text"].form:focus,
-input[type="password"].form:focus
-textarea.form:focus {
+input[type="password"].form:focus,
+textarea:focus {
   box-shadow: 0 0 4px #37b;
 }
 
