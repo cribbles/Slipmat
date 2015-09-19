@@ -5,6 +5,7 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
   template: JST["records/show"],
 
   initialize: function () {
+    this.trackTemplate = JST["tracks/_track"];
     this.commentTemplate = JST["shared/_comment"];
 
     this.listenTo(this.model, "sync change", this.render);
@@ -24,7 +25,9 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
       $textarea = $('<textarea class="form comment-form">');
       this.$("#new-comment").prepend($textarea);
     }
+
     this.listContributors();
+    this.renderTracks();
     this.renderComments();
     this.toggleListButtons();
 
@@ -44,11 +47,20 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
     });
   },
 
+  renderTracks: function () {
+    var tracks = this.model.tracks();
+    if (!tracks.length) { return; }
+
+    tracks.forEach(function (track) {
+      this._addTrack(track);
+    }, this);
+  },
+
   renderComments: function () {
     var comments = this.model.comments();
     if (!comments.length) { return; }
 
-    comments.forEach(function(comment) {
+    comments.forEach(function (comment) {
       this._addComment(comment);
     }, this);
   },
@@ -137,6 +149,12 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
     } else if (listType === "want") {
       $button.text(prependText + "Wantlist");
     }
+  },
+
+  _addTrack: function (track) {
+    var content = this.trackTemplate({ track: track });
+
+    this.$(".tracklist-container").append(content);
   },
 
   _addComment: function (comment) {

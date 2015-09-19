@@ -1135,9 +1135,10 @@ textarea.highlight {
   display: block;
   float: left;
   position: relative;
+  min-height: 10px;
 }
 
-.tracklist-container > .track > .ord {
+.tracklist-container > .track > .position {
   width: 10%;
   left: 3px;
 }

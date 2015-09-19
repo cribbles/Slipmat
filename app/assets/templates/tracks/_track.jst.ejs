@@ -1,32 +1,5 @@
-<div class="tracklist-form-track group">
-  <span class="ord">
-    <small class="draggable"></small>
-  </span>
-  <span class="position">
-    <input
-      type="text"
-      name="record[tracks][][position]"
-      placeholder="#"
-      value="<%= track.escape("position") %>"
-      class="form track-form-position">
-  </span>
-  <span class="title">
-    <input
-      type="text"
-      name="record[tracks][][title]"
-      placeholder="Title"
-      value="<%= track.escape("track") %>"
-      class="form track-form-title">
-  </span>
-  <span class="duration">
-    <input
-      type="text"
-      name="record[tracks][][duration]"
-      placeholder="0:00"
-      value="<%= track.escape("duration") %>"
-      class="form track-form-duration">
-  </span>
-  <span class="remove">
-    <button class="button button-data">-</button>
-  </span>
+<div class="track group" id="track_<%= track.id %>">
+   <span class="position"><%= _.escape(track.position) %></span>
+   <span class="title"><%= _.escape(track.title) %></span>
+   <span class="length"><%= _.escape(track.duration) %></span>
 </div>
