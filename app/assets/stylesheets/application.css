@@ -663,10 +663,6 @@ li:hover > a > .sidebar-item-count {
   width: 400px;
 }
 
-.record-form-main {
-  border-bottom: 1px solid #ddd;
-}
-
 .record-form-info, .record-form-assoc {
   display: block;
   float: left;
@@ -677,7 +673,6 @@ li:hover > a > .sidebar-item-count {
 .record-form-info {
   position: relative;
   left: 1px;
-  border-right: 1px solid #ddd;
 }
 
 .record-form-assoc {
@@ -832,7 +827,8 @@ textarea.highlight {
 }
 
 .tracklist-form-track > span > .form,
-.tracklist-form-track > .remove > .button {
+.tracklist-form-track > .remove > .button,
+.tracklist-form-add-track > .button {
   font-size: 14px;
   height: 15px;
   line-height: 18px;
@@ -846,6 +842,19 @@ textarea.highlight {
   font-size: 14px;
   font-weight: 700;
   border-bottom: 1px solid #eee;
+}
+
+.tracklist-form-track {
+  border-bottom: 1px solid #eee;
+}
+
+.tracklist-form-add-track {
+  height: 39px;
+  text-align: center;
+}
+
+.tracklist-form-add-track > .button {
+  margin: 5px auto;
 }
 
 .tracklist-form-header > span:not(:first-child),
