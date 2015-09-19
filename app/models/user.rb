@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   include Formattable
 
-  VALID_USERNAME_REGEX /\A[a-z]+[a-z0-9\-_]+[a-z0-9]\z/i
+  VALID_USERNAME_REGEX = /\A[a-z]+[a-z0-9\-_]+[a-z0-9]\z/i
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   def self.find_by_credentials(username, password)
