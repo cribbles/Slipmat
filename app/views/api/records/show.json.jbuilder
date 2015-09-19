@@ -15,6 +15,14 @@ json.artist do
   json.name @record.artist.name
 end
 
+if @record.tracks
+  json.tracks(
+    @record.tracks,
+    partial: 'api/tracks/track',
+    as: :track
+  )
+end
+
 if @record.label
   json.label do
     json.id @record.label.id
@@ -29,7 +37,11 @@ if @record.country
   end
 end
 
-json.comments @record.comments.reverse, partial: 'api/comments/comment', as: :comment
+json.comments(
+  @record.comments.reverse,
+  partial: 'api/comments/comment',
+  as: :comment
+)
 
 json.contributors @record.contributors do |user|
   json.id user.id

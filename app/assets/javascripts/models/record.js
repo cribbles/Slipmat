@@ -15,6 +15,10 @@ Slipmat.Models.Record = Backbone.Model.extend({
       this._country = payload.country;
       delete payload.country;
     }
+    if (payload.tracks) {
+      this._tracks = payload.tracks;
+      delete payload.tracks;
+    }
     if (payload.comments) {
       this._comments = payload.comments;
       delete payload.comments;
@@ -51,6 +55,11 @@ Slipmat.Models.Record = Backbone.Model.extend({
   country: function () {
     this._country = this._country || [];
     return this._country;
+  },
+
+  tracks: function () {
+    this._tracks = this._tracks || [];
+    return this._tracks;
   },
 
   comments: function () {
