@@ -661,7 +661,6 @@ li:hover > a > .sidebar-item-count {
 
 .record-form {
   width: 400px;
-  /*width: 802px;*/
 }
 
 .record-form-main {
@@ -822,74 +821,94 @@ textarea.highlight {
 
 /* tracklist form */
 
-.record-form-assoc > .tracklist-form {
-  padding: 2px 0 0 0;
-  position: relative;
-  bottom: 12px;
+.tracklist-form {
+  width: 650px;
 }
 
-.tracklist-tr, .tracklist-th {
-  display: block;
-  position: relative;
-  margin: 5px 0px;
-}
-
-.tracklist-tr span, .tracklist-tr input, .tracklist-tr button {
-  margin: 0;
-}
-
-.tracklist-tr span, .tracklist-th span {
-  position: relative;
+.tracklist-form-main span {
   display: block;
   float: left;
-  right: 25px;
-  margin: 0;
-  border: 0;
-  padding: 0;
+  padding: 5px;
 }
 
-.tracklist-tr > .ord {
-  display: block;
+.tracklist-form-track > span > .form,
+.tracklist-form-track > .remove > .button {
+  font-size: 14px;
+  height: 15px;
+  line-height: 18px;
+}
+
+.tracklist-form-track > span > .form {
+  margin: 5px;
+}
+
+.tracklist-form-header {
+  font-size: 14px;
+  font-weight: 700;
+  border-bottom: 1px solid #eee;
+}
+
+.tracklist-form-header > span:not(:first-child),
+.tracklist-form-track > span:not(:first-child) {
+  border-left: 1px solid #eee;
+}
+
+.tracklist-form-header > span {
+  min-height: 20px;
+}
+
+.tracklist-form-track > span {
+  min-height: 37px;
+  margin: 0 auto;
+}
+
+.tracklist-form-track > .ord {
+  cursor: move;
+}
+
+.tracklist-form-track > .ord > .draggable:after {
+  content: "⇵";
+  font-size: 24px;
   position: relative;
-  top: 5px;
-  width: 10px;
+  top: 6px;
+  left: 2px;
 }
 
-.tracklist-th > .title {
-  display: block;
-  position: relative;
-  left: 0px;
-}
-
-.tracklist-th > .length {
-  display: block;
-  position: relative;
-  left: 225px;
-}
-
-.tracklist-tr > .title {
-  width: 160px;
-}
-
-.tracklist-tr > .length {
+.tracklist-form-header > .ord, .tracklist-form-track > .ord {
   width: 20px;
 }
 
-.tracklist-tr > .remove {
-  width: 10px;
-  display: block;
-  position: relative;
-  left: 130px;
+.tracklist-form-header > .position, .tracklist-form-track > .position {
+  width: 47px;
 }
 
-.track-form-title {
-  width: 225px;
+.tracklist-form-header > .title, .tracklist-form-track > .title {
+  width: 432px;
 }
 
-.track-form-length {
-  width: 43px;
-  position: relative;
-  left: 92px;
+.tracklist-form-header > .duration, .tracklist-form-track > .duration  {
+  width: 60px;
+}
+
+.tracklist-form-header > .remove, .tracklist-form-track > .remove  {
+  width: 30px;
+}
+
+.tracklist-form-track > .position > .track-form-position {
+  width: 25px;
+}
+
+.tracklist-form-track > .title > .track-form-title {
+  width: 410px;
+}
+
+.tracklist-form-track > .duration > .track-form-duration {
+  width: 35px;
+}
+
+.tracklist-form-track > .remove > .button {
+  margin-left: 5px;
+  margin-top: 4px;
 }
 
 /* profile */
