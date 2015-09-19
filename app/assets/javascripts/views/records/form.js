@@ -18,7 +18,8 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
 
   events: {
     "click .new-selector": "replaceInputField",
-    "sortbeforestop .tracks-container": "updateOrder",
+    "sortbeforestop .tracks-container": "updateTracklistOrder",
+    "click .button-remove": "removeTrack",
     "submit": "submit"
   },
 
@@ -103,12 +104,29 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
     this.$(".tracks-container").append(content);
   },
 
-  updateOrder: function () {
+  updateTracklistOrder: function () {
     var order = this.$(".tracks-container").sortable("toArray");
 
     for (var i = 0; i < order.length; i++) {
       var input = this.$("input.track-ord")[i];
       $(input).val(i + 1);
+    }
+  },
+
+  removeTrack: function (e) {
+    e.preventDefault();
+
+    var $track = $(e.currentTarget).parents(".tracklist-form-track");
+
+    if (this.model.isNew()) {
+      $track.remove();
+    } else {
+      var $_destroy = $('<input type="hidden">')
+        .attr("name", "record[tracks_attributes][][_destroy]")
+        .attr("value", "true");
+
+      $track.hide();
+      $track.append($_destroy);
     }
   },
 

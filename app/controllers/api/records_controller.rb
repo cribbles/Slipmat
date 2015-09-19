@@ -99,7 +99,8 @@ module Api
             :ord,
             :position,
             :title,
-            :duration
+            :duration,
+            :_destroy
           ]
         )
     end
