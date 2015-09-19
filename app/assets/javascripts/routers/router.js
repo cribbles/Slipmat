@@ -13,7 +13,10 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     "logout": "sessionDelete",
     "register": "userNew",
     "users/:id": "userShow",
-    "users/:id/:tab": "userShow"
+    "users/:id/:tab": "userShow",
+    "profile": "profile",
+    "wantlist": "wantlist",
+    "collection": "collection"
   },
 
   recordIndex: function () {
@@ -72,6 +75,21 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     });
 
     this._swapView(view);
+  },
+
+  profile: function () {
+    if (!this._ensureSignedIn()) { return; }
+    this.userShow(Slipmat.currentUser.id, "profile");
+  },
+
+  wantlist: function () {
+    if (!this._ensureSignedIn()) { return; }
+    this.userShow(Slipmat.currentUser.id, "wantlist");
+  },
+
+  collection: function () {
+    if (!this._ensureSignedIn()) { return; }
+    this.userShow(Slipmat.currentUser.id, "collection");
   },
 
   sessionNew: function () {
