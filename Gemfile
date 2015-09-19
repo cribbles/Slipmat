@@ -8,6 +8,7 @@ gem 'backbone-on-rails'
 gem 'jbuilder'
 gem 'sdoc'
 gem 'bcrypt'
+gem 'puma'
 
 group :development, :test do
   gem 'byebug'
@@ -18,6 +19,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
   gem 'spring'
 end
