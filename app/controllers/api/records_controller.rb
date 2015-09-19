@@ -71,9 +71,15 @@ module Api
           :cat_no,
           :genre_ids,
           :country_id,
-          :image_url,
           :year,
-          :notes
+          :notes,
+          tracks_attributes: [
+            :id,
+            :ord,
+            :position,
+            :title,
+            :duration
+          ]
         )
     end
 
@@ -86,9 +92,15 @@ module Api
           :cat_no,
           :genre_ids,
           :country_id,
-          :image_url,
           :year,
-          :notes
+          :notes,
+          tracks_attributes: [
+            :id,
+            :ord,
+            :position,
+            :title,
+            :duration
+          ]
         )
     end
   end

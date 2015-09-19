@@ -18,6 +18,7 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
 
   events: {
     "click .new-selector": "replaceInputField",
+    "sortbeforestop .tracks-container": "updateOrder",
     "submit": "submit"
   },
 
@@ -25,6 +26,7 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
     var content = this.template({ record: this.model });
     this.$el.html(content);
     this.addCountries();
+    this.addTracks();
 
     return this;
   },
@@ -78,6 +80,36 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
 
       this.$("#record_country").append(template);
     }, this);
+  },
+
+  addTracks: function () {
+    var tracks = _.sortBy(this.model.tracks(), function (track) {
+      return track.ord;
+    });
+
+    var content = JST["tracks/form"]();
+    this.$(".tracklist-form").html(content);
+
+    this.model.tracks().forEach(function (track) {
+      this.addTrack(track);
+    }, this);
+
+    this.$(".tracks-container").sortable({ handle: "small" });
+  },
+
+  addTrack: function (track) {
+    var content = JST["tracks/_formItem"]({ track: track });
+
+    this.$(".tracks-container").append(content);
+  },
+
+  updateOrder: function () {
+    var order = this.$(".tracks-container").sortable("toArray");
+
+    for (var i = 0; i < order.length; i++) {
+      var input = this.$("input.track-ord")[i];
+      $(input).val(i + 1);
+    }
   },
 
   replaceInputField: function (e) {

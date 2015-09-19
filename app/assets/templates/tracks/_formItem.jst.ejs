@@ -1,0 +1,45 @@
+<div
+  class="tracklist-form-track group"
+  id="track_<%= track.id %>">
+  <% if (track.id) { %>
+    <input
+      type="hidden"
+      name="record[tracks_attributes][][id]"
+      value="<%= track.id %>">
+  <% } %>
+  <span class="ord">
+    <small class="draggable"></small>
+    <input
+      type="hidden"
+      class="track-ord"
+      name="record[tracks_attributes][][ord]"
+      value="<%= track.ord %>">
+  </span>
+  <span class="position">
+    <input
+      type="text"
+      name="record[tracks_attributes][][position]"
+      placeholder="#"
+      value="<%= _.escape(track.position) %>"
+      class="form track-form-position">
+  </span>
+  <span class="title">
+    <input
+      type="text"
+      name="record[tracks_attributes][][title]"
+      placeholder="Title"
+      value="<%= _.escape(track.title) %>"
+      class="form track-form-title">
+  </span>
+  <span class="duration">
+    <input
+      type="text"
+      name="record[tracks_attributes][][duration]"
+      placeholder="0:00"
+      value="<%= _.escape(track.duration) %>"
+      class="form track-form-duration">
+  </span>
+  <span class="remove">
+    <button class="button button-data">-</button>
+  </span>
+</div>

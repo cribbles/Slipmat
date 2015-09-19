@@ -82,7 +82,14 @@
       name="record[notes]"
       id="record_notes"
       class="form record-form"><%= record.get("notes") %></textarea>
+  </div>
+</figure>
 
+<figure class="form tracklist-form">
+</figure>
+
+<figure class="form record-form">
+  <div class="form-main record-form-main">
     <button class="button button-data">
       <%= record.isNew() ? "Add Record" : "Update Record" %>
     </button>

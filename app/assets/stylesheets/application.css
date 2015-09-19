@@ -661,22 +661,7 @@ li:hover > a > .sidebar-item-count {
 
 .record-form {
   width: 400px;
-}
-
-.record-form-info, .record-form-assoc {
-  display: block;
-  float: left;
-  width: 400px;
   padding-bottom: 15px;
-}
-
-.record-form-info {
-  position: relative;
-  left: 1px;
-}
-
-.record-form-assoc {
-  border-left: 1px solid #ddd;
 }
 
 .genre-container > .genre-form {
