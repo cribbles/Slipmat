@@ -5,6 +5,7 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
   template: JST["records/form"],
 
   initialize: function (options) {
+    this.sort = 0;
     this.artists = new Slipmat.Collections.Artists();
     this.labels = new Slipmat.Collections.Labels();
     this.artists.fetch();
@@ -19,7 +20,8 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
   events: {
     "click .new-selector": "replaceInputField",
     "sortbeforestop .tracks-container": "updateTracklistOrder",
-    "click .button-remove": "removeTrack",
+    "click .add-track": "addTrack",
+    "click .remove-track": "removeTrack",
     "submit": "submit"
   },
 
@@ -92,25 +94,24 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
     this.$(".tracklist-form").html(content);
 
     this.model.tracks().forEach(function (track) {
-      this.addTrack(track);
+      this._addTrack(track);
     }, this);
 
     this.$(".tracks-container").sortable({ handle: "small" });
   },
 
-  addTrack: function (track) {
-    var content = JST["tracks/_formItem"]({ track: track });
-
-    this.$(".tracks-container").append(content);
+  addTrack: function (e) {
+    e.preventDefault();
+    this._addTrack({});
   },
 
-  updateTracklistOrder: function () {
-    var order = this.$(".tracks-container").sortable("toArray");
+  _addTrack: function (track) {
+    var content = JST["tracks/_formItem"]({
+      item: this.sort++,
+      track: track
+    });
 
-    for (var i = 0; i < order.length; i++) {
-      var input = this.$("input.track-ord")[i];
-      $(input).val(i + 1);
-    }
+    this.$(".tracks-container").append(content);
   },
 
   removeTrack: function (e) {
@@ -127,6 +128,15 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
 
       $track.hide();
       $track.append($_destroy);
+    }
+  },
+
+  updateTracklistOrder: function () {
+    var order = this.$(".tracks-container").sortable("toArray");
+
+    for (var i = 0; i < order.length; i++) {
+      var input = this.$("input.track-ord")[i];
+      $(input).val(i + 1);
     }
   },
 
