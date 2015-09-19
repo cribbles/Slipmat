@@ -69,7 +69,8 @@ module Api
           :label_name,
           :label_id,
           :cat_no,
-          :country,
+          :genre_ids,
+          :country_id,
           :image_url,
           :year,
           :notes
@@ -83,7 +84,8 @@ module Api
           :label_name,
           :label_id,
           :cat_no,
-          :country,
+          :genre_ids,
+          :country_id,
           :image_url,
           :year,
           :notes
