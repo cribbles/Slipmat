@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   include Formattable
 
+  VALID_USERNAME_REGEX /\A[a-z]+[a-z0-9\-_]+[a-z0-9]\z/i
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   def self.find_by_credentials(username, password)
@@ -23,7 +24,10 @@ class User < ActiveRecord::Base
   has_many :contributions, through: :user_contributions, source: :record
   has_many :authored_comments, class_name: "Comment", foreign_key: :author_id
 
-  validates :username, presence: true, uniqueness: { case_sensitive: false }
+  validates :username, presence: true,
+                       length: { minimum: 3, maximum: 25 },
+                       format: { with: VALID_USERNAME_REGEX },
+                       uniqueness: { case_sensitive: false }
   validates :email, presence: true,
                     length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
