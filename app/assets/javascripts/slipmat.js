@@ -6,9 +6,8 @@ window.Slipmat = {
   initialize: function() {
     this.currentUser = new Slipmat.Models.CurrentUser();
     this.currentUser.fetch();
-
-    this.countries = new Slipmat.Collections.Countries();
-    this.countries.fetch();
+    Slipmat.countries = new Slipmat.Collections.Countries();
+    Slipmat.countries.fetch();
 
     var header = new Slipmat.Views.Header();
     var footer = new Slipmat.Views.Footer();
@@ -16,8 +15,7 @@ window.Slipmat = {
     $("body").append(footer.render().$el);
 
     var router = new Slipmat.Routers.Router({
-      $rootEl: $("main.content"),
-      countries: this.countries
+      $rootEl: $("main.content")
     });
 
     Backbone.history.start();

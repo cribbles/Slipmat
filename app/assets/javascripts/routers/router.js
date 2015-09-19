@@ -2,7 +2,6 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
   initialize: function (options) {
     this.$rootEl = options.$rootEl;
-    this.countries = options.countries;
   },
 
   routes: {
@@ -29,10 +28,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     if (!this._ensureSignedIn()) { return; }
 
     var record = new Slipmat.Models.Record();
-    var view = new Slipmat.Views.RecordForm({
-      model: record,
-      countries: this.countries
-    });
+    var view = new Slipmat.Views.RecordForm({ model: record });
 
     this._swapView(view);
   },
@@ -51,10 +47,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     var record = new Slipmat.Models.Record({ id: id });
     record.fetch();
 
-    var view = new Slipmat.Views.RecordForm({
-      model: record,
-      countries: this.countries
-    });
+    var view = new Slipmat.Views.RecordForm({ model: record });
 
     this._swapView(view);
   },
@@ -98,7 +91,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
       if (!callback) {
         callback = Backbone.history.navigate("login", { trigger: true });
       }
-      this.signIn(callback);
+      Slipmat.currentUser.signIn(callback);
 
       return false;
     }

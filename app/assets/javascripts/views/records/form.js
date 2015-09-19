@@ -5,7 +5,6 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
   template: JST["records/form"],
 
   initialize: function (options) {
-    this.countries = options.countries;
     this.artists = new Slipmat.Collections.Artists();
     this.labels = new Slipmat.Collections.Labels();
     this.artists.fetch();
@@ -14,7 +13,7 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.artists, "sync", this.addArtists);
     this.listenTo(this.labels, "sync", this.addLabels);
-    this.listenTo(this.countries, "sync", this.addCountries);
+    this.listenTo(Slipmat.countries, "sync", this.addCountries);
   },
 
   events: {
@@ -25,6 +24,7 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
   render: function () {
     var content = this.template({ record: this.model });
     this.$el.html(content);
+    this.addCountries();
 
     return this;
   },
@@ -68,7 +68,7 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
   },
 
   addCountries: function () {
-    this.countries.forEach(function (country) {
+    Slipmat.countries.forEach(function (country) {
       var selected = (country.id === this.model.country_id);
       var template = JST["records/_formOption"]({
         model: country,
