@@ -9,7 +9,11 @@ gem 'jbuilder'
 gem 'sdoc'
 gem 'bcrypt'
 gem 'puma'
-gem 'rails_12factor'
+gem 'paperclip'
+
+group :production do
+  gem 'rails_12factor'
+end
 
 group :development, :test do
   gem 'byebug'
@@ -17,9 +21,9 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'annotate'
+  gem 'quiet_assets'
 end
 
 group :development do
-  gem 'web-console'
   gem 'spring'
 end
