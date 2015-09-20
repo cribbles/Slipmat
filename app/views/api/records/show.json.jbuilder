@@ -14,6 +14,8 @@ json.artist do
   json.name @record.artist.name
 end
 
+json.image asset_path(@record.image.url)
+
 if @record.tracks
   json.tracks(
     @record.tracks,

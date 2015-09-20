@@ -3,38 +3,37 @@ Slipmat.Models.Record = Backbone.Model.extend({
   urlRoot: "api/records",
 
   parse: function (payload) {
-    if (payload.artist) {
-      this.artist().set(payload.artist);
-      delete payload.artist;
-    }
-    if (payload.label) {
-      this.label().set(payload.label);
-      delete payload.label;
-    }
-    if (payload.country) {
-      this._country = payload.country;
-      delete payload.country;
-    }
-    if (payload.tracks) {
-      this._tracks = payload.tracks;
-      delete payload.tracks;
-    }
-    if (payload.comments) {
-      this._comments = payload.comments;
-      delete payload.comments;
-    }
-    if (payload.contributors) {
-      this._contributors = payload.contributors;
-      delete payload.contributors;
-    }
-    if (payload.in_collection) {
-      this._inCollection = payload.in_collection;
-      delete payload.in_collection;
-    }
-    if (payload.in_wantlist) {
-      this._inWantlist = payload.in_wantlist;
-      delete payload.in_wantlist;
-    }
+    var record = this;
+
+    var associations = [
+      "artist",
+      "label"
+    ];
+
+    var attributes = [
+      "image",
+      "country",
+      "tracks",
+      "comments",
+      "contributors",
+      "in_collection",
+      "in_wantlist"
+    ];
+
+    associations.forEach(function (association) {
+      if (payload[association]) {
+        record[association]().set(payload[association]);
+        delete payload[association];
+      }
+    });
+
+    attributes.forEach(function (attribute) {
+      if (payload[attribute]) {
+        record["_" + attribute] = payload[attribute];
+        delete payload[attribute];
+      }
+    });
+
     return payload;
   },
 
@@ -73,13 +72,13 @@ Slipmat.Models.Record = Backbone.Model.extend({
   },
 
   inCollection: function () {
-    this._inCollection = this._inCollection || [];
-    return this._inCollection;
+    this._in_collection = this._in_collection || [];
+    return this._in_collection;
   },
 
   inWantlist: function () {
-    this._inWantlist = this._inWantlist || [];
-    return this._inWantlist;
+    this._in_wantlist = this._in_wantlist || [];
+    return this._in_wantlist;
   }
 
 });
