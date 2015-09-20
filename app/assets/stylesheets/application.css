@@ -694,6 +694,10 @@ li:hover > a > .sidebar-item-count {
   height: 100%;
 }
 
+#image-form {
+  display: none;
+}
+
 .genre-container > .genre-form {
   margin: 10px 15px;
 }

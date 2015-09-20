@@ -3,6 +3,21 @@
     <%= record.isNew() ? "Add New Record" : "Edit Record" %>
   </div>
   <div class="form-main record-form-main">
+    <figure class="form-image">
+      <img src="<%= Slipmat.defaultRecordImg %>">
+    </figure>
+
+    <button class="button button-data button-form" id="upload">
+      <%= record.isNew() ? "Upload Album Cover" : "Update Album Cover" %>
+    </button>
+
+    <input
+      type="file"
+      class="button button-data button-form"
+      id="image-form">
+
+    <hr>
+
     <label for="record_artist">
       <b>Artist</b> (required)
       <% if (record.isNew()) { %>

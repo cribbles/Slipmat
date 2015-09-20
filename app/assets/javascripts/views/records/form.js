@@ -18,10 +18,11 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
   },
 
   events: {
+    "click #upload": "triggerUpload",
     "click .new-selector": "replaceInputField",
-    "sortbeforestop .tracks-container": "updateTracklistOrder",
     "click .add-track": "addTrack",
     "click .remove-track": "removeTrack",
+    "sortbeforestop .tracks-container": "updateTracklistOrder",
     "submit": "submit"
   },
 
@@ -37,13 +38,42 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
   submit: function (e) {
     e.preventDefault();
 
+    var view = this;
+    var image = view.$("#image-form")[0].files[0];
     var attributes = this.$el.serializeJSON();
 
     this.model.save(attributes, {
       success: function (model) {
+        view.submitImage({
+          image: image,
+          param: "record[image]",
+          model: view.model
+        });
+
         Backbone.history.navigate("records/" + model.id, { trigger: true });
       }
     });
+  },
+
+  submitImage: function (options) {
+    var image = options.image,
+        param = options.param,
+        model = options.model;
+    if (!image) { return; }
+
+    var formData = new FormData();
+    formData.append(param, image);
+
+    $.ajax({
+      url: _.result(model, "url"),
+      type: "PATCH",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function () {
+        options.success && options.success();
+      }
+    })
   },
 
   addArtists: function (artists) {
@@ -141,6 +171,11 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
       var input = this.$("input.track-ord")[i];
       $(input).val(i + 1);
     }
+  },
+
+  triggerUpload: function (e) {
+    e.preventDefault();
+    $("#image-form").trigger("click");
   },
 
   replaceInputField: function (e) {
