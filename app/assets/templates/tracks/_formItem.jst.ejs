@@ -1,10 +1,6 @@
 <div
   class="tracklist-form-track group"
   id="track_<%= item %>">
-  <input
-    type="hidden"
-    name="record[tracks_attributes][][id]"
-    value="<%= track.id %>">
   <span class="ord">
     <small class="draggable"></small>
     <input
@@ -38,6 +34,11 @@
       class="form track-form-duration">
   </span>
   <span class="remove">
-    <button class="button button-data remove-track">-</button>
+    <button class="button button-data button-form remove-track">-</button>
   </span>
+
+  <input
+    type="hidden"
+    name="record[tracks_attributes][][id]"
+    value="<%= track.id %>">
 </div>
