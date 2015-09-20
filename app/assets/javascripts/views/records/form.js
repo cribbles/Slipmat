@@ -99,7 +99,10 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
 
   addGenres: function () {
     Slipmat.genres.forEach(function (genre) {
-      var checked = _.includes(this.model.genres(), genre.id);
+      var checked = this.model.genres().some(function (modelGenre) {
+        return genre.id === modelGenre.id;
+      });
+
       var template = JST["records/_genreCheckbox"]({
         genre: genre,
         checked: checked
