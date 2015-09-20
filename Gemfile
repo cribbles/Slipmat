@@ -10,6 +10,8 @@ gem 'sdoc'
 gem 'bcrypt'
 gem 'puma'
 gem 'paperclip'
+gem 'figaro'
+gem 'aws-sdk', '< 2.0'
 
 group :production do
   gem 'rails_12factor'
