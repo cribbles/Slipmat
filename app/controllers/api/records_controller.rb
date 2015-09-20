@@ -71,10 +71,10 @@ module Api
           :label_name,
           :label_id,
           :cat_no,
-          :genre_ids,
           :country_id,
           :year,
           :notes,
+          genre_ids: [],
           tracks_attributes: [
             :id,
             :ord,
@@ -93,10 +93,10 @@ module Api
           :label_name,
           :label_id,
           :cat_no,
-          :genre_ids,
           :country_id,
           :year,
           :notes,
+          genre_ids: [],
           tracks_attributes: [
             :id,
             :ord,
