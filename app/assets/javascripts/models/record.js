@@ -13,6 +13,7 @@ Slipmat.Models.Record = Backbone.Model.extend({
     var attributes = [
       "image",
       "country",
+      "genres",
       "tracks",
       "comments",
       "contributors",
@@ -61,6 +62,11 @@ Slipmat.Models.Record = Backbone.Model.extend({
   country: function () {
     this._country = this._country || [];
     return this._country;
+  },
+
+  genres: function () {
+    this._genres = this._genres || [];
+    return this._genres;
   },
 
   tracks: function () {
