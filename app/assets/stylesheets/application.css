@@ -945,31 +945,32 @@ textarea.highlight {
 /* genre form */
 
 .genre-form {
-  width: 600px;
+  width: 525px;
 }
 
 .genre-container {
   background: #ffffff;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .genre-container > .checkbox {
   display: block;
   float: left;
-  padding: 20px;
+  padding: 10px 20px;
+  min-width: 120px;
 }
 
-.checkbox > label {
+.checkbox > checkbox {
   display: block;
-  float: right;
-  margin-left: 8px;
+  float: left;
 }
 
 /* profile */
 
 .profile-sidebar, .profile-main {
   min-height: 200px;
+  min-width: 150px;
   display: block;
   float: left;
   font-size: 14px;
