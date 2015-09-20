@@ -9,15 +9,25 @@ json.extract!(
   :created_at
 )
 
-json.num_reviews user.authored_comments.where(commentable_type: "Record").count
+json.image asset_path(user.image.url)
+json.num_comments user.authored_comments.count
+
 associations = [];
 
 unless user.contributions.empty?
-  json.contributions user.contributions, partial: 'api/records/record', as: :record
+  json.contributions(
+    user.contributions,
+    partial: 'api/records/record',
+    as: :record
+  )
 end
 
 unless user.wantlist.empty?
-  json.wantlist user.wantlist, partial: 'api/records/record', as: :record
+  json.wantlist(
+    user.wantlist,
+    partial: 'api/records/record',
+    as: :record
+  )
 
   user.user_wants.each do |want|
     assocation = {
@@ -30,7 +40,11 @@ unless user.wantlist.empty?
 end
 
 unless user.collection.empty?
-  json.collection user.collection, partial: 'api/records/record', as: :record
+  json.collection(
+    user.collection,
+    partial: 'api/records/record',
+    as: :record
+  )
 
   user.user_collections.each do |want|
     assocation = {
