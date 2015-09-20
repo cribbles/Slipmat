@@ -14,8 +14,6 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.artists, "sync", this.addArtists);
     this.listenTo(this.labels, "sync", this.addLabels);
-    this.listenTo(Slipmat.countries, "sync", this.addCountries);
-    // this.listenTo(Slipmat.genres, "sync", this.addGenres);
   },
 
   events: {
@@ -52,8 +50,9 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
           param: "record[image]",
           model: view.model
         });
+        debugger
 
-        Backbone.history.navigate("records/" + model.id, { trigger: true });
+        Backbone.history.navigate("/records/" + model.id, { trigger: true });
       }
     });
   },
@@ -62,8 +61,8 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
     artists.forEach(function (artist) {
       var selected = (artist.id === this.model.artist().id);
       var template = JST["records/_formOption"]({
-        model: artist,
-        attribute: "name",
+        id: artist.id,
+        attribute: artist.get("name"),
         selected: selected
       });
 
@@ -75,8 +74,8 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
     labels.forEach(function (label) {
       var selected = (label.id === this.model.label().id);
       var template = JST["records/_formOption"]({
-        model: label,
-        attribute: "title",
+        id: label.id,
+        attribute: label.get("title"),
         selected: selected
       });
 
@@ -88,8 +87,8 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
     Slipmat.countries.forEach(function (country) {
       var selected = (country.id === this.model.country().id);
       var template = JST["records/_formOption"]({
-        model: country,
-        attribute: "name",
+        id: country.id,
+        attribute: country.name,
         selected: selected
       });
 

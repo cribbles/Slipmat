@@ -112,7 +112,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
   sessionDelete: function () {
     Slipmat.currentUser.signOut();
-    Backbone.history.navigate("", { trigger: true });
+    Backbone.history.navigate("/", { trigger: true });
   },
 
   _ensureSignedIn: function (callback) {
@@ -138,7 +138,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   _goHome: function () {
-    Backbone.history.navigate("", { trigger: true });
+    Backbone.history.navigate("/", { trigger: true });
   },
 
   _swapView: function (view) {

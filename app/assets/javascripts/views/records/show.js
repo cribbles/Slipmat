@@ -165,7 +165,7 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
 
   _ensureSignedIn: function (callback) {
     if (!Slipmat.currentUser.isSignedIn()) {
-      Backbone.history.navigate("login", { trigger: true });
+      Backbone.history.navigate("/login", { trigger: true });
       this.signIn(callback);
 
       return false;

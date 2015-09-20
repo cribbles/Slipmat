@@ -6,15 +6,15 @@ window.Slipmat = {
   initialize: function() {
     this.currentUser = new Slipmat.Models.CurrentUser();
     this.currentUser.fetch();
-    Slipmat.countries = new Slipmat.Collections.Countries();
-    Slipmat.countries.fetch();
 
-    $.ajax({
-      url: "/api/genres",
-      type: "GET",
-      success: function (genres) {
-        Slipmat.genres = genres;
-      }
+    ["countries", "genres"].forEach(function (model) {
+      $.ajax({
+        url: "/api/" + model,
+        type: "GET",
+        success: function (payload) {
+          Slipmat[model] = payload;
+        }
+      });
     });
 
     var header = new Slipmat.Views.Header();

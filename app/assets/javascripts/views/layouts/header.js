@@ -41,7 +41,7 @@ Slipmat.Views.Header = Backbone.View.extend({
   register: function (e) {
     e.preventDefault();
 
-    Backbone.history.navigate("register", { trigger: true });
+    Backbone.history.navigate("/register", { trigger: true });
   },
 
   signOut: function (e) {
