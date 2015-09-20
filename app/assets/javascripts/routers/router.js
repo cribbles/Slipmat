@@ -65,10 +65,11 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     this._swapView(view);
   },
 
-  userEdit: function () {
+  userEdit: function (id) {
     if (!this._ensureSignedIn()) { return; }
 
     var user = new Slipmat.Models.User(Slipmat.currentUser.attributes);
+    user._image = Slipmat.currentUser._image;
 
     var view = new Slipmat.Views.UserEdit({ model: user });
     this._swapView(view);

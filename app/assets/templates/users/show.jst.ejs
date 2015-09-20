@@ -1,11 +1,17 @@
 <section class="profile-sidebar">
+  <% if (user.id === Slipmat.currentUser.id) { %>
+    <a href="#/users/<%= user.id %>/edit">
+      Edit Profile
+    </a>
+    <hr>
+  <% } %>
   <% if (user.has("location")) { %>
     <span><%= user.escape("location") %></span>
   <% } %>
   <span>Joined on <%= user.get("created_at") %></span>
   <% if (user.has("url")) { %>
     <span>
-      <a href="<%= user.escape("url") %>">
+      <a href="<%= user.escape("url") %>" class="soft">
         <%= user.escape("url") %>
       </a>
     </span>

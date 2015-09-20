@@ -21,7 +21,7 @@
     <label for="user_location">Location</label>
     <input
       type="text"
-      name="user[location]"
+      name="location"
       value="<%= user.get("location") %>"
       id="user_location"
       class="form record-form">
@@ -29,14 +29,14 @@
     <label for="user_url">Homepage (URL)</label>
     <input
       type="text"
-      name="user[url]"
+      name="url"
       value="<%= user.get("url") %>"
       id="user_url"
       class="form record-form">
 
     <label for="user_profile">Profile</label>
     <textarea
-      name="user[profile]"
+      name="profile"
       id="user_profile"
       class="form record-form"><%= user.get("profile") %></textarea>
 

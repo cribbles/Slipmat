@@ -809,10 +809,13 @@ select.record-form {
   margin: 5px 14px 0 14px;
 }
 
+a.soft, .form a.new-selector {
+  color: #37b;
+}
+
 .form a.new-selector {
   display: inline-block;
   float: right;
-  color: #37b;
 }
 
 .form a.new-selector:hover {

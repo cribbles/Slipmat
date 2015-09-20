@@ -5,6 +5,7 @@ Slipmat.Views.Header = Backbone.View.extend({
   template: JST["layouts/header/header"],
 
   initialize: function (options) {
+    this.listenTo(Slipmat.currentUser, "sync", this.renderPanel);
     this.listenTo(Slipmat.currentUser, "signIn signOut", this.togglePanel);
   },
 
@@ -21,6 +22,11 @@ Slipmat.Views.Header = Backbone.View.extend({
     return this;
   },
 
+  renderPanel: function () {
+    var userPanel = JST["layouts/header/_signedInPanel"];
+    this.$(".header-user-list").html(userPanel());
+  },
+
   togglePanel: function () {
     var userPanel;
 
@@ -29,7 +35,6 @@ Slipmat.Views.Header = Backbone.View.extend({
     } else {
       userPanel = JST["layouts/header/_signedOutPanel"];
     }
-
     this.$(".header-user-list").html(userPanel());
   },
 

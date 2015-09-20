@@ -32,6 +32,7 @@ Slipmat.Views.UserEdit = Backbone.ImageableView.extend({
           model: view.model
         });
 
+        Slipmat.currentUser.fetch();
         Backbone.history.navigate("#/users/" + user.id, { trigger: true });
       }
     });
