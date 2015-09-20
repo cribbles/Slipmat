@@ -2,27 +2,40 @@ module Api
   class UserCollectionsController < ApplicationController
 
     def create
-      @collection = UserCollection.new({
-        user_id: params[:user_collection][:user_id],
-        record_id: params[:user_collection][:record_id]
-      })
+      if uc_params[:user_id] == current_user.id
+        @collection = UserCollection.new(uc_params)
 
-      if @collection.save
-        render :show
+        if @collection.save
+          render :show
+        else
+          render json: @collection.errors.full_messages, status: 422
+        end
       else
-        render json: @collection.errors.full_messages, status: 422
+        head :forbidden
       end
     end
 
     def destroy
       collection = UserCollection.find(params[:id])
-      collection.destroy!
 
-      render json: {}
+      if collection.user_id == current_user.id
+        collection.destroy!
+        render json: {}
+      else
+        head :forbidden
+      end
     end
 
     def show
       @collection = UserCollection.find(params[:id])
+    end
+
+    private
+
+    def uc_params
+      params
+        .require(:user_collection)
+        .permit(:user_id, :record_id)
     end
   end
 end

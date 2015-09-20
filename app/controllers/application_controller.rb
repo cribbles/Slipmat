@@ -21,4 +21,12 @@ class ApplicationController < ActionController::Base
   def signed_in?
     !!current_user
   end
+
+  def ensure_signed_in
+    head :forbidden and return unless signed_in?
+  end
+
+  def ensure_signed_out
+    head :forbidden and return if signed_in?
+  end
 end

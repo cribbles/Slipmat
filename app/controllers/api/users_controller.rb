@@ -1,5 +1,6 @@
 module Api
   class UsersController < ApplicationController
+    before_action :ensure_signed_out, only: :create
 
     def create
       @user = User.new(user_params)

@@ -1,5 +1,6 @@
 module Api
   class ArtistsController < ApplicationController
+    before_action :ensure_signed_in, except: [:index, :show]
 
     def create
       @artist = Artist.new(artist_params)

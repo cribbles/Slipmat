@@ -1,5 +1,6 @@
 module Api
   class CommentsController < ApplicationController
+    before_action :ensure_signed_in, only: :create
 
     def create
       @comment = Comment.new(comment_params)

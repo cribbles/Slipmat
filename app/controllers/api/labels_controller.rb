@@ -1,5 +1,6 @@
 module Api
   class LabelsController < ApplicationController
+    before_action :ensure_signed_in, except: [:index, :show]
 
     def create
       @label = Label.new(label_params)

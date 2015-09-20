@@ -1,5 +1,6 @@
 module Api
   class RecordsController < ApplicationController
+    before_action :ensure_signed_in, except: [:index, :show]
 
     def create
       @record = Record.new(record_params)
