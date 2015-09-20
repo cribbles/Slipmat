@@ -1,4 +1,4 @@
-Slipmat.Views.RecordForm = Backbone.View.extend({
+Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
 
   tagName: "form",
   id: "record-form",
@@ -53,27 +53,6 @@ Slipmat.Views.RecordForm = Backbone.View.extend({
         Backbone.history.navigate("records/" + model.id, { trigger: true });
       }
     });
-  },
-
-  submitImage: function (options) {
-    var image = options.image,
-        param = options.param,
-        model = options.model;
-    if (!image) { return; }
-
-    var formData = new FormData();
-    formData.append(param, image);
-
-    $.ajax({
-      url: _.result(model, "url"),
-      type: "PATCH",
-      data: formData,
-      processData: false,
-      contentType: false,
-      success: function () {
-        options.success && options.success();
-      }
-    })
   },
 
   addArtists: function (artists) {
