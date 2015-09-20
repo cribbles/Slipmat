@@ -1,4 +1,10 @@
 class UserContribution < ActiveRecord::Base
+  def self.user_foreign_key
+    "user_id"
+  end
+
+  include Trackable
+
   belongs_to :user
   belongs_to :record
 
