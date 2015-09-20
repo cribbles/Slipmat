@@ -14,6 +14,8 @@ json.artist do
   json.name @record.artist.name
 end
 
+json.genres @record.genres, partial: "api/genres/genre", as: :genre
+
 json.image asset_path(@record.image.url)
 
 if @record.tracks

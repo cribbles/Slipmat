@@ -1,1 +1,1 @@
-json.array!(Genre.all, :id, :name)
+json.array! Genre.all, partial: "genre", as: :genre
