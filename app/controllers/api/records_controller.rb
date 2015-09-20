@@ -64,6 +64,7 @@ module Api
         .require(:record)
         .permit(
           :title,
+          :image,
           :artist_name,
           :artist_id,
           :label_name,
@@ -87,6 +88,7 @@ module Api
       params
         .require(:record)
         .permit(
+          :image,
           :label_name,
           :label_id,
           :cat_no,

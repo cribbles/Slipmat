@@ -4,7 +4,6 @@ json.extract!(
   :title,
   :cat_no,
   :year,
-  :image_url,
   :notes,
   :created_at,
   :updated_at

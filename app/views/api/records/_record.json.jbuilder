@@ -1,4 +1,4 @@
-json.(record, :id, :title, :image_url)
+json.(record, :id, :title)
 
 json.artist do
   json.id record.artist.id

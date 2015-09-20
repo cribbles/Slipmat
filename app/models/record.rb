@@ -4,6 +4,7 @@ class Record < ActiveRecord::Base
   belongs_to :artist
   belongs_to :label
   belongs_to :country
+
   has_many :user_collections
   has_many :collected, through: :user_collections, source: :user
   has_many :user_wants
@@ -11,10 +12,14 @@ class Record < ActiveRecord::Base
   has_many :user_contributions
   has_many :contributors, through: :user_contributions, source: :user
   has_many :comments, as: :commentable
+
   has_many :tracks, dependent: :destroy
   accepts_nested_attributes_for :tracks,
     reject_if: ->(track) { track[:title].blank? },
     allow_destroy: true
+
+  has_attached_file :image, default_url: "default-release.png"
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   validates :title, presence: true
   validates :artist_id, presence: true
