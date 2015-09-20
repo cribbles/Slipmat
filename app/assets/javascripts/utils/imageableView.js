@@ -24,6 +24,18 @@ Backbone.ImageableView = Backbone.CompositeView.extend({
   triggerUpload: function (e) {
     e.preventDefault();
     $("#image-form").trigger("click");
+  },
+
+  replaceFormImage: function (e) {
+    e.preventDefault();
+    var files = e.currentTarget.files
+    if (!files || !files.length) { return; }
+
+    var reader = new FileReader();
+    reader.onload = function (readerEvent) {
+      $("#form-image").attr("src", readerEvent.target.result);
+    }
+    reader.readAsDataURL(files[0]);
   }
 
 });

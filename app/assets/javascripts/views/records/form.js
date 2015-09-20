@@ -18,6 +18,7 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
   },
 
   events: {
+    "change #image-form": "replaceFormImage",
     "click #upload": "triggerUpload",
     "click .new-selector": "replaceInputField",
     "click .add-track": "addTrack",
@@ -39,7 +40,7 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
     e.preventDefault();
 
     var view = this;
-    var image = view.$("#image-form")[0].files[0];
+    var image = this.$("#image-form")[0].files[0];
     var attributes = this.$el.serializeJSON();
 
     this.model.save(attributes, {
