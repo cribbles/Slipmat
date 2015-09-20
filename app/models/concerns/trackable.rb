@@ -8,8 +8,10 @@ module Trackable
 
     ["create", "update", "destroy"].each do |action|
       define_method "user_activity_#{action}" do
+        user_id = self.class.user_foreign_key
+
         UserActivity.create(
-          user_id: self.class.user_foreign_key,
+          user_id: self.send(user_id),
           activity_id: id,
           activity_class: self.class,
           activity_action: action
