@@ -12,6 +12,8 @@ class Record < ActiveRecord::Base
   has_many :user_contributions
   has_many :contributors, through: :user_contributions, source: :user
   has_many :comments, as: :commentable
+  has_many :genre_taggings
+  has_many :genres, through: :genre_taggings
 
   has_many :tracks, dependent: :destroy
   accepts_nested_attributes_for :tracks,
