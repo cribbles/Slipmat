@@ -18,7 +18,7 @@ class Record < ActiveRecord::Base
     reject_if: ->(track) { track[:title].blank? },
     allow_destroy: true
 
-  has_attached_file :image, default_url: "default-release.png"
+  has_attached_file :image, default_url: "default-record.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   validates :title, presence: true

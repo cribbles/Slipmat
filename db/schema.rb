@@ -11,17 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150920132029) do
+ActiveRecord::Schema.define(version: 20150920163955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "artists", force: :cascade do |t|
-    t.string   "name",       null: false
+    t.string   "name",               null: false
     t.string   "real_name"
     t.text     "profile"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "artists", ["name"], name: "index_artists_on_name", unique: true, using: :btree
@@ -46,10 +50,14 @@ ActiveRecord::Schema.define(version: 20150920132029) do
   end
 
   create_table "labels", force: :cascade do |t|
-    t.string   "title",      null: false
+    t.string   "title",              null: false
     t.text     "profile"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "labels", ["title"], name: "index_labels_on_title", unique: true, using: :btree
@@ -131,15 +139,19 @@ ActiveRecord::Schema.define(version: 20150920132029) do
   add_index "user_wants", ["user_id"], name: "index_user_wants_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",        null: false
-    t.string   "email",           null: false
-    t.string   "password_digest", null: false
-    t.string   "session_token",   null: false
+    t.string   "username",           null: false
+    t.string   "email",              null: false
+    t.string   "password_digest",    null: false
+    t.string   "session_token",      null: false
     t.string   "location"
     t.string   "url"
     t.text     "profile"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
