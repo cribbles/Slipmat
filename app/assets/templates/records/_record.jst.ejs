@@ -1,6 +1,6 @@
 <figure class="record">
   <a href="#/records/<%= record.id %>">
-    <img src="<%= Slipmat.defaultRecordImg %>" class="cover">
+    <img src="<%= record.image() %>" class="cover">
   </a>
   <a href="#/artists/<%= record.artist().id %>" class="artist">
     <b><%= record.artist().escape("name") %></b>

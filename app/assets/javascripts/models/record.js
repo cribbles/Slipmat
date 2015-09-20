@@ -37,6 +37,13 @@ Slipmat.Models.Record = Backbone.Model.extend({
     return payload;
   },
 
+  image: function () {
+    if (!this._image) {
+      this._image = Slipmat.defaultRecordImg;
+    }
+    return this._image;
+  },
+
   artist: function () {
     if (!this._artist) {
       this._artist = new Slipmat.Models.Artist();
