@@ -240,3 +240,25 @@ countries = [
 countries.each do |attributes|
   Country.create!(attributes)
 end
+
+genres = [
+  "Blues",
+  "Brass & Military",
+  "Children's",
+  "Classical",
+  "Electronic",
+  "Folk, World, & Country",
+  "Funk / Soul",
+  "Hip-Hop",
+  "Jazz",
+  "Latin",
+  "Non-Music",
+  "Pop",
+  "Reggae",
+  "Rock",
+  "Stage & Screen"
+]
+
+genres.each do |name|
+  Genre.create!(name: name)
+end
