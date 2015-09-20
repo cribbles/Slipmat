@@ -152,11 +152,6 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
     }
   },
 
-  triggerUpload: function (e) {
-    e.preventDefault();
-    $("#image-form").trigger("click");
-  },
-
   replaceInputField: function (e) {
     e.preventDefault();
 

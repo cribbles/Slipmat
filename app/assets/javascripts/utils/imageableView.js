@@ -1,4 +1,5 @@
 Backbone.ImageableView = Backbone.CompositeView.extend({
+
   submitImage: function (options) {
     var image = options.image,
         param = options.param,
@@ -18,5 +19,11 @@ Backbone.ImageableView = Backbone.CompositeView.extend({
         options.success && options.success();
       }
     });
+  },
+
+  triggerUpload: function (e) {
+    e.preventDefault();
+    $("#image-form").trigger("click");
   }
+
 });
