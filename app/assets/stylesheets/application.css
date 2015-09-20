@@ -3,7 +3,7 @@
 html, body, header, nav, h1, ul, li, div,
 a, input, textarea, button, small, select,
 main, section, footer, hr, strong, b, p,
-table, th, tr, td {
+table, th, tr, td, checkbox, label {
   margin: 0px;
   padding: 0px;
   border: 0px;
@@ -940,6 +940,30 @@ textarea.highlight {
 .tracklist-form-track > .remove > .button {
   margin-left: 5px;
   margin-top: 4px;
+}
+
+/* genre form */
+
+.genre-form {
+  width: 600px;
+}
+
+.genre-container {
+  background: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.genre-container > .checkbox {
+  display: block;
+  float: left;
+  padding: 20px;
+}
+
+.checkbox > label {
+  display: block;
+  float: right;
+  margin-left: 8px;
 }
 
 /* profile */
