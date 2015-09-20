@@ -29,7 +29,8 @@ Slipmat.Views.UserEdit = Backbone.ImageableView.extend({
         view.submitImage({
           image: image,
           param: "user[image]",
-          model: view.model
+          model: user,
+          success: function () { Slipmat.currentUser.fetch(); }
         });
 
         Slipmat.currentUser.fetch();

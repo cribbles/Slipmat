@@ -23,6 +23,8 @@ Slipmat.Views.Header = Backbone.View.extend({
   },
 
   renderPanel: function () {
+    if (!Slipmat.currentUser.isSignedIn()) { return; }
+
     var userPanel = JST["layouts/header/_signedInPanel"];
     this.$(".header-user-list").html(userPanel());
   },

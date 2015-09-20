@@ -102,9 +102,10 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
       type: "POST",
       data: credentials,
       dataType: "json",
-      success: function (user) {
-        this.set(user);
-        options.success && options.success(user);
+      success: function (attributes) {
+        var parsed = this.parse(attributes);
+        this.set(parsed);
+        options.success && options.success(attributes);
       }.bind(this),
       error: function () {
         options.error && options.error();
