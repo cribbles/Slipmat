@@ -49,7 +49,7 @@ module Api
     def user_update_params
       params
         .require(:user)
-        .permit(:location, :url, :profile)
+        .permit(:location, :url, :profile, :image)
     end
   end
 end
