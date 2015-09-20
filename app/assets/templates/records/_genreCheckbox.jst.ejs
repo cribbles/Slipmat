@@ -1,0 +1,8 @@
+<div class="checkbox group">
+  <input
+    type="checkbox"
+    <% if (checked) { %> checked <% } %>
+    id="<%= genre.name %>"
+    name="record[genre_ids][]" value="<%= genre.id %>">
+  <label for="<%= genre.name %>"><%= genre.name %></label>
+</div>

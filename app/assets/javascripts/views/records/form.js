@@ -15,6 +15,7 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
     this.listenTo(this.artists, "sync", this.addArtists);
     this.listenTo(this.labels, "sync", this.addLabels);
     this.listenTo(Slipmat.countries, "sync", this.addCountries);
+    // this.listenTo(Slipmat.genres, "sync", this.addGenres);
   },
 
   events: {
@@ -31,6 +32,7 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
     var content = this.template({ record: this.model });
     this.$el.html(content);
     this.addCountries();
+    this.addGenres();
     this.addTracks();
 
     return this;
@@ -92,6 +94,18 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
       });
 
       this.$("#record_country").append(template);
+    }, this);
+  },
+
+  addGenres: function () {
+    Slipmat.genres.forEach(function (genre) {
+      var checked = _.includes(this.model.genres(), genre.id);
+      var template = JST["records/_genreCheckbox"]({
+        genre: genre,
+        checked: checked
+      });
+
+      this.$(".genre-container").append(template);
     }, this);
   },
 
