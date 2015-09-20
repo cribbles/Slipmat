@@ -1,9 +1,11 @@
-Slipmat.Views.UserNew = Backbone.View.extend({
+Slipmat.Views.UserEdit = Backbone.ImageableView.extend({
 
-  template: JST["users/new"],
+  tagName: "form",
+  id: "user-form",
+  template: JST["users/edit"],
 
   events: {
-    "submit #new-user": "submit"
+    "submit": "submit"
   },
 
   render: function () {

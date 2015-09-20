@@ -1,0 +1,47 @@
+<figure class="form record-form">
+  <div class="form-header">
+    Edit Profile
+  </div>
+  <div class="form-main record-form-main">
+    <figure class="form-image">
+      <img src="<%= user.image() %>" id="form-image">
+    </figure>
+
+    <button class="button button-data button-form" id="upload">
+      Update Profile Picture
+    </button>
+
+    <input
+      type="file"
+      class="button button-data button-form"
+      id="image-form">
+
+    <hr>
+
+    <label for="user_location">Location</label>
+    <input
+      type="text"
+      name="user[location]"
+      value="<%= user.get("location") %>"
+      id="user_location"
+      class="form record-form">
+
+    <label for="user_url">Homepage (URL)</label>
+    <input
+      type="text"
+      name="user[url]"
+      value="<%= user.get("url") %>"
+      id="user_url"
+      class="form record-form">
+
+    <label for="user_profile">Profile</label>
+    <textarea
+      name="user[profile]"
+      id="user_profile"
+      class="form record-form"><%= user.get("profile") %></textarea>
+
+    <button class="button button-data">
+      Update Profile
+    </button>
+  </div>
+</figure>

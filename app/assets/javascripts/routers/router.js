@@ -13,6 +13,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     "logout": "sessionDelete",
     "register": "userNew",
     "users/:id": "userShow",
+    "users/:id/edit": "userEdit",
     "users/:id/:tab": "userShow",
     "profile": "profile",
     "wantlist": "wantlist",
@@ -60,7 +61,16 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
     var user = new Slipmat.Models.User();
 
-    var view = new Slipmat.Views.UserForm({ model: user });
+    var view = new Slipmat.Views.UserNew({ model: user });
+    this._swapView(view);
+  },
+
+  userEdit: function () {
+    if (!this._ensureSignedIn()) { return; }
+
+    var user = new Slipmat.Models.User(Slipmat.currentUser.attributes);
+
+    var view = new Slipmat.Views.UserEdit({ model: user });
     this._swapView(view);
   },
 

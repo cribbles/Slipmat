@@ -24,12 +24,32 @@ module Api
       render :show
     end
 
+    def update
+      if Integer(params[:id]) == current_user.id
+        @user = User.find(params[:id])
+
+        if @user.update(user_update_params)
+          render json: @user
+        else
+          render json: @user.errors.full_messages, status: 422
+        end
+      else
+        head :forbidden
+      end
+    end
+
     private
 
     def user_params
       params
         .require(:user)
         .permit(:username, :email, :password)
+    end
+
+    def user_update_params
+      params
+        .require(:user)
+        .permit(:location, :url, :profile)
     end
   end
 end
