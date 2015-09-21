@@ -74,6 +74,7 @@ module Api
           :country_id,
           :year,
           :notes,
+          :discogs_id,
           genres: [],
           genre_ids: [],
           tracks_attributes: [
