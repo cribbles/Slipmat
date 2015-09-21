@@ -27,16 +27,20 @@ class Record < ActiveRecord::Base
   validates :artist_id, presence: true
 
   def artist_name=(artist_name)
-    artist = Artist.new(name: artist_name)
-    artist.save!
+    artist = Artist.where("lower(name) = ?", artist_name.downcase).first
+    artist ||= Artist.create(name: artist_name)
 
     self.artist_id = artist.id
   end
 
   def label_name=(label_name)
-    label = Label.new(title: label_name)
-    label.save!
+    label = Label.where("lower(title) = ?", label_name.downcase).first
+    label ||= Label.create(title: label_name)
 
     self.label_id = label.id
+  end
+
+  def image_url=(image_url)
+    self.image = open(image_url)
   end
 end
