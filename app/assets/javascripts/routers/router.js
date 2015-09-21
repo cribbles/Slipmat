@@ -17,7 +17,8 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     "users/:id/:tab": "userShow",
     "profile": "profile",
     "wantlist": "wantlist",
-    "collection": "collection"
+    "collection": "collection",
+    "import/:id": "_import"
   },
 
   recordIndex: function () {
@@ -113,6 +114,10 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   sessionDelete: function () {
     Slipmat.currentUser.signOut();
     Backbone.history.navigate("/", { trigger: true });
+  },
+
+  _import: function (id) {
+    Slipmat.import(id);
   },
 
   _ensureSignedIn: function (callback) {

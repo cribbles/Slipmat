@@ -74,6 +74,7 @@ module Api
           :country_id,
           :year,
           :notes,
+          genres: [],
           genre_ids: [],
           tracks_attributes: [
             :id,
@@ -90,6 +91,7 @@ module Api
         .require(:record)
         .permit(
           :image,
+          :image_url,
           :label_name,
           :label_id,
           :cat_no,
