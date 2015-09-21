@@ -34,7 +34,7 @@ Slipmat.Import.parse = function (payload) {
       title: track.title
     };
 
-    record.attributes.record.tracks_attributes.push(newTrack);
+    record.attributes.record.tracks_attributes.unshift(newTrack);
   });
 
   record.save({}, {
