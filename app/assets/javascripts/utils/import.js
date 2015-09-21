@@ -1,7 +1,8 @@
 Slipmat.Import = {}
 
 Slipmat.Import.import = function (id) {
-  var token = Slipmat.discogsUserToken
+  var token = Slipmat.discogsUserToken;
+
   $.ajax({
     url: "http://api.discogs.com/releases/" + id,
     type: "GET",
@@ -24,6 +25,7 @@ Slipmat.Import.parse = function (payload) {
     year: payload.year,
     notes: payload.notes,
     genres: payload.genres,
+    discogs_id: payload.id,
     tracks_attributes: []
   };
 
@@ -69,7 +71,7 @@ Slipmat.Import.patchImage = function (recordId, payload) {
 
   newModel.save({}, {
     success: function () {
-      console.log("Fetch successful, URL is /records/" + recordId);
+      console.log("Patch successful, URL is /records/" + recordId);
     }
   });
 }
