@@ -3,7 +3,8 @@
 html, body, header, nav, h1, ul, li, div,
 a, input, textarea, button, small, select,
 main, section, footer, hr, strong, b, p,
-table, th, tr, td, checkbox, label {
+table, th, tr, td, checkbox, label, figure,
+section {
   margin: 0px;
   padding: 0px;
   border: 0px;
@@ -607,7 +608,7 @@ li:hover > a > .sidebar-item-count {
   display: inline-block;
 }
 
-.content-records > .record > img {
+.content-records > .record > img, .record > .cover {
   width: 150px;
   height: 150px;
 }
@@ -1110,7 +1111,7 @@ textarea.highlight {
 
 /* record show */
 
-.record-main, .record-sidebar {
+.record-main, .record-sidebar, .show-comments {
   min-height: 200px;
   display: block;
   float: left;
@@ -1123,7 +1124,7 @@ textarea.highlight {
   margin-right: 2%;
 }
 
-.record-main > section {
+.record-main > section, .show-comments > section {
   margin-bottom: 15px;
 }
 
@@ -1160,7 +1161,36 @@ textarea.highlight {
   width: 85px;
 }
 
-.record-main h3, .record-sidebar h3 {
+.show-info > .info {
+  display: block;
+  float: left;
+  position: relative;
+  top: -13px;
+  padding-left: 180px;
+}
+
+.show-info > figure {
+  position: absolute;
+}
+
+.show-attr {
+  display: block;
+  margin: 5px 0;
+}
+
+.show-attr > .key {
+  display: block;
+  position: absolute;
+}
+
+.show-attr > .value {
+  display: block;
+  position: relative;
+  left: 85px;
+  padding-right: 100px;
+}
+
+.record-main h3, .record-sidebar h3, .show-comments h3 {
   font-size: 15px;
   margin: 2px 0;
   padding: 5px 0;
