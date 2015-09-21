@@ -42,17 +42,22 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
     var view = this;
     var image = this.$("#image-form")[0].files[0];
     var attributes = this.$el.serializeJSON();
+    var callback = function (model) {
+      Backbone.history.navigate("/records/" + model.id, { trigger: true });
+    }
 
     this.model.save(attributes, {
       success: function (model) {
+        if (!image) {
+          callback(model);
+          return;
+        }
         view.submitImage({
           image: image,
           param: "record[image]",
-          model: view.model
+          model: model,
+          success: callback.bind(view, model)
         });
-        debugger
-
-        Backbone.history.navigate("/records/" + model.id, { trigger: true });
       }
     });
   },

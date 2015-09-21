@@ -23,18 +23,24 @@ Slipmat.Views.UserEdit = Backbone.ImageableView.extend({
     var view = this;
     var image = this.$("#image-form")[0].files[0];
     var attributes = this.$el.serializeJSON();
+    var callback = function (user) {
+      Slipmat.currentUser.fetch();
+      Backbone.history.navigate("#/users/" + user.id, { trigger: true });
+    }
 
     this.model.save(attributes, {
       success: function (user) {
+        if (!image) {
+          callback(user);
+          return;
+        }
+
         view.submitImage({
           image: image,
           param: "user[image]",
           model: user,
-          success: function () { Slipmat.currentUser.fetch(); }
+          success: callback.bind(view, user)
         });
-
-        Slipmat.currentUser.fetch();
-        Backbone.history.navigate("#/users/" + user.id, { trigger: true });
       }
     });
   }
