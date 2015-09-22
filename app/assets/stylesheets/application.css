@@ -665,6 +665,17 @@ li:hover > a > .sidebar-item-count {
   width: 350px;
 }
 
+.form-with-errors {
+  width: 500px;
+  display: none;
+}
+
+.errors {
+  padding: 20px 30px;
+  list-style: circle;
+  font-size: 15px;
+}
+
 .record-form {
   width: 400px;
 }

@@ -15,11 +15,11 @@ module Api
 
     def show
       @user = User
-                .includes(:authored_comments)
-                .includes(:contributions)
-                .includes(:collection)
-                .includes(:wantlist)
-                .find(params[:id])
+        .includes(:authored_comments)
+        .includes(:contributions)
+        .includes(:collection)
+        .includes(:wantlist)
+        .find(params[:id])
 
       render :show
     end

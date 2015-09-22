@@ -1,4 +1,4 @@
-Slipmat.Views.UserNew = Backbone.View.extend({
+Slipmat.Views.UserNew = Backbone.CompositeView.extend({
 
   template: JST["users/new"],
 
@@ -16,6 +16,7 @@ Slipmat.Views.UserNew = Backbone.View.extend({
   submit: function (e) {
     e.preventDefault();
 
+    var view = this;
     var $form = $(e.currentTarget);
     var attributes = $form.serializeJSON().user;
 
@@ -23,6 +24,16 @@ Slipmat.Views.UserNew = Backbone.View.extend({
       success: function (user) {
         Slipmat.currentUser.fetch();
         Backbone.history.navigate("#/users/" + user.id, { trigger: true });
+      },
+      error: function (model, resp) {
+        this.$(".form-with-errors").show();
+        var $errors = $(".errors").empty();
+
+        resp.responseJSON.forEach(function(error) {
+          var $error = $("<li>").text(error);
+
+          $errors.append($error);
+        });
       }
     });
   }
