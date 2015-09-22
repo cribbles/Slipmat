@@ -22,7 +22,7 @@
     <input
       type="text"
       name="location"
-      value="<%= user.get("location") %>"
+      value="<%= user.escape("location") %>"
       id="user_location"
       class="form record-form">
 
@@ -30,7 +30,7 @@
     <input
       type="text"
       name="url"
-      value="<%= user.get("url") %>"
+      value="<%= user.escape("url") %>"
       id="user_url"
       class="form record-form">
 
@@ -38,7 +38,7 @@
     <textarea
       name="profile"
       id="user_profile"
-      class="form record-form"><%= user.get("profile") %></textarea>
+      class="form record-form"><%= user.escape("profile") %></textarea>
 
     <button class="button button-data">
       Update Profile
