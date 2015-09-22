@@ -4,8 +4,8 @@ module Contributable
   def add_contribution(model)
     UserContribution.create(
       user_id: current_user.id,
-      contribution_id: model.id,
-      contribution_type: model.class
+      contributable_id: model.id,
+      contributable_type: model.class
     )
   end
 end
