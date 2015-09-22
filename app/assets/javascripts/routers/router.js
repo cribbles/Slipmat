@@ -9,15 +9,21 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     "records/new": "recordNew",
     "records/:id": "recordShow",
     "records/:id/edit": "recordEdit",
-    "login": "sessionNew",
-    "logout": "sessionDelete",
-    "register": "userNew",
+
+    "artists/:id": "artistShow",
+
     "users/:id": "userShow",
     "users/:id/edit": "userEdit",
     "users/:id/:tab": "userShow",
+
+    "login": "sessionNew",
+    "logout": "sessionDelete",
+    "register": "userNew",
+
     "profile": "profile",
     "wantlist": "wantlist",
     "collection": "collection",
+
     "import/:id": "_import",
     "demo": "_demo"
   },
@@ -55,6 +61,14 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
     var view = new Slipmat.Views.RecordForm({ model: record });
 
+    this._swapView(view);
+  },
+
+  artistShow: function (id) {
+    var artist = new Slipmat.Models.Artist({ id: id });
+    artist.fetch();
+
+    var view = new Slipmat.Views.ArtistShow({ model: artist });
     this._swapView(view);
   },
 

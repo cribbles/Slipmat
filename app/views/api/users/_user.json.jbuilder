@@ -11,16 +11,9 @@ json.extract!(
 
 json.image asset_path(user.image.url)
 json.num_comments user.authored_comments.count
+json.num_contributions user.contributions.count
 
 associations = [];
-
-unless user.contributions.empty?
-  json.contributions(
-    user.contributions,
-    partial: 'api/records/record',
-    as: :record
-  )
-end
 
 unless user.wantlist.empty?
   json.wantlist(

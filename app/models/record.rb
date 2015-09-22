@@ -9,7 +9,7 @@ class Record < ActiveRecord::Base
   has_many :collected, through: :user_collections, source: :user
   has_many :user_wants
   has_many :wanted, through: :user_wants, source: :user
-  has_many :user_contributions
+  has_many :user_contributions, as: :contributable
   has_many :contributors, through: :user_contributions, source: :user
   has_many :comments, as: :commentable
   has_many :genre_taggings

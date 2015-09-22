@@ -1,16 +1,14 @@
 module Api
   class RecordsController < ApplicationController
+    include Contributable
+
     before_action :ensure_signed_in, except: [:index, :show]
 
     def create
       @record = Record.new(record_params)
 
       if @record.save
-        UserContribution.create(
-          user_id: current_user.id,
-          record_id: @record.id
-        )
-
+        add_contribution(@record)
         render json: @record
       else
         render json: @record.errors.full_messages, status: 422
@@ -21,13 +19,7 @@ module Api
       @record = Record.find(params[:id])
 
       if @record.update(record_update_params)
-        unless current_user.contributions.include?(@record)
-          UserContribution.create(
-            user_id: current_user.id,
-            record_id: @record.id
-          )
-        end
-
+        add_contribution(@record)
         render json: @record
       else
         render json @record.errors.full_messages, status: 422

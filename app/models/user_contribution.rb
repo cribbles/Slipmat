@@ -6,7 +6,9 @@ class UserContribution < ActiveRecord::Base
   include Trackable
 
   belongs_to :user
-  belongs_to :record
+  belongs_to :contributable, polymorphic: true
 
-  validates_uniqueness_of :record_id, scope: :user_id
+  validates_uniqueness_of :user_id, scope: [
+    :contributable_id, :contributable_type
+  ]
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150921181137) do
+ActiveRecord::Schema.define(version: 20150922151118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,14 +137,15 @@ ActiveRecord::Schema.define(version: 20150921181137) do
   add_index "user_collections", ["user_id"], name: "index_user_collections_on_user_id", using: :btree
 
   create_table "user_contributions", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.integer  "record_id",  null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id",            null: false
+    t.integer  "contributable_id",   null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "contributable_type"
   end
 
-  add_index "user_contributions", ["record_id"], name: "index_user_contributions_on_record_id", using: :btree
-  add_index "user_contributions", ["user_id", "record_id"], name: "index_user_contributions_on_user_id_and_record_id", unique: true, using: :btree
+  add_index "user_contributions", ["contributable_id"], name: "index_user_contributions_on_contributable_id", using: :btree
+  add_index "user_contributions", ["user_id", "contributable_id"], name: "index_user_contributions_on_user_id_and_contributable_id", unique: true, using: :btree
   add_index "user_contributions", ["user_id"], name: "index_user_contributions_on_user_id", using: :btree
 
   create_table "user_wants", force: :cascade do |t|

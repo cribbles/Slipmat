@@ -20,8 +20,7 @@ class User < ActiveRecord::Base
   has_many :collection, through: :user_collections, source: :record
   has_many :user_wants
   has_many :wantlist, through: :user_wants, source: :record
-  has_many :user_contributions
-  has_many :contributions, through: :user_contributions, source: :record
+  has_many :contributions, class_name: "UserContribution"
   has_many :authored_comments, class_name: "Comment", foreign_key: :author_id
   has_many :recent_activity, class_name: "UserActivity"
 

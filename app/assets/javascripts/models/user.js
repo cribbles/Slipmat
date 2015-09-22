@@ -9,10 +9,6 @@ Slipmat.Models.User = Backbone.Model.extend({
   parse: function (payload) {
     var user = this;
 
-    if (payload.contributions) {
-      this.contributedRecords().set(payload.contributions, { parse: true });
-      delete payload.contributions;
-    }
     if (payload.collection) {
       this.collectedRecords().set(payload.collection, { parse: true });
       delete payload.collection;
@@ -33,15 +29,12 @@ Slipmat.Models.User = Backbone.Model.extend({
       this._num_comments = payload.num_comments;
       delete payload.num_comments;
     }
+    if (payload.num_contributions) {
+      this._num_contributions = payload.num_contributions;
+      delete payload.num_contributions;
+    }
 
     return payload;
-  },
-
-  contributedRecords: function () {
-    if (!this._contributedRecords) {
-      this._contributedRecords = new Slipmat.Collections.Records();
-    }
-    return this._contributedRecords;
   },
 
   collectedRecords: function () {
@@ -73,6 +66,10 @@ Slipmat.Models.User = Backbone.Model.extend({
 
   numComments: function () {
     return this._num_comments || 0;
+  },
+
+  numContributions: function () {
+    return this._num_contributions || 0;
   }
 
 });
