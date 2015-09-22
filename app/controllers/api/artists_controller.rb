@@ -33,7 +33,10 @@ module Api
     end
 
     def show
-      @artist = Artist.find(params[:id])
+      @artist = Artist
+        .includes(:records)
+        .includes(:comments)
+        .find(params[:id])
 
       render :show
     end
