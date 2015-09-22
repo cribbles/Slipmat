@@ -21,7 +21,7 @@ module Api
         add_contribution(@artist)
         render json: @artist
       else
-        render json @artist.errors.full_messages, status: 422
+        render json: @artist.errors.full_messages, status: 422
       end
     end
 

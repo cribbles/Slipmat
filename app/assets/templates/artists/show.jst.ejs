@@ -8,7 +8,7 @@
         <h2 id="name">
           <b><%= artist.escape("name") %></b>
         </h2>
-        <% if (artist.has("real_name")) { %>
+        <% if (artist.has("real_name") && artist.escape("real_name").length) { %>
           <div class="show-attr group" id="label">
             <span class="key">
               Real Name:
@@ -18,7 +18,7 @@
             </span>
           </div>
         <% } %>
-        <% if (artist.has("profile")) { %>
+        <% if (artist.has("profile") && artist.escape("profile").length) { %>
           <div class="show-attr group" id="country">
             <span class="key">
               Profile:

@@ -8,7 +8,7 @@
         <h2 id="name">
           <b><%= label.escape("title") %></b>
         </h2>
-        <% if (label.has("profile")) { %>
+        <% if (label.has("profile") && label.escape("profile").length) { %>
           <div class="show-attr group" id="country">
             <span class="key">
               Profile:

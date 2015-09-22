@@ -16,7 +16,8 @@ module Api
       )
 
       if user.nil?
-        head :unprocessable_entity
+        response = ["Couldn't find a user with that username or password."]
+        render json: response, status: 422
       else
         sign_in!(user)
         render :show

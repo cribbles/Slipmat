@@ -41,6 +41,9 @@ Slipmat.Views.UserEdit = Backbone.ImageableView.extend({
           model: user,
           success: callback.bind(view, user)
         });
+      },
+      error: function (model, resp) {
+        Slipmat._onError(this, resp.responseJSON);
       }
     });
   }

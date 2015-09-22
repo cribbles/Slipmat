@@ -16,6 +16,7 @@ Slipmat.Views.SessionForm = Backbone.View.extend({
   submit: function (e) {
     e.preventDefault();
 
+    var view = this;
     var $form = $(e.currentTarget);
     var credentials = $form.serializeJSON();
 
@@ -24,6 +25,9 @@ Slipmat.Views.SessionForm = Backbone.View.extend({
       password: credentials.password,
       success: function (user) {
         Backbone.history.navigate("#/users/" + user.id, { trigger: true });
+      },
+      error: function (resp) {
+        Slipmat._onError(view, resp.responseJSON);
       }
     });
   }

@@ -104,8 +104,8 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
         this.set(parsed);
         options.success && options.success(attributes);
       }.bind(this),
-      error: function () {
-        options.error && options.error();
+      error: function (resp) {
+        options.error && options.error(resp);
       }
     });
   },

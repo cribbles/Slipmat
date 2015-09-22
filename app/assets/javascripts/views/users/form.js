@@ -26,7 +26,7 @@ Slipmat.Views.UserNew = Backbone.CompositeView.extend({
         Backbone.history.navigate("#/users/" + user.id, { trigger: true });
       },
       error: function (model, resp) {
-        Slipmat._onError(this, model, resp);
+        Slipmat._onError(this, resp.responseJSON);
       }
     });
   }

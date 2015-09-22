@@ -45,6 +45,9 @@ Slipmat.Views.ArtistEdit = Backbone.ImageableView.extend({
           model: artist,
           success: callback.bind(view, artist)
         });
+      },
+      error: function (model, resp) {
+        Slipmat._onError(this, resp.responseJSON);
       }
     });
   }
