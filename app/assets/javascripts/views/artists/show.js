@@ -23,8 +23,23 @@ Slipmat.Views.ArtistShow = Backbone.ModularView.extend({
 
     this.listContributors();
     this.renderComments();
+    this.renderRecords();
 
     return this;
+  },
+
+  renderRecords: function () {
+    var view = this;
+    var records = this.model.records();
+
+    var header = JST["records/_paginationHeader"]({ records: records });
+    this.$(".pagination-header").html(header);
+
+    records.forEach(function(record) {
+      var subview = JST["records/_record"]({ record: record });
+
+      view.$(".content-records").append(subview);
+    });
   }
 
 });
