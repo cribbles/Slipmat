@@ -1,0 +1,61 @@
+<header class="show-header group">
+  <section class="record-main">
+    <section class="show-info group">
+      <figure class="record">
+        <img src="<%= label.image() %>" class="cover">
+      </figure>
+      <div class="info">
+        <h2 id="name">
+          <b><%= label.escape("title") %></b>
+        </h2>
+        <% if (label.has("profile")) { %>
+          <div class="show-attr group" id="country">
+            <span class="key">
+              Profile:
+            </span>
+            <span class="value">
+              <%= label.escape("profile").replace(/\n/g, "<br>") %>
+            </span>
+          </div>
+        <% } %>
+      </div>
+    </section>
+  </section>
+
+  <section class="record-sidebar">
+    <section class="release">
+      <h3>Label</h3>
+      <div class="release-container">
+        <span>
+          <a href="#/labels/<%= label.id %>/edit" class="link">
+            Edit Label
+          </a>
+        </span>
+      </div>
+    </section>
+    <section class="contributors">
+      <h3>Contributors</h3>
+      <div class="contributors-container">
+      </div>
+    </section>
+  </section>
+</header>
+
+<nav class="content-tabs pagination-header group">
+</nav>
+
+<section class="content-records group">
+</section>
+
+<section class="record-main">
+  <section class="comments">
+    <h3>Reviews</h3>
+    <form id="new-comment">
+      <button class="button button-main button-data button-comment">
+        Add Review
+      </button>
+    </form>
+    <div class="comments-container">
+    </div>
+  </section>
+</section>

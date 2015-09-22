@@ -4,8 +4,6 @@ Slipmat.Models.Artist = Backbone.Model.extend({
   urlRoot: "api/artists",
 
   parse: function (payload) {
-    var artist = this;
-
     if (payload.records) {
       this.records().set(payload.records, { parse: true });
       delete payload.records;

@@ -13,6 +13,9 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     "artists/:id": "artistShow",
     "artists/:id/edit": "artistEdit",
 
+    "labels/:id": "labelShow",
+    "labels/:id/edit": "labelEdit",
+
     "users/:id": "userShow",
     "users/:id/edit": "userEdit",
     "users/:id/:tab": "userShow",
@@ -80,6 +83,25 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     artist.fetch();
 
     var view = new Slipmat.Views.ArtistEdit({ model: artist });
+
+    this._swapView(view);
+  },
+
+  labelShow: function (id) {
+    var label = new Slipmat.Models.Label({ id: id });
+    label.fetch();
+
+    var view = new Slipmat.Views.LabelShow({ model: label });
+    this._swapView(view);
+  },
+
+  labelEdit: function (id) {
+    if (!this._ensureSignedIn()) { return; }
+
+    var label = new Slipmat.Models.Label({ id: id });
+    label.fetch();
+
+    var view = new Slipmat.Views.LabelEdit({ model: label });
 
     this._swapView(view);
   },

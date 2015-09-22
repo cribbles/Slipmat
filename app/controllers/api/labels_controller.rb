@@ -1,5 +1,7 @@
 module Api
   class LabelsController < ApplicationController
+    include Contributable
+
     before_action :ensure_signed_in, except: [:index, :show]
 
     def create
@@ -15,7 +17,8 @@ module Api
     def update
       @label = Label.find(params[:id])
 
-      if @label.update(label_params)
+      if @label.update(label_update_params)
+        add_contribution(@label)
         render json: @label
       else
         render json @label.errors.full_messages, status: 422
@@ -30,15 +33,18 @@ module Api
     end
 
     def show
-      @label = Label.find(params[:id])
+      @label = Label
+        .includes(:records)
+        .includes(:comments)
+        .find(params[:id])
 
-      render json: @label
+      render :show
     end
 
     def index
-      @label = Label.all
+      @labels = Label.all
 
-      render json: @label
+      render json: @labels
     end
 
     private
@@ -46,7 +52,13 @@ module Api
     def label_params
       params
         .require(:label)
-        .permit(:title, :profile)
+        .permit(:title)
+    end
+
+    def label_update_params
+      params
+        .require(:label)
+        .permit(:profile, :image)
     end
   end
 end
