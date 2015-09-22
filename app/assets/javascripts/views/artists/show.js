@@ -13,7 +13,6 @@ Slipmat.Views.ArtistShow = Backbone.ModularView.extend({
   },
 
   render: function () {
-    debugger
     var content = this.template({ artist: this.model });
     this.$el.html(content);
 

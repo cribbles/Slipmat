@@ -4,6 +4,10 @@ Slipmat.Views.ArtistEdit = Backbone.ImageableView.extend({
   id: "user-form",
   template: JST["artists/edit"],
 
+  initialize: function () {
+    this.listenTo(this.model, "sync", this.render);
+  },
+
   events: {
     "change #image-form": "replaceFormImage",
     "click #upload": "triggerUpload",
