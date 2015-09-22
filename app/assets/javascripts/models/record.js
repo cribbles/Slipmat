@@ -1,5 +1,6 @@
 Slipmat.Models.Record = Backbone.Model.extend({
 
+  class: "Record",
   urlRoot: "api/records",
 
   parse: function (payload) {

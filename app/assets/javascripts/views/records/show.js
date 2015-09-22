@@ -1,4 +1,4 @@
-Slipmat.Views.RecordShow = Backbone.View.extend({
+Slipmat.Views.RecordShow = Backbone.ModularView.extend({
 
   tagName: "main",
   className: "group",
@@ -6,7 +6,6 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
 
   initialize: function () {
     this.trackTemplate = JST["tracks/_track"];
-    this.commentTemplate = JST["shared/_comment"];
 
     this.listenTo(this.model, "sync change", this.render);
     this.listenTo(Slipmat.currentUser, "sync", this.toggleListButtons);
@@ -34,19 +33,6 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
     return this;
   },
 
-  listContributors: function () {
-    var contributors = this.model.contributors();
-    if (!contributors.length) { return; }
-
-    var $contributors = this.$(".contributors-container");
-    contributors.forEach(function (contributor) {
-      var $contributor = $('<a href="#/users/' + contributor.id + '">')
-      $contributor.text(_.escape(contributor.username));
-
-      $contributors.append($contributor);
-    });
-  },
-
   renderTracks: function () {
     var tracks = this.model.tracks();
     if (!tracks.length) { return; }
@@ -54,38 +40,6 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
     tracks.forEach(function (track) {
       this._addTrack(track);
     }, this);
-  },
-
-  renderComments: function () {
-    var comments = this.model.comments();
-    if (!comments.length) { return; }
-
-    comments.forEach(function (comment) {
-      this._addComment(comment);
-    }, this);
-  },
-
-  addComment: function (e) {
-    e.preventDefault();
-    if (!this._ensureSignedIn()) { return; }
-
-    var comment = {
-      "comment[author_id]": Slipmat.currentUser.id,
-      "comment[body]": this.$(".comment-form").val(),
-      "comment[commentable_id]": this.model.id,
-      "comment[commentable_type]": "Record"
-    };
-
-    $.ajax({
-      url: "/api/comments",
-      type: "POST",
-      dataType: "json",
-      data: comment,
-      success: function (comment) {
-        this.$(".comment-form").val("");
-        this._addComment(comment);
-      }.bind(this)
-    });
   },
 
   toggleListButtons: function () {
@@ -155,22 +109,6 @@ Slipmat.Views.RecordShow = Backbone.View.extend({
     var content = this.trackTemplate({ track: track });
 
     this.$(".tracklist-container").append(content);
-  },
-
-  _addComment: function (comment) {
-    var content = this.commentTemplate({ comment: comment });
-
-    this.$(".comments-container").prepend(content);
-  },
-
-  _ensureSignedIn: function (callback) {
-    if (!Slipmat.currentUser.isSignedIn()) {
-      Backbone.history.navigate("/login", { trigger: true });
-      this.signIn(callback);
-
-      return false;
-    }
-    return true;
   }
 
 });
