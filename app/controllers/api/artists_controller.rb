@@ -17,7 +17,7 @@ module Api
     def update
       @artist = Artist.find(params[:id])
 
-      if @artist.update(artist_params)
+      if @artist.update(artist_update_params)
         add_contribution(@artist)
         render json: @artist
       else
@@ -52,7 +52,13 @@ module Api
     def artist_params
       params
         .require(:artist)
-        .permit(:name, :real_name, :profile)
+        .permit(:name)
+    end
+
+    def artist_update_params
+      params
+        .require(:artist)
+        .permit(:real_name, :profile, :image)
     end
   end
 end

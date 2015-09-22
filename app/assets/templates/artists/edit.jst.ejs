@@ -1,0 +1,39 @@
+<figure class="form record-form">
+  <div class="form-header">
+    Edit Artist Info
+  </div>
+  <div class="form-main record-form-main">
+    <figure class="form-image">
+      <img src="<%= artist.image() %>" id="form-image">
+    </figure>
+
+    <button class="button button-data button-form" id="upload">
+      Update Artist Photo
+    </button>
+
+    <input
+      type="file"
+      class="button button-data button-form"
+      id="image-form">
+
+    <hr>
+
+    <label for="artist_real_name">Real Name</label>
+    <input
+      type="text"
+      name="real_name"
+      value="<%= artist.escape("real_name") %>"
+      id="artist_real_name"
+      class="form record-form">
+
+    <label for="artist_profile">Profile</label>
+    <textarea
+      name="profile"
+      id="artist_profile"
+      class="form record-form"><%= artist.escape("profile") %></textarea>
+
+    <button class="button button-data">
+      Update Profile
+    </button>
+  </div>
+</figure>
