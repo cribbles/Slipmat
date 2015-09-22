@@ -8,5 +8,15 @@
     Slipmat.defaultArtistImg = "<%= asset_path("default-record.png") %>";
     Slipmat.defaultLabelImg = "<%= asset_path("default-record.png") %>";
     Slipmat.discogsUserToken = "<%= ENV["discogs_user_token"] %>";
+
+    Slipmat._onError = function (view, model, resp) {
+      view.$(".form-with-errors").show();
+      var $errors = $(".errors").empty();
+
+      resp.responseJSON.forEach(function(error) {
+        var $error = $("<li>").text(error);
+        $errors.append($error);
+      });
+    }
   })();
 </script>
