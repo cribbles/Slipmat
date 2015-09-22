@@ -25,12 +25,28 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
       this.$("#new-comment").prepend($textarea);
     }
 
-    this.listContributors();
+    this.renderGenres();
     this.renderTracks();
+    this.listContributors();
     this.renderComments();
     this.toggleListButtons();
 
     return this;
+  },
+
+  renderGenres: function () {
+    var genres = this.model.genres();
+    if (!genres.length) { return; }
+
+    var $genres = this.$("#genres .value");
+    for (var i = 0; i < genres.length; i++) {
+      var $genre = $('<a href="#">').text(genres[i].name);
+      $genres.append($genre);
+
+      if (i + 1 < genres.length) {
+        $genres.append(", ");
+      }
+    }
   },
 
   renderTracks: function () {
