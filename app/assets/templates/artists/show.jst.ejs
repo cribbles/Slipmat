@@ -2,28 +2,32 @@
   <section class="record-main">
     <section class="show-info group">
       <figure class="record">
-        <img src="default-artist.png" class="cover">
+        <img src="<%= artist.image() %>" class="cover">
       </figure>
       <div class="info">
         <h2 id="name">
-          <b>Nas</b>
+          <b><%= artist.escape("name") %></b>
         </h2>
-        <div class="show-attr group" id="label">
-          <span class="key">
-            Real Name:
-          </span>
-          <span class="value">
-            <%= artist.escape("real_name") %>
-          </span>
-        </div>
-        <div class="show-attr group" id="country">
-          <span class="key">
-            Profile:
-          </span>
-          <span class="value">
-            <%= artist.escape("profile").replace(/\n/g, "<br>") %>
-          </span>
-        </div>
+        <% if (artist.has("real_name")) { %>
+          <div class="show-attr group" id="label">
+            <span class="key">
+              Real Name:
+            </span>
+            <span class="value">
+              <%= artist.escape("real_name") %>
+            </span>
+          </div>
+        <% } %>
+        <% if (artist.has("profile")) { %>
+          <div class="show-attr group" id="country">
+            <span class="key">
+              Profile:
+            </span>
+            <span class="value">
+              <%= artist.escape("profile").replace(/\n/g, "<br>") %>
+            </span>
+          </div>
+        <% } %>
       </div>
     </section>
   </section>

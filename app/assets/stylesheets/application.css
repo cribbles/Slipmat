@@ -1169,6 +1169,7 @@ textarea.highlight {
 }
 
 .show-info > figure {
+  margin: 0;
   position: absolute;
 }
 

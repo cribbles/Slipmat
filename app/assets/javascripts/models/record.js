@@ -40,23 +40,17 @@ Slipmat.Models.Record = Backbone.Model.extend({
   },
 
   image: function () {
-    if (!this._image) {
-      this._image = Slipmat.defaultRecordImg;
-    }
+    this._image = this._image || Slipmat.defaultRecordImg;
     return this._image;
   },
 
   artist: function () {
-    if (!this._artist) {
-      this._artist = new Slipmat.Models.Artist();
-    }
+    this._artist = this._artist || new Slipmat.Models.Artist();
     return this._artist;
   },
 
   label: function () {
-    if (!this._label) {
-      this._label = new Slipmat.Models.Label();
-    }
+    this._label = this._label || new Slipmat.Models.Label();
     return this._label;
   },
 

@@ -1,6 +1,8 @@
 class Label < ActiveRecord::Base
   has_many :records
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :user_contributions, as: :contributable
+  has_many :contributors, through: :user_contributions, source: :user
   validates :title, presence: true, uniqueness: true
 
   has_attached_file :image, default_url: "default-label.png"
