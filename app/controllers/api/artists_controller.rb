@@ -1,5 +1,7 @@
 module Api
   class ArtistsController < ApplicationController
+    include Contributable
+
     before_action :ensure_signed_in, except: [:index, :show]
 
     def create
@@ -16,6 +18,7 @@ module Api
       @artist = Artist.find(params[:id])
 
       if @artist.update(artist_params)
+        add_contribution(@artist)
         render json: @artist
       else
         render json @artist.errors.full_messages, status: 422
@@ -32,13 +35,13 @@ module Api
     def show
       @artist = Artist.find(params[:id])
 
-      render json: @artist
+      render :show
     end
 
     def index
-      @artist = Artist.all
+      @artists = Artist.all
 
-      render json: @artist
+      render json: @artists
     end
 
     private
