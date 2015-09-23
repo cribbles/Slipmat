@@ -90,7 +90,7 @@ b {
 }
 
 .header-nav, main.content, .footer {
-  max-width: 1230px;
+  max-width: 985px;
   min-width: 840px;
   padding: 0 30px;
 }
@@ -1041,7 +1041,7 @@ textarea.highlight {
 }
 
 .profile-navbar > .navbar {
-  max-width: 1280px;
+  max-width: 985px;
   min-width: 890px;
   margin: auto;
 }
