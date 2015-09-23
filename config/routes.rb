@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
 
   namespace :api, defaults: { format: :json } do
+    resource  :search, to: "search#search"
     resources :countries, only: :index
     resources :genres, only: :index
-    resource  :session, only: [:create, :destroy, :show]
     resources :users,   only: [:create, :update, :destroy, :show]
+    resource  :session, only: [:create, :destroy, :show]
     resources :artists, only: [:create, :update, :destroy, :show, :index]
     resources :labels,  only: [:create, :update, :destroy, :show, :index]
     resources :records, only: [:create, :update, :destroy, :show, :index]
