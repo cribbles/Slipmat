@@ -1,3 +1,7 @@
+json.pages do
+  json.partial! 'api/shared/pages', collection: @search_results
+end
+
 json.results do
   json.array! @search_results do |search_result|
     json.searchable_type search_result.searchable_type
