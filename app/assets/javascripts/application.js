@@ -2,7 +2,6 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require jquery.serializejson
-//= require google-images-api
 //= require underscore
 //= require backbone
 //= require slipmat

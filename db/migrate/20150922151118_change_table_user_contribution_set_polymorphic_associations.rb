@@ -4,6 +4,6 @@ class ChangeTableUserContributionSetPolymorphicAssociations < ActiveRecord::Migr
     add_column :user_contributions, :contributable_type, :string
 
     UserContribution.reset_column_information
-    UserContribution.update_all(:contributable_type => "Record")
+    UserContribution.update_all(contributable_type: "Record")
   end
 end

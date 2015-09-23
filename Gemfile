@@ -13,6 +13,7 @@ gem 'puma'
 gem 'paperclip'
 gem 'figaro'
 gem 'aws-sdk', '< 2.0'
+gem 'omniauth-google-oauth2'
 
 group :production do
   gem 'rails_12factor'
