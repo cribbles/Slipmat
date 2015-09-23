@@ -3,7 +3,8 @@ Slipmat.Views.SessionForm = Backbone.View.extend({
   template: JST["session/form"],
 
   events: {
-    "submit #new-session": "submit"
+    "submit #new-session": "submit",
+    "click .button-google": "redirect"
   },
 
   render: function () {
@@ -30,5 +31,11 @@ Slipmat.Views.SessionForm = Backbone.View.extend({
         Slipmat._onError(view, resp.responseJSON);
       }
     });
+  },
+
+  redirect: function (e) {
+    e.preventDefault();
+    location.replace("/auth/google_oauth2");
   }
+
 });

@@ -3,7 +3,8 @@ Slipmat.Views.UserNew = Backbone.CompositeView.extend({
   template: JST["users/new"],
 
   events: {
-    "submit #new-user": "submit"
+    "submit #new-user": "submit",
+    "click .button-google": "redirect"
   },
 
   render: function () {
@@ -29,5 +30,10 @@ Slipmat.Views.UserNew = Backbone.CompositeView.extend({
         Slipmat._onError(this, resp.responseJSON);
       }
     });
+  },
+
+  redirect: function (e) {
+    e.preventDefault();
+    location.replace("/auth/google_oauth2");
   }
 });
