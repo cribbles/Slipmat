@@ -461,6 +461,10 @@ li:hover > a > .sidebar-item-count {
   left: 10px;
 }
 
+.pagination-footer {
+  border-bottom: none;
+}
+
 .tabs > li {
   display: block;
   float: left;
@@ -588,6 +592,8 @@ li:hover > a > .sidebar-item-count {
 
 .content-records {
   margin-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
 }
 
 .content-records > .record, .record-info > .record {

@@ -1,16 +1,5 @@
-<div class="content-pages">
-  1 – <%= collection.length %> of <%= collection.length %>
-</div>
-<small class="prev-page">
-  <span class="prev-page">
-    Prev
-  </span>
-</small>
-<small class="next-page">
-  <span class="next-page">
-    Next
-  </a>
-</small>
+<%= JST["layouts/_pages"]({ collection: collection }) %>
+
 <div class="content-sort">
   <label for="content-sort" id="content-sort">Sort</label>
   <select

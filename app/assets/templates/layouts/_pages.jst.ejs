@@ -1,0 +1,21 @@
+<div class="content-pages">
+  <%= collection.pages().lower_limit %>
+  –
+  <%= collection.pages().upper_limit %>
+  of
+  <%= collection.pages().total_count %>
+</div>
+<small class="prev-page page">
+  <span
+    <% if (collection.pages().prev_page) { %> class="link" <% } %>
+    >
+    Prev
+  </span>
+</small>
+<small class="next-page page">
+  <span
+    <% if (collection.pages().next_page) { %> class="link" <% } %>
+    >
+    Next
+  </a>
+</small>

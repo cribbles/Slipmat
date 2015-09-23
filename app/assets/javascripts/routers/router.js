@@ -6,7 +6,8 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   routes: {
-    "": "recordIndex",
+    "": "index",
+
     "records/new": "recordNew",
     "records/:id": "recordShow",
     "records/:id/edit": "recordEdit",
@@ -33,9 +34,9 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     "demo": "_demo"
   },
 
-  recordIndex: function () {
+  index: function () {
     this.records.fetch();
-    var view = new Slipmat.Views.RecordIndex({ collection: this.records });
+    var view = new Slipmat.Views.Index({ collection: this.records });
 
     this._swapView(view);
   },

@@ -40,6 +40,7 @@ module Api
 
       @records = @label
         .records
+        .includes(:artist)
         .page(params[:page])
         .per(24)
 
