@@ -32,7 +32,7 @@ module Api
     def omniauth
       user = User.find_or_create_by_auth_hash(auth_hash)
       sign_in!(user)
-      render :show
+      redirect_to root_url
     end
 
     private
