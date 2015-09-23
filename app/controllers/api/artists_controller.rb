@@ -42,9 +42,11 @@ module Api
     end
 
     def index
-      @artists = Artist.all
+      @artists = Artist
+        .page(params[:page])
+        .per(24)
 
-      render json: @artists
+      render :index
     end
 
     private

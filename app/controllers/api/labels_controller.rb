@@ -42,9 +42,11 @@ module Api
     end
 
     def index
-      @labels = Label.all
+      @labels = Label
+        .page(params[:page])
+        .per(24)
 
-      render json: @labels
+      render :index
     end
 
     private
