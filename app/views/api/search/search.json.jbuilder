@@ -1,3 +1,9 @@
+json.statistics do
+  json.num_records @search_results.where(searchable_type: "Record").count
+  json.num_artists @search_results.where(searchable_type: "Artist").count
+  json.num_labels @search_results.where(searchable_type: "Label").count
+end
+
 json.pages do
   json.partial! 'api/shared/pages', collection: @search_results
 end
