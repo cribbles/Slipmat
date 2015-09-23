@@ -15,38 +15,30 @@ json.num_contributions user.contributions.count
 
 associations = [];
 
-unless user.wantlist.empty?
-  json.wantlist(
-    user.wantlist,
-    partial: 'api/records/record',
-    as: :record
-  )
-
-  user.user_wants.each do |want|
-    assocation = {
-      id: want.id,
-      record_id: want.record_id,
-      type: :want
-    }
-    associations << assocation
-  end
+json.wantlist do
+  json.partial! 'api/records/records', records: @wantlist
 end
 
-unless user.collection.empty?
-  json.collection(
-    user.collection,
-    partial: 'api/records/record',
-    as: :record
-  )
+user.user_wants.each do |want|
+  assocation = {
+    id: want.id,
+    record_id: want.record_id,
+    type: :want
+  }
+  associations << assocation
+end
 
-  user.user_collections.each do |want|
-    assocation = {
-      id: want.id,
-      record_id: want.record_id,
-      type: :collection
-    }
-    associations << assocation
-  end
+json.collection do
+  json.partial! 'api/records/records', records: @collection
+end
+
+user.user_collections.each do |want|
+  assocation = {
+    id: want.id,
+    record_id: want.record_id,
+    type: :collection
+  }
+  associations << assocation
 end
 
 json.associations associations

@@ -51,11 +51,15 @@ Slipmat.Views.UserShow = Backbone.CompositeView.extend({
   renderCollection: function (collection) {
     var view = this;
     var recordSubview = JST["records/_record"];
-    var header = JST["records/_paginationHeader"]({ records: collection });
-    this.$(".pagination-header").append(header);
+
+    var header = JST["layouts/_paginationHeader"]({ collection: collection });
+    this.$(".pagination-header").html(header);
+
+    var footer = JST["layouts/_paginationFooter"]({ collection: collection });
+    this.$(".pagination-footer").html(footer);
 
     collection.each(function(record) {
-      var subview = recordSubview({ record: record });
+      var subview = recordSubview({ model: record });
 
       view.$(".content-records").append(subview);
     });

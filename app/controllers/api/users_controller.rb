@@ -21,6 +21,18 @@ module Api
         .includes(:wantlist)
         .find(params[:id])
 
+      @wantlist = @user
+        .wantlist
+        .includes(:artist)
+        .page(params[:page])
+        .per(24)
+
+      @collection = @user
+        .collection
+        .includes(:artist)
+        .page(params[:page])
+        .per(24)
+
       render :show
     end
 
