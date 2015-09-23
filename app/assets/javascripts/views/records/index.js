@@ -10,13 +10,22 @@ Slipmat.Views.RecordIndex = Backbone.View.extend({
   },
 
   render: function () {
-    var content = this.template({ records: this.collection });
-
+    var content = this.template({
+      stats: this.collection.statistics()
+    });
     this.$el.html(content);
+
+    this.selectTab();
     this.renderPages();
     this.renderSubviews();
 
     return this;
+  },
+
+  selectTab: function (e) {
+    this.$(".tabs > li").removeClass("selected");
+    var $el = this.$("#" + this.collection.class);
+    $el.addClass("selected");
   },
 
   paginate: function (e) {

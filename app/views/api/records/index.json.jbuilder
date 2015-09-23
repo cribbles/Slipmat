@@ -1,3 +1,9 @@
+json.statistics do
+  json.num_records Record.count
+  json.num_artists Artist.count
+  json.num_labels Label.count
+end
+
 json.pages do
   json.out_of_range true if @records.out_of_range?
 

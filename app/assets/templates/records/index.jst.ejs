@@ -4,19 +4,25 @@
 <section class="content-main">
   <nav class="content-tabs group">
     <ul class="tabs group">
-      <li class="selected">
+      <li class="selected" id="Record">
         <a href="#">
-          Records<small class="tabs-count"><%= records.length %></small>
+          Records<small class="tabs-count">
+            <%= stats.num_records %>
+          </small>
         </a>
       </li>
       <li>
-        <a href="#">
-          Artists<small class="tabs-count"></small>
+        <a href="#" id="Artist">
+          Artists<small class="tabs-count">
+            <%= stats.num_artists %>
+          </small>
         </a>
       </li>
       <li>
-        <a href="#">
-          Labels<small class="tabs-count"></small>
+        <a href="#" id="Label">
+          Labels<small class="tabs-count">
+            <%= stats.num_labels %>
+          </small>
         </a>
       </li>
     </ul>

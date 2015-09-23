@@ -1,14 +1,23 @@
 Slipmat.Collections.Records = Backbone.Collection.extend({
 
   url: "api/records",
-
   model: Slipmat.Models.Record,
 
   parse: function (payload) {
+    this.class = "Record";
+
+    this._statistics = payload.statistics;
+    delete payload.statistics;
+
     this._pages = payload.pages;
     delete payload.pages;
 
     return payload.records;
+  },
+
+  statistics: function () {
+    this._statistics = this._statistics || {};
+    return this._statistics;
   },
 
   pages: function () {
