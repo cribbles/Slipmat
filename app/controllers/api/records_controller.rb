@@ -45,7 +45,9 @@ module Api
     end
 
     def index
-      @records = Record.all
+      @records = Record
+        .includes(:artist)
+        .all
 
       render :index
     end

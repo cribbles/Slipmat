@@ -4,6 +4,7 @@ window.Slipmat = {
   Views: {},
   Routers: {},
   initialize: function() {
+    this.records = new Slipmat.Collections.Records();
     this.currentUser = new Slipmat.Models.CurrentUser();
     this.currentUser.fetch();
 
@@ -23,7 +24,8 @@ window.Slipmat = {
     $("body").append(footer.render().$el);
 
     var router = new Slipmat.Routers.Router({
-      $rootEl: $("main.content")
+      $rootEl: $("main.content"),
+      records: this.records
     });
 
     Backbone.history.start();

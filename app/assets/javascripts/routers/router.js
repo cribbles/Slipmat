@@ -2,6 +2,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
   initialize: function (options) {
     this.$rootEl = options.$rootEl;
+    this.records = options.records;
   },
 
   routes: {
@@ -33,10 +34,9 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   recordIndex: function () {
-    var records = new Slipmat.Collections.Records();
-    records.fetch();
+    this.records.fetch();
+    var view = new Slipmat.Views.RecordIndex({ collection: this.records });
 
-    var view = new Slipmat.Views.RecordIndex({ collection: records });
     this._swapView(view);
   },
 
@@ -50,19 +50,16 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   recordShow: function (id) {
-    var record = new Slipmat.Models.Record({ id: id });
-    record.fetch();
-
+    var record = this.records.getOrFetch(id);
     var view = new Slipmat.Views.RecordShow({ model: record });
+
     this._swapView(view);
   },
 
   recordEdit: function (id) {
     if (!this._ensureSignedIn()) { return; }
 
-    var record = new Slipmat.Models.Record({ id: id });
-    record.fetch();
-
+    var record = this.records.getOrFetch(id);
     var view = new Slipmat.Views.RecordForm({ model: record });
 
     this._swapView(view);
@@ -71,8 +68,8 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   artistShow: function (id) {
     var artist = new Slipmat.Models.Artist({ id: id });
     artist.fetch();
-
     var view = new Slipmat.Views.ArtistShow({ model: artist });
+
     this._swapView(view);
   },
 
@@ -81,7 +78,6 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
     var artist = new Slipmat.Models.Artist({ id: id });
     artist.fetch();
-
     var view = new Slipmat.Views.ArtistEdit({ model: artist });
 
     this._swapView(view);
@@ -90,8 +86,8 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   labelShow: function (id) {
     var label = new Slipmat.Models.Label({ id: id });
     label.fetch();
-
     var view = new Slipmat.Views.LabelShow({ model: label });
+
     this._swapView(view);
   },
 
@@ -100,7 +96,6 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
     var label = new Slipmat.Models.Label({ id: id });
     label.fetch();
-
     var view = new Slipmat.Views.LabelEdit({ model: label });
 
     this._swapView(view);
@@ -110,8 +105,8 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     if (!this._ensureSignedOut()) { return; }
 
     var user = new Slipmat.Models.User();
-
     var view = new Slipmat.Views.UserNew({ model: user });
+
     this._swapView(view);
   },
 
@@ -120,8 +115,8 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
     var user = new Slipmat.Models.User(Slipmat.currentUser.attributes);
     user._image = Slipmat.currentUser._image;
-
     var view = new Slipmat.Views.UserEdit({ model: user });
+
     this._swapView(view);
   },
 
