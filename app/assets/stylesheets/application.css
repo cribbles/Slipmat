@@ -1171,12 +1171,21 @@ textarea.highlight {
   width: 85px;
 }
 
+.show-info {
+  margin-top: 5px;
+}
+
 .show-info > .info {
   display: block;
   float: left;
   position: relative;
   top: -13px;
-  padding-left: 180px;
+  padding-left: 175px;
+}
+
+.show-info h2 {
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 .show-info > figure {
@@ -1186,7 +1195,7 @@ textarea.highlight {
 
 .show-attr {
   display: block;
-  margin: 5px 0;
+  margin: 2px 0;
 }
 
 .show-attr > .key {
