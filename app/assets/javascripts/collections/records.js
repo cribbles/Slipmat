@@ -4,6 +4,18 @@ Slipmat.Collections.Records = Backbone.Collection.extend({
 
   model: Slipmat.Models.Record,
 
+  parse: function (payload) {
+    this._pages = payload.pages;
+    delete payload.pages;
+
+    return payload.records;
+  },
+
+  pages: function () {
+    this._pages = this._pages || {};
+    return this._pages;
+  },
+
   hasRecord: function (model) {
     return this.some(function (record) {
       return record.id === Number(model.id);
