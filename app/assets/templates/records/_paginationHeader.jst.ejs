@@ -1,13 +1,21 @@
 <div class="content-pages">
-  1 – 50 of <%= records.length %>
+  <%= records.pages().lower_limit %>
+  –
+  <%= records.pages().upper_limit %>
+  of
+  <%= records.pages().total_count %>
 </div>
-<small class="prev-page">
-  <span class="prev-page">
+<small class="prev-page page">
+  <span
+    <% if (records.pages().prev_page) { %> class="link" <% } %>
+    >
     Prev
   </span>
 </small>
-<small class="next-page">
-  <a href="#" class="next-page">
+<small class="next-page page">
+  <span
+    <% if (records.pages().next_page) { %> class="link" <% } %>
+    >
     Next
   </a>
 </small>
