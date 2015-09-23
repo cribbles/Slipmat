@@ -1,7 +1,10 @@
 class Record < ActiveRecord::Base
   include Formattable
   include PgSearch
-  multisearchable against: [:title]
+  multisearchable against: :title, using: {
+                    tsearch: { prefix: true },
+                    trigram: { threshold: 0.3 }
+                  }
 
   belongs_to :artist
   belongs_to :label

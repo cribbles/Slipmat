@@ -1,6 +1,9 @@
 class Artist < ActiveRecord::Base
   include PgSearch
-  multisearchable against: [:name]
+  multisearchable against: :name, using: {
+                    tsearch: { prefix: true },
+                    trigram: { threshold: 0.3 }
+                  }
 
   has_many :records, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
