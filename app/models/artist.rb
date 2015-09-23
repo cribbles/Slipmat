@@ -1,4 +1,7 @@
 class Artist < ActiveRecord::Base
+  include PgSearch
+  multisearchable against: [:name]
+
   has_many :records, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :user_contributions, as: :contributable

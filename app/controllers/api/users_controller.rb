@@ -25,13 +25,11 @@ module Api
         .wantlist
         .includes(:artist)
         .page(params[:page])
-        .per(24)
 
       @collection = @user
         .collection
         .includes(:artist)
         .page(params[:page])
-        .per(24)
 
       render :show
     end

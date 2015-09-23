@@ -1,5 +1,7 @@
 class Record < ActiveRecord::Base
   include Formattable
+  include PgSearch
+  multisearchable against: [:title]
 
   belongs_to :artist
   belongs_to :label

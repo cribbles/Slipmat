@@ -41,7 +41,6 @@ module Api
       @records = @artist
         .records
         .page(params[:page])
-        .per(24)
 
       render :show
     end
@@ -50,7 +49,6 @@ module Api
       @artists = Artist
         .includes(:records)
         .page(params[:page])
-        .per(24)
 
       render :index
     end

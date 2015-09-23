@@ -1,4 +1,7 @@
 class Label < ActiveRecord::Base
+  include PgSearch
+  multisearchable against: [:title]
+
   has_many :records
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :user_contributions, as: :contributable
