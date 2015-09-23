@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
         provider: auth_hash[:provider],
         uid: auth_hash[:uid],
         username: auth_hash[:info][:name],
-        email: SecureRandom::urlsafe_base64,
+        email: SecureRandom::urlsafe_base64(8) + "@slipmat.xyz",
         password: SecureRandom::urlsafe_base64,
         image: auth_hash[:info][:image]
       )
