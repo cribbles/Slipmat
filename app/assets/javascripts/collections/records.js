@@ -3,9 +3,12 @@ Slipmat.Collections.Records = Backbone.Collection.extend({
   url: "api/records",
   model: Slipmat.Models.Record,
 
-  parse: function (payload) {
-    this.class = "Record";
+  initialize: function () {
+    this.proto = "Records";
+    this.subview = JST["records/_record"];
+  },
 
+  parse: function (payload) {
     this._statistics = payload.statistics;
     delete payload.statistics;
 
