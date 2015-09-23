@@ -361,6 +361,10 @@ a:active {
   margin: 7px auto;
 }
 
+.content > h2 {
+  margin: 15px 15px 5px 15px;
+}
+
 .content:before {
   content: "";
   display: block;
