@@ -15,6 +15,7 @@ gem 'figaro'
 gem 'aws-sdk', '< 2.0'
 gem 'omniauth-google-oauth2'
 gem 'kaminari'
+gem 'pg_search'
 
 group :production do
   gem 'rails_12factor'
