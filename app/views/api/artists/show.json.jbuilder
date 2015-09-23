@@ -8,7 +8,9 @@ json.extract!(
 
 json.image asset_path(@artist.image.url)
 
-json.records @artist.records, partial: 'api/records/record', as: :record
+json.records do
+  json.partial! 'api/records/records', records: @records
+end
 
 json.comments @artist.comments, partial: 'api/comments/comment', as: :comment
 

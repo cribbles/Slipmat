@@ -38,6 +38,11 @@ module Api
         .includes(:comments)
         .find(params[:id])
 
+      @records = @label
+        .records
+        .page(params[:page])
+        .per(24)
+
       render :show
     end
 

@@ -36,7 +36,7 @@ Slipmat.Views.LabelShow = Backbone.ModularView.extend({
     this.$(".pagination-header").html(header);
 
     records.forEach(function(record) {
-      var subview = JST["records/_record"]({ record: record });
+      var subview = JST["records/_record"]({ model: record });
 
       view.$(".content-records").append(subview);
     });

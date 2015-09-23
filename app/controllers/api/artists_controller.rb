@@ -38,11 +38,17 @@ module Api
         .includes(:comments)
         .find(params[:id])
 
+      @records = @artist
+        .records
+        .page(params[:page])
+        .per(24)
+
       render :show
     end
 
     def index
       @artists = Artist
+        .includes(:records)
         .page(params[:page])
         .per(24)
 
