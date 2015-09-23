@@ -137,8 +137,8 @@ a.menu, a.menu:hover,
 li.link > a, li.link > a:hover,
 .header-logo > a, .header-logo > a:hover,
 a.sidebar-filter, a.sidebar-filter:hover,
-a.next-page, a.next-page:hover,
-a.prev-page, a.prev-page:hover {
+span.next-page, span.next-page:hover,
+span.prev-page, span.prev-page:hover {
   text-decoration: none;
 }
 
@@ -541,31 +541,33 @@ li:hover > a > .sidebar-item-count {
   font-weight: 400;
 }
 
-.content-tabs > .prev-page {
+.content-tabs > small.prev-page > span {
   margin-left: 10px;
   margin-right: 5px;
 }
 
-.content-tabs > .next-page {
+.content-tabs > small.next-page > span {
   margin-left: 5px;
   margin-right: 10px;
 }
 
-.content-tabs > small > a {
+.content-tabs > small > .link {
+  cursor: pointer;
   color: #03b;
   padding: 13px 0;
 }
 
-.content-tabs > small > a:hover {
+.content-tabs > small > .link:hover {
+  cursor: pointer;
   color: #37b;
 }
 
-.content-tabs > small > .prev-page:before {
+.content-tabs > small.prev-page > span:before {
   content: "←";
   font-weight: 700;
 }
 
-.content-tabs > small > .next-page:after {
+.content-tabs > small.next-page > span:after {
   content: "→";
   font-weight: 700;
 }
