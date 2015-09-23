@@ -5,8 +5,12 @@ Slipmat.Views.RecordIndex = Backbone.View.extend({
   template: JST["records/index"],
 
   initialize: function () {
-    this.subview = JST["records/_record"];
+    this.subview = this.collection.subview;
     this.listenTo(this.collection, "sync", this.render);
+  },
+
+  events: {
+    "click .nav-tabs > li": "switchTab"
   },
 
   render: function () {
@@ -14,25 +18,42 @@ Slipmat.Views.RecordIndex = Backbone.View.extend({
       stats: this.collection.statistics()
     });
     this.$el.html(content);
-
-    this.selectTab();
-    this.renderPages();
-    this.renderSubviews();
+    this.renderCollection();
 
     return this;
   },
 
-  selectTab: function (e) {
-    this.$(".tabs > li").removeClass("selected");
-    var $el = this.$("#" + this.collection.class);
-    $el.addClass("selected");
+  renderCollection: function () {
+    this.selectTab();
+    this.renderPages();
+    this.renderSubviews();
+  },
+
+  selectTab: function () {
+    this.$(".nav-tabs > li").removeClass("selected");
+    this.$("#" + this.collection.proto).addClass("selected");
+  },
+
+  switchTab: function (e) {
+    e.preventDefault();
+
+    var $proto = $(e.currentTarget).attr("id");
+    if ($proto === this.collection.class) { return; }
+
+    this.stopListening();
+    this.collection = new Slipmat.Collections[$proto]();
+    this.subview = this.collection.subview;
+    this.listenTo(this.collection, "sync", this.render);
+    this.collection.fetch();
   },
 
   paginate: function (e) {
     e.preventDefault();
 
-    var page;
     var $el = $(e.currentTarget);
+    if (!$el.hasClass("link")) { return; }
+
+    var page;
     var pages = this.collection.pages();
     var prevPage = $el.parent().hasClass("prev-page");
     var nextPage = $el.parent().hasClass("next-page");
@@ -59,10 +80,15 @@ Slipmat.Views.RecordIndex = Backbone.View.extend({
     this.$(".content-records").empty();
 
     var view = this;
-    view.collection.each(function(record) {
+    view.collection.forEach(function(record) {
       var content = view.subview({ model: record });
       view.$(".content-records").append(content);
     });
+  },
+
+  remove: function () {
+    this.$(".page > span").off();
+    Backbone.View.prototype.remove.call(this);
   }
 
 });
