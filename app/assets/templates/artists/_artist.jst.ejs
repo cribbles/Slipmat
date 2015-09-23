@@ -1,0 +1,8 @@
+<figure class="record">
+  <a href="#/artists/<%= model.id %>">
+    <img src="<%= model.image() %>" class="cover">
+  </a>
+  <a href="#/artists/<%= model.id %>" class="artist">
+    <b><%= model.escape("name") %></b>
+  </a>
+</figure>

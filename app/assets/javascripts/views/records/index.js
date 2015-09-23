@@ -5,11 +5,8 @@ Slipmat.Views.RecordIndex = Backbone.View.extend({
   template: JST["records/index"],
 
   initialize: function () {
+    this.subview = JST["records/_record"];
     this.listenTo(this.collection, "sync", this.render);
-  },
-
-  events: {
-    "click .page > span": "paginate"
   },
 
   render: function () {
@@ -42,18 +39,19 @@ Slipmat.Views.RecordIndex = Backbone.View.extend({
   },
 
   renderPages: function () {
+    this.$(".page > span").off();
+
     var header = JST["records/_paginationHeader"]({ records: this.collection });
     this.$(".pagination-header").html(header);
+    this.$(".page > span").on("click", this.paginate.bind(this));
   },
 
   renderSubviews: function () {
     this.$(".content-records").empty();
 
     var view = this;
-    var template = JST["records/_record"];
-
-    this.collection.each(function(record) {
-      var content = template({ record: record });
+    view.collection.each(function(record) {
+      var content = view.subview({ model: record });
       view.$(".content-records").append(content);
     });
   }

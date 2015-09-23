@@ -1,11 +1,11 @@
 <figure class="record">
-  <a href="#/records/<%= record.id %>">
-    <img src="<%= record.image() %>" class="cover">
+  <a href="#/records/<%= model.id %>">
+    <img src="<%= model.image() %>" class="cover">
   </a>
-  <a href="#/artists/<%= record.artist().id %>" class="artist">
-    <b><%= record.artist().escape("name") %></b>
+  <a href="#/artists/<%= model.artist().id %>" class="artist">
+    <b><%= model.artist().escape("name") %></b>
   </a>
-  <a href="#/records/<%= record.id %>" class="title">
-    <%= record.escape("title") %>
+  <a href="#/records/<%= model.id %>" class="title">
+    <%= model.escape("title") %>
   </a>
 </figure>
