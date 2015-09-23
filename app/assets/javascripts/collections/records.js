@@ -24,7 +24,11 @@ Slipmat.Collections.Records = Backbone.Collection.extend({
   },
 
   pages: function () {
-    this._pages = this._pages || {};
+    this._pages = this._pages || {
+      upper_limit: 0,
+      lower_limit: 0,
+      total_count: "None"
+    };
     return this._pages;
   },
 
