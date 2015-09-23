@@ -16,8 +16,8 @@ Slipmat.Views.RecordIndex = Backbone.View.extend({
     var content = this.template({ records: this.collection });
 
     this.$el.html(content);
-    this.renderSubviews();
     this.renderPages();
+    this.renderSubviews();
 
     return this;
   },
@@ -25,19 +25,20 @@ Slipmat.Views.RecordIndex = Backbone.View.extend({
   paginate: function (e) {
     e.preventDefault();
 
-    var data;
+    var page;
     var $el = $(e.currentTarget);
     var pages = this.collection.pages();
-    var prevPage = $el.parent().hasClass("prev-page")
-    var nextPage = $el.parent().hasClass("next-page")
+    var prevPage = $el.parent().hasClass("prev-page");
+    var nextPage = $el.parent().hasClass("next-page");
 
     if (nextPage && pages.next_page) {
-      data = { page: pages.next_page }
-      this.collection.fetch({ data: data });
+      page = pages.next_page;
     } else if (prevPage && pages.prev_page) {
-      data = { page: pages.prev_page };
-      this.collection.fetch({ data: data });
+      page = pages.prev_page;
     }
+    this.collection.fetch({
+      data: { page: page }
+    });
   },
 
   renderPages: function () {
@@ -49,11 +50,11 @@ Slipmat.Views.RecordIndex = Backbone.View.extend({
     this.$(".content-records").empty();
 
     var view = this;
-    var recordSubview = JST["records/_record"];
+    var template = JST["records/_record"];
 
     this.collection.each(function(record) {
-      var subview = recordSubview({ record: record });
-      view.$(".content-records").append(subview);
+      var content = template({ record: record });
+      view.$(".content-records").append(content);
     });
   }
 
