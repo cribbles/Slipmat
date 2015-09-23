@@ -14,6 +14,7 @@ gem 'paperclip'
 gem 'figaro'
 gem 'aws-sdk', '< 2.0'
 gem 'omniauth-google-oauth2'
+gem 'kaminari'
 
 group :production do
   gem 'rails_12factor'
