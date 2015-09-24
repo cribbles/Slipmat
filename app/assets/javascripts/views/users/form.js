@@ -35,7 +35,7 @@ Slipmat.Views.UserNew = Backbone.CompositeView.extend({
   redirect: function (e) {
     e.preventDefault();
 
-    var provider = $(e.currentTarget).id();
+    var provider = $(e.currentTarget).attr("id");
     location.replace("/auth/" + provider);
   }
 
