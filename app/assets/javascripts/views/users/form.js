@@ -4,7 +4,7 @@ Slipmat.Views.UserNew = Backbone.CompositeView.extend({
 
   events: {
     "submit #new-user": "submit",
-    "click .button-google": "redirect"
+    "click .button-oauth": "redirect"
   },
 
   render: function () {
@@ -34,6 +34,9 @@ Slipmat.Views.UserNew = Backbone.CompositeView.extend({
 
   redirect: function (e) {
     e.preventDefault();
-    location.replace("/auth/google_oauth2");
+
+    var provider = $(e.currentTarget).id();
+    location.replace("/auth/" + provider);
   }
+
 });

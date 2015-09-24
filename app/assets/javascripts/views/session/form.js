@@ -4,7 +4,7 @@ Slipmat.Views.SessionForm = Backbone.View.extend({
 
   events: {
     "submit #new-session": "submit",
-    "click .button-google": "redirect"
+    "click .button-oauth": "redirect"
   },
 
   render: function () {
@@ -35,7 +35,9 @@ Slipmat.Views.SessionForm = Backbone.View.extend({
 
   redirect: function (e) {
     e.preventDefault();
-    location.replace("/auth/google_oauth2");
+
+    var provider = $(e.currentTarget).id();
+    location.replace("/auth/" + provider);
   }
 
 });
