@@ -152,9 +152,12 @@ b {
 }
 
 .search-result {
+  position: relative;
+  display: block;
   height: 49px;
   border-bottom: 1px solid #ccc;
   cursor: pointer;
+  z-index: 1000;
 }
 
 .search-result:hover {
@@ -1134,7 +1137,6 @@ textarea.highlight {
   display: inline-block;
   position: relative;
   bottom: 140px;
-  z-index: 3;
 }
 
 .navbar-sidebar > .user-pic > img {
