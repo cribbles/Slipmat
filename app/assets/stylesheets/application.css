@@ -470,6 +470,21 @@ a:active {
   position: relative;
 }
 
+.results-header > h2 {
+  display: block;
+  float: left;
+  margin-right: 10px;
+}
+
+.results-header > .key {
+  color: #333;
+}
+
+.results-header > .value {
+  font-weight: normal;
+  color: black;
+}
+
 .sidebar-filters > li {
   display: block;
 }

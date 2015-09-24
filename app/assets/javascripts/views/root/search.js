@@ -11,6 +11,7 @@ Slipmat.Views.Search = Backbone.PaginatableView.extend({
   render: function () {
     var content = this.template();
     this.$el.html(content);
+    this.$("h2").text("Search Results");
     this.renderCollection();
 
     return this;

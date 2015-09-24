@@ -17,6 +17,7 @@ module Api
       @records = @records.find_by_genre(params[:genre]) if params[:genre]
 
       @records = @records.page(params[:page])
+      @params = params.slice(:year, :country, :genre)
 
       render :filter
     end

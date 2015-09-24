@@ -8,6 +8,7 @@ Slipmat.Collections.FilterResults = Backbone.Collection.extend({
   },
 
   parse: function (payload) {
+    this._sort = payload.sort;
     this._pages = payload.pages;
     delete payload.pages;
 

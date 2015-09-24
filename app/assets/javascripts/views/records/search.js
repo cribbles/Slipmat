@@ -11,9 +11,23 @@ Slipmat.Views.RecordSearch = Backbone.PaginatableView.extend({
   render: function () {
     var content = this.template();
     this.$el.html(content);
+    this.renderHeader();
     this.renderCollection();
 
     return this;
+  },
+
+  renderHeader: function () {
+    var headerText;
+    var sort = this.collection._sort;
+
+    if (!sort) {
+      headerText = "Search Results";
+    } else {
+      headerText = "Records by " + sort.type + ": " + sort.value;
+    }
+
+    this.$("h2").text(headerText);
   },
 
   renderSubviews: function () {
