@@ -14,7 +14,7 @@ Slipmat.Collections.SearchResults = Backbone.Collection.extend({
     var proto = attributes.searchable_type;
     delete attributes.searchable_type;
 
-    return new Slipmat.Models[proto](attributes);
+    return new Slipmat.Models[proto](attributes, { parse: true });
   },
 
   pages: function () {
