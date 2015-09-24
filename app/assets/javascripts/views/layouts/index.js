@@ -1,4 +1,4 @@
-Slipmat.Views.Index = Backbone.CompositeView.extend({
+Slipmat.Views.Index = Backbone.View.extend({
 
   tagName: "main",
   className: "group",

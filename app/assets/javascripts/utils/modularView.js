@@ -1,4 +1,4 @@
-Backbone.ModularView = Backbone.CompositeView.extend({
+Backbone.ModularView = Backbone.View.extend({
 
   listContributors: function () {
     var contributors = this.model.contributors();

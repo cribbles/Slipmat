@@ -1,4 +1,4 @@
-Backbone.ImageableView = Backbone.CompositeView.extend({
+Backbone.ImageableView = Backbone.View.extend({
 
   submitImage: function (options) {
     var image = options.image,

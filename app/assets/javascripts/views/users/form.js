@@ -1,4 +1,4 @@
-Slipmat.Views.UserNew = Backbone.CompositeView.extend({
+Slipmat.Views.UserNew = Backbone.View.extend({
 
   template: JST["users/new"],
 

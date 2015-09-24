@@ -1,4 +1,4 @@
-Slipmat.Views.UserShow = Backbone.CompositeView.extend({
+Slipmat.Views.UserShow = Backbone.View.extend({
 
   tagName: "main",
   className: "group",
