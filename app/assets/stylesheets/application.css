@@ -932,7 +932,7 @@ select:disabled {
 input[type="text"].highlight,
 input[type="password"].highlight,
 textarea.highlight {
-  background: #FEB;
+  background: #FFEFCF;
 }
 
 /* tracklist form */
