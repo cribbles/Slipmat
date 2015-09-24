@@ -19,7 +19,6 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
   events: {
     "change #image-form": "replaceFormImage",
     "click #upload": "triggerUpload",
-    "click .new-selector": "replaceInputField",
     "click .add-track": "addTrack",
     "click .remove-track": "removeTrack",
     "sortbeforestop .tracks-container": "updateTracklistOrder",
@@ -172,20 +171,6 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
       var input = this.$("input.track-ord")[i];
       $(input).val(i + 1);
     }
-  },
-
-  replaceInputField: function (e) {
-    e.preventDefault();
-
-    var $el = $(e.currentTarget);
-    var id = $el.data("id");
-    var template = JST["records/_formInput"]({
-      id: id,
-      name: $el.data("name")
-    });
-
-    $el.remove();
-    this.$("#" + id).replaceWith(template);
   }
 
 });
