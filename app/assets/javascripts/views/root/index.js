@@ -1,4 +1,4 @@
-Slipmat.Views.Index = Backbone.View.extend({
+Slipmat.Views.Index = Backbone.PaginatableView.extend({
 
   tagName: "main",
   className: "group",
@@ -18,15 +18,10 @@ Slipmat.Views.Index = Backbone.View.extend({
       stats: this.collection.statistics()
     });
     this.$el.html(content);
+    this.selectTab();
     this.renderCollection();
 
     return this;
-  },
-
-  renderCollection: function () {
-    this.selectTab();
-    this.renderPages();
-    this.renderSubviews();
   },
 
   selectTab: function () {
@@ -47,43 +42,6 @@ Slipmat.Views.Index = Backbone.View.extend({
     this.collection.fetch();
   },
 
-  paginate: function (e) {
-    e.preventDefault();
-
-    var $el = $(e.currentTarget);
-    if (!$el.hasClass("link")) { return; }
-
-    var page;
-    var pages = this.collection.pages();
-    var prevPage = $el.parent().hasClass("prev-page");
-    var nextPage = $el.parent().hasClass("next-page");
-
-    if (nextPage && pages.next_page) {
-      page = pages.next_page;
-    } else if (prevPage && pages.prev_page) {
-      page = pages.prev_page;
-    }
-    this.collection.fetch({
-      data: { page: page }
-    });
-  },
-
-  renderPages: function () {
-    this.$(".page > span").off();
-
-    var header = JST["layouts/_paginationHeader"]({
-      collection: this.collection
-    });
-    this.$(".pagination-header").html(header);
-
-    var footer = JST["layouts/_paginationFooter"]({
-      collection: this.collection
-    });
-    this.$(".pagination-footer").html(footer);
-
-    this.$(".page > span").on("click", this.paginate.bind(this));
-  },
-
   renderSubviews: function () {
     this.$(".content-records").empty();
 
@@ -92,11 +50,6 @@ Slipmat.Views.Index = Backbone.View.extend({
       var content = view.subview({ model: record });
       view.$(".content-records").append(content);
     });
-  },
-
-  remove: function () {
-    this.$(".page > span").off();
-    Backbone.View.prototype.remove.call(this);
   }
 
 });
