@@ -30,7 +30,7 @@ Backbone.ModularView = Backbone.CompositeView.extend({
       "comment[author_id]": Slipmat.currentUser.id,
       "comment[body]": this.$(".comment-form").val(),
       "comment[commentable_id]": this.model.id,
-      "comment[commentable_type]": this.model.class
+      "comment[commentable_type]": this.model.proto
     };
 
     $.ajax({

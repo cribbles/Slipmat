@@ -1,7 +1,8 @@
 Slipmat.Models.Record = Backbone.Model.extend({
 
-  class: "Record",
+  proto: "Record",
   urlRoot: "api/records",
+  subview: JST["records/_record"],
 
   parse: function (payload) {
     var record = this;

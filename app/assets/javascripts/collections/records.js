@@ -5,7 +5,7 @@ Slipmat.Collections.Records = Backbone.Collection.extend({
 
   initialize: function () {
     this.proto = "Records";
-    this.subview = JST["records/_record"];
+    this.subview = this.model.prototype.subview;
   },
 
   parse: function (payload) {

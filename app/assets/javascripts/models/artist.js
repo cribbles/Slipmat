@@ -1,7 +1,8 @@
 Slipmat.Models.Artist = Backbone.Model.extend({
 
-  class: "Artist",
+  proto: "Artist",
   urlRoot: "api/artists",
+  subview: JST["artists/_artist"],
 
   parse: function (payload) {
     if (payload.records) {

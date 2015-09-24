@@ -1,7 +1,8 @@
 Slipmat.Models.Label = Backbone.Model.extend({
 
-  class: "Label",
+  proto: "Label",
   urlRoot: "api/labels",
+  subview: JST["labels/_label"],
 
   parse: function (payload) {
     if (payload.records) {

@@ -1,12 +1,11 @@
 Slipmat.Collections.Labels = Backbone.Collection.extend({
 
   url: "api/labels",
-
   model: Slipmat.Models.Label,
 
   initialize: function () {
     this.proto = "Labels";
-    this.subview = JST["labels/_label"];
+    this.subview = this.model.prototype.subview;
   },
 
   parse: function (payload) {
