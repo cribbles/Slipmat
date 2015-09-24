@@ -10,6 +10,7 @@ Slipmat.Views.Header = Backbone.View.extend({
   },
 
   events: {
+    "submit #search": "search",
     "click #signOut": "signOut",
     "click #register": "register"
   },
@@ -38,6 +39,13 @@ Slipmat.Views.Header = Backbone.View.extend({
       userPanel = JST["layouts/header/_signedOutPanel"];
     }
     this.$(".header-user-list").html(userPanel());
+  },
+
+  search: function (e) {
+    e.preventDefault();
+
+    var query = $(e.currentTarget).find("input").val();
+    Backbone.history.navigate("/search?query=" + query, { trigger: true });
   },
 
   register: function (e) {
