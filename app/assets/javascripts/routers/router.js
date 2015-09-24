@@ -195,7 +195,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
   _profile: function () {
     // redirects Facebook login
-    Backbone.history.navigate("/profile", { trigger: true });
+    Backbone.history.navigate("", { trigger: true });
   },
 
   _import: function (id) {
