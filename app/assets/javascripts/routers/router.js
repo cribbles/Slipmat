@@ -7,7 +7,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
   routes: {
     "": "index",
-    "search/:query": "search",
+    "search": "search",
 
     "records/new": "recordNew",
     "records/:id": "recordShow",
@@ -44,9 +44,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
   search: function (query) {
     var results = new Slipmat.Collections.SearchResults();
-    results.fetch({
-      data: { query: query }
-    });
+    results.fetch({ data: query });
     var view = new Slipmat.Views.Search({ collection: results });
 
     this._swapView(view);

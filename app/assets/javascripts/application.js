@@ -4,6 +4,7 @@
 //= require jquery.serializejson
 //= require underscore
 //= require backbone
+//= require backbone-queryparams-rails
 //= require slipmat
 //= require_tree ../templates
 //= require_tree ./utils
