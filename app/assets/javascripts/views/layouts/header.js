@@ -16,6 +16,7 @@ Slipmat.Views.Header = Backbone.View.extend({
   events: {
     "input input": "fetchSearchResults",
     "click .search-result": "redirect",
+    "blur .search": "clearSearchResults",
     "submit #search": "search",
     "click #signOut": "signOut",
     "click #register": "register"
@@ -76,9 +77,17 @@ Slipmat.Views.Header = Backbone.View.extend({
     }
   },
 
+  clearSearchResults: function () {
+    window.setTimeout(this._clearSearchResults, 150);
+  },
+
+  _clearSearchResults: function () {
+    this.$(".search-results").empty().hide();
+  },
+
   redirect: function (e) {
     e.preventDefault();
-    this.$(".search-results").empty().hide();
+    this._clearSearchResults();
 
     var fragment = $(e.currentTarget).data("fragment");
     Backbone.history.navigate(fragment, { trigger: true });
@@ -86,7 +95,7 @@ Slipmat.Views.Header = Backbone.View.extend({
 
   search: function (e) {
     e.preventDefault();
-    this.$(".search-results").empty().hide();
+    this._clearSearchResults();
 
     var query = $(e.currentTarget).find("input").val();
     var fragment = (query.length ? "/search?query=" + query : "");
