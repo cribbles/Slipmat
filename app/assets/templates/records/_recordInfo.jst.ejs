@@ -30,7 +30,9 @@
         Country:
       </span>
       <span class="value">
-        <a href="#" class="link">
+        <a
+          href="#/records/search?country=<%= record.country().name %>"
+          class="link">
           <%= record.country().name %>
         </a>
       </span>
@@ -42,7 +44,9 @@
         Released:
       </span>
       <span class="value">
-        <a href="#" class="link">
+        <a
+          href="#/records/search?year=<%= record.get("year") %>"
+          class="link">
           <%= record.get("year") %>
         </a>
       </span>

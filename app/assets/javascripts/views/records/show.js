@@ -40,12 +40,12 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
 
     var $genres = this.$("#genres .value");
     for (var i = 0; i < genres.length; i++) {
-      var $genre = $('<a href="#">').text(genres[i].name);
+      var genre = genres[i].name
+      var fragment = "#/records/search?genre=" + genre
+      var $genre = $('<a href="' + fragment + '">').text(genre);
       $genres.append($genre);
 
-      if (i + 1 < genres.length) {
-        $genres.append(", ");
-      }
+      if (i + 1 < genres.length) { $genres.append(", "); }
     }
   },
 
