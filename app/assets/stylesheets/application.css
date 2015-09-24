@@ -938,6 +938,7 @@ a.soft, .form a.new-selector {
 
 input[type="text"]:disabled,
 input[type="password"]:disabled,
+input[type="text"].highlight:disabled,
 textarea:disabled,
 select:disabled {
   background: #EEE;
