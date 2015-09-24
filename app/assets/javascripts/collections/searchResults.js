@@ -1,5 +1,6 @@
 Slipmat.Collections.SearchResults = Backbone.Collection.extend({
 
+  proto: "All",
   url: "api/search",
 
   parse: function (payload) {
@@ -14,6 +15,15 @@ Slipmat.Collections.SearchResults = Backbone.Collection.extend({
     delete attributes.searchable_type;
 
     return new Slipmat.Models[proto](attributes);
+  },
+
+  pages: function () {
+    this._pages = this._pages || {
+      upper_limit: 0,
+      lower_limit: 0,
+      total_count: "None"
+    };
+    return this._pages;
   }
 
 });
