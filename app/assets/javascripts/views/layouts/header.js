@@ -14,7 +14,8 @@ Slipmat.Views.Header = Backbone.View.extend({
   },
 
   events: {
-    "input input": "handleInput",
+    "input input": "fetchSearchResults",
+    "click .search-result": "redirect",
     "submit #search": "search",
     "click #signOut": "signOut",
     "click #register": "register"
@@ -46,7 +47,7 @@ Slipmat.Views.Header = Backbone.View.extend({
     this.$(".header-user-list").html(userPanel());
   },
 
-  handleInput: function (e) {
+  fetchSearchResults: function (e) {
     e.preventDefault();
 
     var userInput = $(e.currentTarget).val();
@@ -75,13 +76,20 @@ Slipmat.Views.Header = Backbone.View.extend({
     }
   },
 
+  redirect: function (e) {
+    e.preventDefault();
+    this.$(".search-results").empty().hide();
+
+    var fragment = $(e.currentTarget).data("fragment");
+    Backbone.history.navigate(fragment, { trigger: true });
+  },
+
   search: function (e) {
     e.preventDefault();
     this.$(".search-results").empty().hide();
 
     var query = $(e.currentTarget).find("input").val();
     var fragment = (query.length ? "/search?query=" + query : "");
-
     Backbone.history.navigate(fragment, { trigger: true });
   },
 
