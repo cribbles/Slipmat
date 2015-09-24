@@ -5,11 +5,16 @@ Slipmat.Views.Header = Backbone.View.extend({
   template: JST["layouts/header/header"],
 
   initialize: function (options) {
+    this.results = new Slipmat.Collections.SearchResults();
+    this.resultTemplate = JST["layouts/header/_searchResult"];
+
     this.listenTo(Slipmat.currentUser, "sync", this.renderPanel);
     this.listenTo(Slipmat.currentUser, "signIn signOut", this.togglePanel);
+    this.listenTo(this.results, "sync", this.renderSearchResults);
   },
 
   events: {
+    "input input": "handleInput",
     "submit #search": "search",
     "click #signOut": "signOut",
     "click #register": "register"
@@ -39,6 +44,35 @@ Slipmat.Views.Header = Backbone.View.extend({
       userPanel = JST["layouts/header/_signedOutPanel"];
     }
     this.$(".header-user-list").html(userPanel());
+  },
+
+  handleInput: function (e) {
+    e.preventDefault();
+
+    var userInput = $(e.currentTarget).val();
+    var query = {
+      query: userInput,
+      limit: 10
+    };
+
+    this.results.fetch({ data: query });
+  },
+
+  renderSearchResults: function () {
+    var header = this;
+    var $results = this.$(".search-results").empty();
+
+    if (!this.results.length) {
+      $results.hide();
+    } else {
+      $results.show();
+
+      var results = this.results.slice(0, 10);
+      results.forEach(function (result) {
+        var $result = header.resultTemplate({ result: result });
+        $results.append($result);
+      });
+    }
   },
 
   search: function (e) {

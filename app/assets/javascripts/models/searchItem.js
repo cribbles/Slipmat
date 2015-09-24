@@ -15,8 +15,14 @@ Slipmat.Models.SearchResult = Backbone.Model.extend({
     delete payload.searchable_type;
 
     this.subview = Slipmat.Models[this.proto].prototype.subview;
+    this.heading = (this.proto === "Artist" ? payload.name : payload.title);
+    this.subtitle = (this.proto === "Record" ? this._artist.name : this.proto);
 
     return payload;
+  },
+
+  image: function () {
+    return this._image;
   },
 
   artist: function () {
@@ -25,10 +31,7 @@ Slipmat.Models.SearchResult = Backbone.Model.extend({
       id: this._artist.id,
       escape: function () { return name; }
     }
-
     return artist;
-  },
-
-  image: function () { return this._image; }
+  }
 
 });
