@@ -127,6 +127,10 @@ b {
   padding: 2px 7px;
 }
 
+.header-search:focus {
+  background: white;
+}
+
 .header-search-list {
   display: block;
   float: left;
