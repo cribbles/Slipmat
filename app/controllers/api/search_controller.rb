@@ -8,5 +8,17 @@ module Api
 
       render :search
     end
+
+    def filter
+      @records = Record.where(nil)
+
+      @records = @records.where(year: params[:year]) if params[:year]
+      @records = @records.find_by_country(params[:country]) if params[:country]
+      @records = @records.find_by_genre(params[:genre]) if params[:genre]
+
+      @records = @records.page(params[:page])
+
+      render :filter
+    end
   end
 end

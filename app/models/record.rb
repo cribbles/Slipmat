@@ -30,6 +30,16 @@ class Record < ActiveRecord::Base
   has_attached_file :image, default_url: "default-record.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
+  scope :find_by_country, -> (country) {
+     joins(:country)
+    .where("LOWER(countries.name) = ?", country.downcase)
+  }
+
+  scope :find_by_genre, -> (genre) {
+     joins(:genres)
+    .where("LOWER(genres.name) = ?", genre.downcase)
+  }
+
   validates :title, presence: true
   validates :artist_id, presence: true
 
