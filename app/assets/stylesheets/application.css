@@ -1222,7 +1222,7 @@ textarea.highlight {
   margin: 5px;
 }
 
-.profile-main a {
+.profile-main .homepage {
   display: block;
   margin: 10px 0;
 }
