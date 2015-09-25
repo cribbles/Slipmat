@@ -1310,7 +1310,7 @@ textarea.highlight {
   display: block;
   position: relative;
   left: 85px;
-  padding-right: 100px;
+  margin-right: 70px;
 }
 
 .record-main h3, .record-sidebar h3, .show-comments h3 {
