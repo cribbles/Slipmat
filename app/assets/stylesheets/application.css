@@ -1257,6 +1257,7 @@ textarea.highlight {
   position: absolute;
   top: 2px;
   margin-left: 175px;
+  width: 60%;
 }
 
 .record-info > .info > h2 {
@@ -1272,6 +1273,12 @@ textarea.highlight {
 
 .record-attr > .key {
   width: 85px;
+}
+
+.record-attr > .value {
+  position: absolute;
+  left: 75px;
+  width: 100%;
 }
 
 .show-info {
