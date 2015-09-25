@@ -7,6 +7,11 @@
   <% } else { %>
     This user hasn't yet filled out their profile.
   <% } %>
+  <% if (user.has("url")) { %>
+    <a href="<%= user.escape("url") %>" class="soft homepage">
+      <%= user.escape("url") %>
+    </a>
+  <% } %>
 </p>
 
 <!-- placeholder -->
