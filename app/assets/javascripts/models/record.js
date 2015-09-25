@@ -40,6 +40,18 @@ Slipmat.Models.Record = Backbone.Model.extend({
     return payload;
   },
 
+  save: function (key, val, options) {
+    if (key.record && key.record.year) {
+      var year = Number(key.record.year);
+      if (!year) {
+        delete key.record.year;
+      } else {
+        key.record.year = year;
+      }
+    }
+    return Backbone.Model.prototype.save.call(this, key, val, options);
+  },
+
   image: function () {
     this._image = this._image || Slipmat.defaultRecordImg;
     return this._image;
