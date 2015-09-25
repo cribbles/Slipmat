@@ -60,4 +60,12 @@ class Record < ActiveRecord::Base
   def image_url=(image_url)
     self.image = open(image_url)
   end
+
+  def genres=(genres)
+    genre_ids = genres.inject([]) do |ids, name|
+      ids << Genre.find_by(name: name).id
+    end
+
+    self.genre_ids = genre_ids
+  end
 end
