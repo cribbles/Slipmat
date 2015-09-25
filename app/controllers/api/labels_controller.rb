@@ -48,6 +48,7 @@ module Api
 
     def index
       @labels = Label
+        .order(created_at: :desc)
         .page(params[:page])
 
       render :index

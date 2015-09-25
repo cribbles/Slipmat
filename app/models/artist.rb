@@ -11,6 +11,7 @@ class Artist < ActiveRecord::Base
   has_many :contributors, through: :user_contributions, source: :user
   validates :name, presence: true, uniqueness: true
 
-  has_attached_file :image, default_url: "default-artist.png"
+  has_attached_file :image, default_url: "default-artist.png",
+                            style: { thumb: "150x150#" }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 end
