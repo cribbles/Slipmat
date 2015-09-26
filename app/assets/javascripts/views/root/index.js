@@ -4,7 +4,8 @@ Slipmat.Views.Index = Backbone.PaginatableView.extend({
   className: "group",
   template: JST["root/index"],
 
-  initialize: function () {
+  initialize: function (options) {
+    this.collection = options.collection;
     this.subview = this.collection.subview;
     this.listenTo(this.collection, "sync", this.render);
   },

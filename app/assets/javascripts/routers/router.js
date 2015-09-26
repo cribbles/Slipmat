@@ -42,10 +42,14 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     "demo": "_demo"
   },
 
-  index: function (options) {
+  index: function (query, options) {
+    query = query || {};
     options = options || {};
     collection = options.collection || this.records;
-    collection.fetch();
+    collection.fetch({
+      data: { page: Number(query.page) }
+    });
+
     var view = new Slipmat.Views.Index({ collection: collection });
 
     this._swapView(view);
@@ -57,6 +61,11 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     var view = new Slipmat.Views.Search({ collection: results });
 
     this._swapView(view);
+  },
+
+  recordsIndex: function (query) {
+    options = { collection: this.records };
+    this.index(query, options);
   },
 
   recordNew: function () {
@@ -95,8 +104,9 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     this._swapView(view);
   },
 
-  artistsIndex: function () {
-    this.index({ collection: this.artists });
+  artistsIndex: function (query) {
+    options = { collection: this.artists };
+    this.index(query, options);
   },
 
   artistShow: function (id) {
@@ -117,8 +127,9 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     this._swapView(view);
   },
 
-  labelsIndex: function () {
-    this.index({ collection: this.labels });
+  labelsIndex: function (query) {
+    options = { collection: this.labels };
+    this.index(query, options);
   },
 
   labelShow: function (id) {
