@@ -32,14 +32,16 @@ Slipmat.Views.Index = Backbone.PaginatableView.extend({
   switchTab: function (e) {
     e.preventDefault();
 
-    var $proto = $(e.currentTarget).attr("id");
-    if ($proto === this.collection.class) { return; }
+    var proto = $(e.currentTarget).attr("id");
+    if (proto === this.collection.class) { return; }
 
-    this.stopListening();
-    this.collection = new Slipmat.Collections[$proto]();
+    this.collection = new Slipmat.Collections[proto]();
     this.subview = this.collection.subview;
+    this.stopListening();
     this.listenTo(this.collection, "sync", this.render);
     this.collection.fetch();
+
+    Backbone.history.navigate("//" + this.collection.url.slice(4));
   },
 
   renderSubviews: function () {

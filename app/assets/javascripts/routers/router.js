@@ -3,20 +3,25 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   initialize: function (options) {
     this.$rootEl = options.$rootEl;
     this.records = options.records;
+    this.artists = options.artists;
+    this.labels = options.labels;
   },
 
   routes: {
     "": "index",
     "search": "search",
 
+    "records": "index",
     "records/new": "recordNew",
     "records/search": "recordSearch",
     "records/:id": "recordShow",
     "records/:id/edit": "recordEdit",
 
+    "artists": "artistsIndex",
     "artists/:id": "artistShow",
     "artists/:id/edit": "artistEdit",
 
+    "labels": "labelsIndex",
     "labels/:id": "labelShow",
     "labels/:id/edit": "labelEdit",
 
@@ -37,9 +42,11 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     "demo": "_demo"
   },
 
-  index: function () {
-    this.records.fetch();
-    var view = new Slipmat.Views.Index({ collection: this.records });
+  index: function (options) {
+    options = options || {};
+    collection = options.collection || this.records;
+    collection.fetch();
+    var view = new Slipmat.Views.Index({ collection: collection });
 
     this._swapView(view);
   },
@@ -88,6 +95,10 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     this._swapView(view);
   },
 
+  artistsIndex: function () {
+    this.index({ collection: this.artists });
+  },
+
   artistShow: function (id) {
     var artist = new Slipmat.Models.Artist({ id: id });
     artist.fetch();
@@ -104,6 +115,10 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     var view = new Slipmat.Views.ArtistEdit({ model: artist });
 
     this._swapView(view);
+  },
+
+  labelsIndex: function () {
+    this.index({ collection: this.labels });
   },
 
   labelShow: function (id) {
