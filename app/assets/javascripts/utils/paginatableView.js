@@ -7,6 +7,7 @@ Backbone.PaginatableView = Backbone.View.extend({
     if (!$el.hasClass("link")) { return; }
 
     var page;
+    var query = this.query || {};
     var pages = this.collection.pages();
     var prevPage = $el.parent().hasClass("prev-page");
     var nextPage = $el.parent().hasClass("next-page");
@@ -16,13 +17,14 @@ Backbone.PaginatableView = Backbone.View.extend({
     } else if (prevPage && pages.prev_page) {
       page = pages.prev_page;
     }
+    query.page = page;
 
     this.collection.fetch({
-      data: { page: page },
+      data: query,
       success: function () {
         var fragment = Backbone.history.getFragment();
-        var token = (fragment.match(/\?(?=.*\&)/) ? "&" : "?");
         var fragment = fragment.replace(/(\?|\&)page=\d/, "");
+        var token = (fragment.match(/\?/) ? "&" : "?");
 
         Backbone.history.navigate(fragment + token + "page=" + page);
       }

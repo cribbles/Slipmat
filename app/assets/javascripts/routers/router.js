@@ -80,6 +80,8 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   recordSearch: function (query) {
     var results = new Slipmat.Collections.FilterResults();
     results.fetch({ data: query });
+    delete query.page;
+
     var view = new Slipmat.Views.RecordSearch({
       query: query,
       collection: results

@@ -5,6 +5,8 @@ Slipmat.Views.RecordSearch = Backbone.PaginatableView.extend({
   template: JST["root/search"],
 
   initialize: function (options) {
+    options = options || {};
+    this.query = options.query;
     this.listenTo(this.collection, "sync", this.render);
   },
 
