@@ -16,8 +16,16 @@ Backbone.PaginatableView = Backbone.View.extend({
     } else if (prevPage && pages.prev_page) {
       page = pages.prev_page;
     }
+
     this.collection.fetch({
-      data: { page: page }
+      data: { page: page },
+      success: function () {
+        var fragment = Backbone.history.getFragment();
+        var token = (fragment.match(/\?(?=.*\&)/) ? "&" : "?");
+        var fragment = fragment.replace(/(\?|\&)page=\d/, "");
+
+        Backbone.history.navigate(fragment + token + "page=" + page);
+      }
     });
   },
 
