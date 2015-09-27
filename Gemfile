@@ -18,6 +18,7 @@ gem 'omniauth-facebook'
 gem 'kaminari'
 gem 'pg_search'
 gem 'backbone-queryparams-rails'
+gem 'friendly_id'
 
 group :production do
   gem 'rails_12factor'

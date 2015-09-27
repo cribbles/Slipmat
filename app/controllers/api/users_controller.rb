@@ -19,6 +19,7 @@ module Api
         .includes(:contributions)
         .includes(:collection)
         .includes(:wantlist)
+        .friendly
         .find(params[:id])
 
       @wantlist = @user

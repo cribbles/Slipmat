@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  extend FriendlyId
   include Formattable
 
   VALID_USERNAME_REGEX = /\A[a-z]+[a-z0-9\-_ ]+[a-z0-9]\z/i
@@ -58,6 +59,8 @@ class User < ActiveRecord::Base
 
   has_attached_file :image, default_url: "default-user.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+
+  friendly_id :username, use: :slugged
 
   after_initialize :ensure_session_token
 
