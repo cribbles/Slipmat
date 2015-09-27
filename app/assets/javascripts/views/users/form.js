@@ -23,9 +23,8 @@ Slipmat.Views.UserNew = Backbone.View.extend({
 
     this.model.save(attributes, {
       success: function (user) {
-        var fragment = "//users/" + user.get("slug");
         Slipmat.currentUser.fetch();
-        Backbone.history.navigate(fragment, { trigger: true });
+        Backbone.history.navigate("", { trigger: true });
       },
       error: function (model, resp) {
         Slipmat._onError(this, resp.responseJSON);
