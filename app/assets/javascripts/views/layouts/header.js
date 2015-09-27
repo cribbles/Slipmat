@@ -98,7 +98,8 @@ Slipmat.Views.Header = Backbone.View.extend({
     this._clearSearchResults();
 
     var query = $(e.currentTarget).find("input").val();
-    var fragment = (query.length ? "/search?query=" + query : "");
+    var queryFragment = window.encodeURIComponent(query);
+    var fragment = (query.length ? "/search?query=" + queryFragment : "");
     Backbone.history.navigate(fragment, { trigger: true });
   },
 
