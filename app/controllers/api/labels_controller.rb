@@ -25,13 +25,6 @@ module Api
       end
     end
 
-    def destroy
-      @label = Label.find(params[:id])
-      @label.destroy!
-
-      render json: @label
-    end
-
     def show
       @label = Label
         .includes(:records)

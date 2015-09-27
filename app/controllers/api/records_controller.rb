@@ -26,13 +26,6 @@ module Api
       end
     end
 
-    def destroy
-      @record = Record.find(params[:id])
-      @record.destroy!
-
-      render json: @record
-    end
-
     def show
       @record = Record
                   .includes(:comments)

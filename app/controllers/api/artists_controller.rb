@@ -25,13 +25,6 @@ module Api
       end
     end
 
-    def destroy
-      @artist = Artist.find(params[:id])
-      @artist.destroy!
-
-      render json: @artist
-    end
-
     def show
       @artist = Artist
         .includes(:records)
