@@ -211,16 +211,6 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     this._goHome();
   },
 
-  _demo: function () {
-    var success = this._goHome;
-
-    Slipmat.currentUser.signIn({
-      username: "Sennacy",
-      password: "password",
-      success: success
-    })
-  },
-
   _import: function (id) {
     Slipmat.import(id);
   },
@@ -237,8 +227,10 @@ Slipmat.Routers.Router = Backbone.Router.extend({
         }
       }
       if (!options.error) {
+        var router = this;
         options.error = function () {
-          Backbone.history.navigate("/login", { trigger: true });
+          var view = new Slipmat.Views.SessionForm();
+          router._swapView(view);
         }
       }
       Slipmat.currentUser.fetch(options);

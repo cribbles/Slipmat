@@ -19,7 +19,8 @@ Slipmat.Views.Header = Backbone.View.extend({
     "blur .search": "clearSearchResults",
     "submit #search": "search",
     "click button": "signIn",
-    "click #signOut": "signOut"
+    "click #signOut": "signOut",
+    "click #demo": "demo"
   },
 
   render: function () {
@@ -113,6 +114,12 @@ Slipmat.Views.Header = Backbone.View.extend({
     e.preventDefault();
 
     Slipmat.currentUser.signOut();
+  },
+
+  demo: function (e) {
+    e.preventDefault();
+
+    Slipmat.currentUser.signInAsDemoUser();
   }
 
 });

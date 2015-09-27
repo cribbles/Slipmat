@@ -88,6 +88,7 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
 
   signIn: function (options) {
     options = options || {};
+    options.success = options.success || this._signInCallback;
 
     var credentials = {
       "user[username]": options.username,
@@ -107,6 +108,13 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
       error: function (resp) {
         options.error && options.error(resp);
       }
+    });
+  },
+
+  signInAsDemoUser: function () {
+    this.signIn({
+      username: "Sennacy",
+      password: "password"
     });
   },
 
@@ -177,6 +185,17 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
         callback && callback();
       }
     });
+  },
+
+  _signInCallback: function () {
+    var fragment;
+    if (Backbone.history.fragment === "login") {
+      fragment = "";
+    } else {
+      fragment = Backbone.history.fragment;
+      Backbone.history.fragment = null;
+    }
+    Backbone.history.navigate(fragment, { trigger: true });
   }
 
 });
