@@ -24,8 +24,9 @@ Slipmat.Views.UserEdit = Backbone.ImageableView.extend({
     var image = this.$("#image-form")[0].files[0];
     var attributes = this.$el.serializeJSON();
     var callback = function (user) {
+      var fragment = "//users/" + user.get("slug");
       Slipmat.currentUser.fetch();
-      Backbone.history.navigate("#/users/" + user.id, { trigger: true });
+      Backbone.history.navigate(fragment, { trigger: true });
     }
 
     this.model.save(attributes, {

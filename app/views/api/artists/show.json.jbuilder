@@ -16,5 +16,6 @@ json.comments @artist.comments, partial: 'api/comments/comment', as: :comment
 
 json.contributors @artist.contributors do |user|
   json.id user.id
+  json.slug user.slug
   json.username user.username
 end

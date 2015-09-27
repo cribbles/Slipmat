@@ -1,5 +1,5 @@
 <li class="menu">
-  <a href="#/users/<%= Slipmat.currentUser.id %>" class="menu">
+  <a href="#/users/<%= Slipmat.currentUser.get("slug") %>" class="menu">
     <img src="<%= Slipmat.currentUser.image() %>" class="header">
   </a>
 

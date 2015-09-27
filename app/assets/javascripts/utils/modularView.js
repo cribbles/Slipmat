@@ -6,7 +6,7 @@ Backbone.ModularView = Backbone.View.extend({
 
     var $contributors = this.$(".contributors-container");
     contributors.forEach(function (contributor) {
-      var $contributor = $('<a href="#/users/' + contributor.id + '">')
+      var $contributor = $('<a href="#/users/' + contributor.slug + '">');
       $contributor.text(_.escape(contributor.username));
 
       $contributors.append($contributor);

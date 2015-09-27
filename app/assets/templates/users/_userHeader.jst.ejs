@@ -11,7 +11,7 @@
           <a
             id="profile"
             class="tab"
-            href="#/users/<%= user.id %>">
+            href="#/users/<%= user.get("slug") %>">
             <%= user.escape("username") %>
           </a>
         </h2>
@@ -20,19 +20,19 @@
             <a
               id="profile"
               class="tab"
-              href="#/users/<%= user.id %>">Profile</a>
+              href="#/users/<%= user.get("slug") %>">Profile</a>
           </li>
           <li>
             <a
               id="collection"
               class="tab"
-              href="#/users/<%= user.id %>/collection">Collection</a>
+              href="#/users/<%= user.get("slug") %>/collection">Collection</a>
           </li>
           <li>
             <a
               id="wantlist"
               class="tab"
-              href="#/users/<%= user.id %>/wantlist">Wantlist</a>
+              href="#/users/<%= user.get("slug") %>/wantlist">Wantlist</a>
           </li>
         </ul>
       </section>

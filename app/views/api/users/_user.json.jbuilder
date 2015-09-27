@@ -1,6 +1,7 @@
 json.extract!(
   user,
   :id,
+  :slug,
   :username,
   :email,
   :url,

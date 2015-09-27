@@ -25,7 +25,8 @@ Slipmat.Views.SessionForm = Backbone.View.extend({
       username: credentials.username,
       password: credentials.password,
       success: function (user) {
-        Backbone.history.navigate("#/users/" + user.id, { trigger: true });
+        var fragment = "//users/" + user.get("slug");
+        Backbone.history.navigate(fragment, { trigger: true });
       },
       error: function (resp) {
         Slipmat._onError(view, resp.responseJSON);

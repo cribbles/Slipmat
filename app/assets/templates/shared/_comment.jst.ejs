@@ -1,9 +1,9 @@
 <div class="comment group">
-  <a href="#/users/<%= comment.author.id %>" class="author-img">
+  <a href="#/users/<%= comment.author.slug %>" class="author-img">
     <img src="<%= comment.author.image %>">
   </a>
   <div class="comment-main">
-    <a href="#/users/<%= comment.author.id %>" class="author">
+    <a href="#/users/<%= comment.author.slug %>" class="author">
       <%= _.escape(comment.author.username) %>
     </a>
     <span class="date"><%= comment.created_at %></span>
