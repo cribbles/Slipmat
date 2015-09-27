@@ -92,7 +92,10 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
   recordShow: function (id) {
     var record = this.records.getOrFetch(id);
-    var view = new Slipmat.Views.RecordShow({ model: record });
+    var view = new Slipmat.Views.RecordShow({
+      model: record,
+      router: this
+    });
 
     this._swapView(view);
   },
@@ -114,7 +117,10 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   artistShow: function (id) {
     var artist = new Slipmat.Models.Artist({ id: id });
     artist.fetch();
-    var view = new Slipmat.Views.ArtistShow({ model: artist });
+    var view = new Slipmat.Views.ArtistShow({
+      model: artist,
+      router: this
+    });
 
     this._swapView(view);
   },
@@ -137,7 +143,10 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   labelShow: function (id) {
     var label = new Slipmat.Models.Label({ id: id });
     label.fetch();
-    var view = new Slipmat.Views.LabelShow({ model: label });
+    var view = new Slipmat.Views.LabelShow({
+      model: label,
+      router: this
+    });
 
     this._swapView(view);
   },

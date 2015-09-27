@@ -4,7 +4,8 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
   className: "group",
   template: JST["records/show"],
 
-  initialize: function () {
+  initialize: function (options) {
+    this.router = options.router;
     this.trackTemplate = JST["tracks/_track"];
 
     this.listenTo(this.model, "sync change", this.render);
@@ -24,7 +25,6 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
       $textarea = $('<textarea class="form comment-form">');
       this.$("#new-comment").prepend($textarea);
     }
-
     this.renderGenres();
     this.renderTracks();
     this.listContributors();
@@ -51,12 +51,13 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
   },
 
   renderTracks: function () {
+    var view = this;
     var tracks = this.model.tracks();
     if (!tracks.length) { return; }
 
     tracks.forEach(function (track) {
-      this._addTrack(track);
-    }, this);
+      view._addTrack(track);
+    });
   },
 
   toggleListButtons: function () {
@@ -67,16 +68,13 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
     var wantlist = Slipmat.currentUser.wantedRecords();
     var collection = Slipmat.currentUser.collectedRecords();
 
-    if (collection && collection.hasRecord(this.model)) {
-      this._toggleButton($collect, "remove");
-    } else {
-      this._toggleButton($collect, "add");
+    if (collection) {
+      var action = (collection.hasRecord(this.model) ? "remove" : "add");
+      this._toggleButton($collect, action);
     }
-
-    if (wantlist && wantlist.hasRecord(this.model)) {
-      this._toggleButton($want, "remove");
-    } else {
-      this._toggleButton($want, "add");
+    if (wantlist) {
+      var action = (wantlist.hasRecord(this.model) ? "remove" : "add");
+      this._toggleButton($want, action);
     }
   },
 
@@ -94,7 +92,6 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
       var callback = function () {
         var newCount = Number(listCount.text()) + 1;
         listCount.html(newCount);
-
         view._toggleButton($el, "remove");
       }
       Slipmat.currentUser.addToList(list, view.model, callback);
@@ -102,7 +99,6 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
       var callback = function () {
         var newCount = Number(listCount.text()) - 1;
         listCount.html(newCount);
-
         view._toggleButton($el, "add");
       }
       Slipmat.currentUser.removeFromList(list, view.model, callback);
@@ -113,18 +109,14 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
     $button.data("action", action);
 
     var listType = $button.attr("id");
-    var prependText = (action === "add" ? "Add to " : "Remove from ");
+    var prependText = (action === "add" ? "Add to" : "Remove from");
+    var appendText = (listType === "want" ? "Wantlist" : "Collection");
 
-    if (listType === "collection") {
-      $button.text(prependText + "Collection");
-    } else if (listType === "want") {
-      $button.text(prependText + "Wantlist");
-    }
+    $button.text(prependText + " " + appendText);
   },
 
   _addTrack: function (track) {
     var content = this.trackTemplate({ track: track });
-
     this.$(".tracklist-container").append(content);
   }
 

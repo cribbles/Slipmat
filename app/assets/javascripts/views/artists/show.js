@@ -4,7 +4,8 @@ Slipmat.Views.ArtistShow = Backbone.ModularView.extend({
   className: "group",
   template: JST["artists/show"],
 
-  initialize: function () {
+  initialize: function (options) {
+    this.router = options.router;
     this.listenTo(this.model, "sync change", this.render);
   },
 

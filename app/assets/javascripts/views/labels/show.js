@@ -4,7 +4,8 @@ Slipmat.Views.LabelShow = Backbone.ModularView.extend({
   className: "group",
   template: JST["labels/show"],
 
-  initialize: function () {
+  initialize: function (options) {
+    this.router = options.router;
     this.listenTo(this.model, "sync change", this.render);
   },
 
