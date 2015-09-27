@@ -19,8 +19,8 @@ Slipmat.Models.Record = Backbone.Model.extend({
       "tracks",
       "comments",
       "contributors",
-      "in_collection",
-      "in_wantlist"
+      "num_collected",
+      "num_wanted"
     ];
 
     associations.forEach(function (association) {
@@ -92,14 +92,14 @@ Slipmat.Models.Record = Backbone.Model.extend({
     return this._contributors;
   },
 
-  inCollection: function () {
-    this._in_collection = this._in_collection || [];
-    return this._in_collection;
+  numCollected: function () {
+    this._num_collected = this._num_collected || 0;
+    return this._num_collected;
   },
 
-  inWantlist: function () {
-    this._in_wantlist = this._in_wantlist || [];
-    return this._in_wantlist;
+  numWanted: function () {
+    this._num_wanted = this._num_wanted || 0;
+    return this._num_wanted;
   }
 
 });

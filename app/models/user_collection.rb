@@ -6,7 +6,7 @@ class UserCollection < ActiveRecord::Base
   include Trackable
 
   belongs_to :user
-  belongs_to :record
+  belongs_to :record, counter_cache: true
 
   validates_uniqueness_of :record_id, scope: :user_id
 end

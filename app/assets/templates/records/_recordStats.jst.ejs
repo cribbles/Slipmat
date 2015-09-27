@@ -6,7 +6,7 @@
         Have:
       </span>
       <span class="value" id="collectionCount">
-        <%= record.inCollection().length %>
+        <%= record.numCollected() %>
       </span>
     </div>
     <div class="statistic group">
@@ -14,7 +14,7 @@
         Want:
       </span>
       <span class="value" id="wantCount">
-        <%= record.inWantlist().length %>
+        <%= record.numWanted() %>
       </span>
     </div>
     <div class="statistic group" id="created_at">

@@ -46,19 +46,10 @@ json.comments(
   as: :comment
 )
 
+json.num_collected @record.user_collections_count
+json.num_wanted @record.user_wants_count
+
 json.contributors @record.contributors do |user|
-  json.id user.id
-  json.slug user.slug
-  json.username user.username
-end
-
-json.in_collection @record.collected do |user|
-  json.id user.id
-  json.slug user.slug
-  json.username user.username
-end
-
-json.in_wantlist @record.wanted do |user|
   json.id user.id
   json.slug user.slug
   json.username user.username
