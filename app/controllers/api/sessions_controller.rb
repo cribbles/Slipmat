@@ -5,7 +5,7 @@ module Api
       if signed_in?
         render :show
       else
-        render json: {}
+        render json: {}, status: 422
       end
     end
 

@@ -230,8 +230,9 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
     if (!Slipmat.currentUser.isSignedIn()) {
       if (!options.success) {
+        var fragment = Backbone.history.fragment;
         options.success = function () {
-          var fragment = Backbone.history.fragment;
+          Backbone.history.fragment = null;
           Backbone.history.navigate(fragment, { trigger: true });
         }
       }
@@ -240,7 +241,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
           Backbone.history.navigate("/login", { trigger: true });
         }
       }
-      Slipmat.currentUser.signIn(options);
+      Slipmat.currentUser.fetch(options);
       return false;
     }
     return true;
