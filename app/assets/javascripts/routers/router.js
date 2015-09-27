@@ -225,13 +225,22 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     Slipmat.import(id);
   },
 
-  _ensureSignedIn: function (callback) {
-    if (!Slipmat.currentUser.isSignedIn()) {
-      if (!callback) {
-        callback = Backbone.history.navigate("login", { trigger: true });
-      }
-      Slipmat.currentUser.signIn(callback);
+  _ensureSignedIn: function (options) {
+    options = options || {};
 
+    if (!Slipmat.currentUser.isSignedIn()) {
+      if (!options.success) {
+        options.success = function () {
+          var fragment = Backbone.history.fragment;
+          Backbone.history.navigate(fragment, { trigger: true });
+        }
+      }
+      if (!options.error) {
+        options.error = function () {
+          Backbone.history.navigate("/login", { trigger: true });
+        }
+      }
+      Slipmat.currentUser.signIn(options);
       return false;
     }
     return true;
