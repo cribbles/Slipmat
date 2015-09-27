@@ -19,7 +19,7 @@ Slipmat.Views.Header = Backbone.View.extend({
     "blur .search": "clearSearchResults",
     "submit #search": "search",
     "click button": "signIn",
-    "click #signOut": "signOut",
+    "click #sign-out": "signOut",
     "click #demo": "demo"
   },
 
@@ -111,7 +111,14 @@ Slipmat.Views.Header = Backbone.View.extend({
 
   signOut: function (e) {
     e.preventDefault();
-    Slipmat.currentUser.signOut();
+
+    var fragment = Backbone.history.fragment;
+    Slipmat.currentUser.signOut({
+      success: function () {
+        Backbone.history.fragment = null;
+        Backbone.history.navigate(fragment, { trigger: true });
+      }
+    });
   },
 
   demo: function (e) {

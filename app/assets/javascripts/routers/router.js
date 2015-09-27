@@ -30,7 +30,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     "users/:id/:tab": "userShow",
 
     "login": "sessionNew",
-    "logout": "sessionDelete",
+    "logout": "sessionDestroy",
     "register": "userNew",
 
     "profile": "profile",
@@ -215,7 +215,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     this._swapView(view);
   },
 
-  sessionDelete: function () {
+  sessionDestroy: function () {
     Slipmat.currentUser.signOut();
     this._goHome();
   },
