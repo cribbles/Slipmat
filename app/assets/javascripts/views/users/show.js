@@ -33,7 +33,7 @@ Slipmat.Views.UserShow = Backbone.View.extend({
     this.tab = $(e.currentTarget).attr("id");
     this.renderTab();
 
-    var fragment = "//users/" + this.model.get("slug") + "/" + this.tab;
+    var fragment = "users/" + this.model.get("slug") + "/" + this.tab;
     Backbone.history.navigate(fragment);
   },
 
