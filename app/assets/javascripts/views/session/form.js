@@ -4,6 +4,7 @@ Slipmat.Views.SessionForm = Backbone.View.extend({
 
   events: {
     "submit #new-session": "submit",
+    "click #demo-user": "demo",
     "click .button-oauth": "redirect"
   },
 
@@ -28,6 +29,11 @@ Slipmat.Views.SessionForm = Backbone.View.extend({
         Slipmat._onError(view, resp.responseJSON);
       }
     });
+  },
+
+  demo: function (e) {
+    e.preventDefault();
+    Slipmat.currentUser.signInAsDemoUser();
   },
 
   redirect: function (e) {
