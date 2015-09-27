@@ -10,12 +10,12 @@ Rails.application.routes.draw do
     resources :genres, only: :index
     resources :users,   only: [:create, :update, :destroy, :show]
     resource  :session, only: [:create, :destroy, :show]
-    resources :artists, only: [:create, :update, :destroy, :show, :index]
-    resources :labels,  only: [:create, :update, :destroy, :show, :index]
-    resources :records, only: [:create, :update, :destroy, :show, :index]
+    resources :artists, only: [:create, :update, :show, :index]
+    resources :labels,  only: [:create, :update, :show, :index]
+    resources :records, only: [:create, :update, :show, :index]
     resources :user_collections, only: [:create, :destroy, :show]
     resources :user_wants, only: [:create, :destroy, :show]
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: :create
   end
 
   get "/auth/:provider/callback", to: "api/sessions#omniauth"
