@@ -11,8 +11,8 @@ json.extract!(
 )
 
 json.image asset_path(user.image.url)
-json.num_comments user.authored_comments.count
-json.num_contributions user.contributions.count
+json.num_comments user.comments_count
+json.num_contributions user.user_contributions_count
 
 associations = [];
 

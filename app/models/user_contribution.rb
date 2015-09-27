@@ -5,7 +5,7 @@ class UserContribution < ActiveRecord::Base
 
   include Trackable
 
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   belongs_to :contributable, polymorphic: true
 
   validates_uniqueness_of :user_id, scope: [
