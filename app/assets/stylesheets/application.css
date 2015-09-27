@@ -1089,6 +1089,7 @@ textarea.highlight {
   display: block;
   float: left;
   font-size: 14px;
+  word-wrap: break-word;
 }
 
 .profile-sidebar {
@@ -1235,6 +1236,7 @@ textarea.highlight {
   float: left;
   font-size: 14px;
   margin-top: 10px;
+  word-wrap: break-word;
 }
 
 .record-main {
