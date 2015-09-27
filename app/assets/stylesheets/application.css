@@ -1369,8 +1369,9 @@ textarea.highlight {
   line-height: 20px;
 }
 
-.release-container > span > a {
+.release-container > span > .link {
   display: block;
+  font-weight: bold;
   margin: 5px 0 10px 0;
   padding: 3px;
 }
