@@ -37,7 +37,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     "wantlist": "wantlist",
     "collection": "collection",
 
-    "_=_": "_profile",
+    "_=_": "_goHome",
     "import/:id": "_import",
     "demo": "_demo"
   },
@@ -186,17 +186,17 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
   profile: function () {
     if (!this._ensureSignedIn()) { return; }
-    this.userShow(Slipmat.currentUser.id, "profile");
+    this.userShow(Slipmat.currentUser.get("slug"), "profile");
   },
 
   wantlist: function () {
     if (!this._ensureSignedIn()) { return; }
-    this.userShow(Slipmat.currentUser.id, "wantlist");
+    this.userShow(Slipmat.currentUser.get("slug"), "wantlist");
   },
 
   collection: function () {
     if (!this._ensureSignedIn()) { return; }
-    this.userShow(Slipmat.currentUser.id, "collection");
+    this.userShow(Slipmat.currentUser.get("slug"), "collection");
   },
 
   sessionNew: function () {
@@ -208,22 +208,17 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
   sessionDelete: function () {
     Slipmat.currentUser.signOut();
-    Backbone.history.navigate("/", { trigger: true });
+    this._goHome();
   },
 
   _demo: function () {
+    var success = this._goHome;
+
     Slipmat.currentUser.signIn({
       username: "Sennacy",
       password: "password",
-      success: function () {
-        Backbone.history.navigate("/profile", { trigger: true });
-      }
+      success: success
     })
-  },
-
-  _profile: function () {
-    // redirects Facebook login
-    Backbone.history.navigate("", { trigger: true });
   },
 
   _import: function (id) {

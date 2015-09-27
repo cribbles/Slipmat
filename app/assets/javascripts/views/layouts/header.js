@@ -18,8 +18,8 @@ Slipmat.Views.Header = Backbone.View.extend({
     "click .search-result": "redirect",
     "blur .search": "clearSearchResults",
     "submit #search": "search",
-    "click #signOut": "signOut",
-    "click #register": "register"
+    "click button": "signIn",
+    "click #signOut": "signOut"
   },
 
   render: function () {
@@ -102,10 +102,10 @@ Slipmat.Views.Header = Backbone.View.extend({
     Backbone.history.navigate(fragment, { trigger: true });
   },
 
-  register: function (e) {
+  signIn: function (e) {
     e.preventDefault();
 
-    Backbone.history.navigate("/register", { trigger: true });
+    Backbone.history.navigate("/login", { trigger: true });
   },
 
   signOut: function (e) {
