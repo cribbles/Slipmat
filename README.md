@@ -1,119 +1,129 @@
 # Slipmat
 
-[Heroku link][heroku]
+[Live](http://slipmat.xyz)
 
-[heroku]: http://slipmat.herokuapp.com
+## Summary
 
-## Minimum Viable Product
-Slipmat is a clone of Discogs built on Rails and Backbone. Users can:
+Slipmat is a near-faithful clone of [Discogs](http://discogs.com), the
+Internet's largest database and marketplace for audio recordings. Slipmat
+replicates most of the core functionality and UI components of Discogs's
+inventory and user systems. The main difference is that Slipmat is designed
+from the ground up as a single-page application.
 
-- [X] View records
-- [X] Add and update records
-- [X] Create accounts
-- [X] Create sessions (log in)
-- [X] Update their profile
-- [X] Add records to their wantlist and collection
-- [X] View other users' profiles, wantlists, and collections
-- [ ] See their own and others' recent activity
-- [X] View artists and labels
-- [X] Comment on records, artists and labels
-- [X] Search for records, artists and labels
-- [X] Filter records, artists and labels
+### Languages:
+- Javascript
+- Ruby
+- HTML / CSS
 
-## Design Docs
-* [View Wireframes][views]
-* [DB schema][schema]
+### Frameworks:
+- Backbone
+- Rails
 
-[views]: ./docs/views.md
-[schema]: ./docs/schema.md
+### Libraries and Technologies:
+- jQuery / AJAX
+- jQuery-UI
+- paperclip / AWS
+- pg_search
+- kaminari
+- figaro
+- jbuilder
+- omniauth
+- friendly_id
 
-## Implementation Timeline
+## What can I do on this website?
 
-### Phase 1: Displaying, Adding and Editing Records (~1 day)
-I will create the API endpoints for my `records` table, along with the
-`RecordsIndex`, `RecordShow` and `RecordForm` Backbone views. `RecordsIndex`
-will be a composite view comprised of many `RecordsIndexItem` subviews.
+Slipmat provides a hand-rolled Rails user auth system managed entirely through
+Backbone. You can:
+- Securely create an account
+- Log in using Facebook or Google
+- Edit your own profile
+- Add records to your wantlist and collection
+- Contribute new records to the database
+- Contribute information about records, artists, and labels
+- Update, sort, and customize tracklists (using jQuery sortable UI)
+- Tag and sort records by genre
+- Comment on records, artists, and labels
 
-This phase will also involve making a couple of minimal `Genre` and `Style`
-tables and corresponding join tables to allow inventoried records to be
-'tagged' with genres and styles.
+Slipmat provides an robust interface for browsing, searching, and sorting
+records, artists, and labels. It features:
+- Live search results in the header search bar
+- Global search indices for records, artists, and labels
+- Stackable category filtering for records
+  - Sort by year, genre, or country
+- Tabbed and paginated index for records, artists, and labels
 
-I will conclude this phase by making sure everything deploys properly with
-Heroku.
+## API
 
-[Details][phase-one]
+Slipmat is powered by a RESTful JSON API.
 
-### Phase 2: User Authentication, User Profile (~1 days)
-I will implement Rails user authentication including sign up, sign in, and
-sign out. Users will be able to fill out a short profile and upload a picture
-of themselves using Filepicker - at this stage I will also refactor my
-`RecordForm` view to enable users to upload record covers.
+I took great care to ensure correspondence between Backbone routes and API
+endpoints. If you're on a page that displays data, you can replace the `#` in
+the URI fragment at any time with `api` to see what's being served up for a
+given view. This includes [search](http://slipmat.xyz/api/search?query=jackson)
+and
+[sort](http://slipmat.xyz/api/records/search?year=1991&genre=rock&country=United%20States)
+results.
 
-[Details][phase-two]
+Many API responses handle nested data and associations. I made extensive use of
+jbuilder to manage these. Nearly all Backbone models override the `parse` method
+to keep track of nested associations.
 
-### Phase 3: Collections, Wantlists, Comments, and Recent Activity (~1-2 days)
-I will enable users to add records to (and remove records from) their
-Wantlist or Collection, via the `RecordShow` page. I will expand user profiles
-by creating views for a `UserWantlist` and `UserCollection`, each a composite
-view populated with `UserListItem` elements. `UserWantlist`s and
-`UserCollections` will each represent different types of `Record` collections
-(nice how that works out, isn't it?)
+I used Rails's counter caching and eager loading to optimize data retreival. API
+responses are structured to prevent N+1 queries.
 
-Finally, I will create a `UserActivity` join table to keep track of user
-contributions (adding / updating records), collections and wantlists. I will
-display recent activity in the `UserShow` view. Rails will be responsible for
-updating the `UserActivity` table in coordination with relevant actions.
+I structured user comments and contributions as polymorphic associations in
+order to prevent bloat. This greatly reduced the overhead for my Rails models
+and Backbone views.
 
-[Details][phase-three]
+## Slipmat.Import
 
-### Phase 4: Artists and Labels (~1 day)
-I will create `ArtistShow` and `LabelShow` views to display records for a
-given artist and label.  Each will be a composite view with corresponding
-`ArtistItemShow`/`LabelItemShow` subviews.  Users will be able to update
-artist and label information (including images) on these pages.
+Slipmat features a super handy [import
+utility](app/assets/javascripts/utils/import.js), `Slipmat.Import`, for
+constructing seed data based on real Discogs releases.
 
-This will involve a slight refactor of the `RecordForm` - users will be
-prompted to select from a list of existing artists when submitting a new
-record, or to type out the name of a new one. Ditto with labels.
+For my own convenience, I've bound it to a Backbone route. Visit
+`#/import/(discogs release id)` if you want to try it out!
 
-[Details][phase-four]
+Here's how it works:
 
-### Phase 5: Record, Artist, and Label Comments (~1 day)
-I will create a `CommentForm` subview to enable users to leave comments on
-record, artist, and label pages. The `RecordShow`, `ArtistShow`, and `LabelShow`
-views will make use of a `UserComments` composite subview with many
-`UserCommentItem` subviews. `Comments` will be a singular SQL item with
-a polymorphic relationship to its subject.
+- `Import#import` takes Discogs release ID provided in the URI fragment as an
+argument and fetches the release data from the [official Discogs
+API](http://www.discogs.com/developers/) by making a GET request to the
+release's API endpoint.
+- On success, the payload is passed along to `Import#parse`. This parses the
+Discogs data into Backbone model attributes, sets them on a new instance of
+`Slipmat.Models.Record` and saves the record. This includes nested associations,
+e.g. tracklist, genre taggings, artist and label.
+- On success, the persisted model is passed along to `Import#fetchImage`, which
+makes a separate GET request to the Discogs search engine, sending along the
+artist name and album title as parameters.
+- On success, the payload is scanned for the first associated thumbnail URI,
+which is passed along to `Import#patchImage`. This updates the persisted model
+by assigning the thumbnail to the its `image_url` attribute and saving it.
 
-[Details][phase-five]
+_N.B._ - under the hood, the Rails `Record` model doesn't really have an
+`image_url` attribute. Instead, we override `#image_url=` like so:
 
-### Phase 6: Searching for Records, Artists, and Labels (~1-2 days)
-I will create API endpoints to search for records, artists, and labels by
-title/name. I will integrate a live search into the header nav-bar's search
-field.
+```ruby
+def image_url=(image_url)
+  self.image = open(image_url)
+end
+```
 
-[Details][phase-six]
+This intercepts the thumbnail before saving the model and delegates the file
+contents to Paperclip, which politely stores the thumbnail on AWS for us and
+displays it normally (i.e. without image leeching).
 
-### Phase 7: Filtering Records, Artists and Labels (~1-2 days)
-I will improve my search API to enable filtering records by genre, style,
-country, and decade; artists and labels by decade. Users will be able to use
-the front page of the site to create stackable search parameters.
+## Future polishing touches (TBD)
+- User activity / feed
+- Git diff / wiki like updates for records, artists, and labels
+- Comment on comments
+- Multiple formats and releases (CD, Cassette, Reissue, Deluxe, etc.)
+- Buy and sell records
+- User messaging
+- Ratings for records (5 star scale)
+- Add records to lists (Best Reggae records of the 90s, etc.)
 
-[Details][phase-seven]
+## License
 
-### Bonus Features (TBD)
-- [ ] Ratings for records (5 star scale)
-- [ ] Git diff / wiki like updates for records, artists, and labels
-- [ ] Comment on comments
-- [ ] Multiple formats and releases (CD, Cassette, Reissue, Deluxe, etc.)
-- [ ] Buy and sell records
-- [ ] User messaging
-- [ ] Add records to lists (Best Reggae records of the 90s, etc.)
-
-[phase-one]: ./docs/phases/phase1.md
-[phase-two]: ./docs/phases/phase2.md
-[phase-three]: ./docs/phases/phase3.md
-[phase-four]: ./docs/phases/phase4.md
-[phase-five]: ./docs/phases/phase5.md
-[phase-six]: ./docs/phases/phase6.md
-[phase-seven]: ./docs/phases/phase7.md
+Slipmat is released under the [MIT License](/LICENSE).
