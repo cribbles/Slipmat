@@ -51,9 +51,10 @@ Slipmat.Import.fetchImage = function (model, artist_name) {
   var token = Slipmat.discogsUserToken;
   var escapedTitle = model.get("title").replace(/ /g, "+");
   var url = "https://api.discogs.com/database/search?artist=";
+  url += artist_name + "&title=" + escapedTitle + "&token=" + token;
 
   $.ajax({
-    url: url + artist_name + "&title=" + escapedTitle + "&token=" + token,
+    url: url,
     type: "GET",
     dataType: "json",
     success: function (payload) {
@@ -63,15 +64,17 @@ Slipmat.Import.fetchImage = function (model, artist_name) {
 }
 
 Slipmat.Import.patchImage = function (recordId, payload) {
-  var newModel = new Slipmat.Models.Record({ id: recordId });
-
-  newModel.attributes.record = {
-    image_url: payload.results[0].thumb
-  };
+  var newModel = new Slipmat.Models.Record({
+    id: recordId,
+    record: {
+      id: recordId,
+      image_url: payload.results[0].thumb
+    }
+  });
 
   newModel.save({}, {
     success: function () {
-      console.log("Patch successful, URL is /records/" + recordId);
+      Backbone.history.navigate("//records/" + recordId);
     }
   });
 }
