@@ -43,16 +43,17 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   index: function (query, options) {
+    var router = this;
     query = query || {};
     options = options || {};
     collection = options.collection || this.records;
     collection.fetch({
-      data: { page: Number(query.page) }
+      data: { page: Number(query.page) },
+      success: function () {
+        var view = new Slipmat.Views.Index({ collection: collection });
+        router._swapView(view);
+      }
     });
-
-    var view = new Slipmat.Views.Index({ collection: collection });
-
-    this._swapView(view);
   },
 
   search: function (query) {
@@ -78,35 +79,43 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   recordSearch: function (query) {
+    var router = this;
     var results = new Slipmat.Collections.FilterResults();
-    results.fetch({ data: query });
-    delete query.page;
 
-    var view = new Slipmat.Views.RecordSearch({
-      query: query,
-      collection: results
+    results.fetch({
+      data: query,
+      success: function (records) {
+        delete query.page;
+        var view = new Slipmat.Views.RecordSearch({
+          query: query,
+          collection: results
+        });
+        router._swapView(view);
+      }
     });
-
-    this._swapView(view);
   },
 
   recordShow: function (id) {
-    var record = this.records.getOrFetch(id);
-    var view = new Slipmat.Views.RecordShow({
-      model: record,
-      router: this
-    });
-
-    this._swapView(view);
+    var router = this;
+    var callback = function (record) {
+      var view = new Slipmat.Views.RecordShow({
+        model: record,
+        router: router
+      });
+      router._swapView(view);
+    }
+    this.records.getOrFetch(id, callback);
   },
 
   recordEdit: function (id) {
     if (!this._ensureSignedIn()) { return; }
 
-    var record = this.records.getOrFetch(id);
-    var view = new Slipmat.Views.RecordForm({ model: record });
-
-    this._swapView(view);
+    var router = this;
+    var callback = function (record) {
+      var view = new Slipmat.Views.RecordForm({ model: record });
+      router._swapView(view);
+    }
+    this.records.getOrFetch(id, callback);
   },
 
   artistsIndex: function (query) {
