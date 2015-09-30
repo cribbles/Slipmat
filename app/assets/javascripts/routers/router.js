@@ -84,7 +84,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
     results.fetch({
       data: query,
-      success: function (records) {
+      success: function (results) {
         delete query.page;
         var view = new Slipmat.Views.RecordSearch({
           query: query,
@@ -124,24 +124,30 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   artistShow: function (id) {
+    var router = this;
     var artist = new Slipmat.Models.Artist({ id: id });
-    artist.fetch();
-    var view = new Slipmat.Views.ArtistShow({
-      model: artist,
-      router: this
+    artist.fetch({
+      success: function (artist) {
+        var view = new Slipmat.Views.ArtistShow({
+          model: artist,
+          router: router
+        });
+        router._swapView(view);
+      }
     });
-
-    this._swapView(view);
   },
 
   artistEdit: function (id) {
     if (!this._ensureSignedIn()) { return; }
 
+    var router = this;
     var artist = new Slipmat.Models.Artist({ id: id });
-    artist.fetch();
-    var view = new Slipmat.Views.ArtistEdit({ model: artist });
-
-    this._swapView(view);
+    artist.fetch({
+      success: function (artist) {
+        var view = new Slipmat.Views.ArtistEdit({ model: artist });
+        router._swapView(view);
+      }
+    });
   },
 
   labelsIndex: function (query) {
@@ -150,24 +156,30 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   labelShow: function (id) {
+    var router = this;
     var label = new Slipmat.Models.Label({ id: id });
-    label.fetch();
-    var view = new Slipmat.Views.LabelShow({
-      model: label,
-      router: this
+    label.fetch({
+      success: function (label) {
+        var view = new Slipmat.Views.LabelShow({
+          model: label,
+          router: router
+        });
+        router._swapView(view);
+      }
     });
-
-    this._swapView(view);
   },
 
   labelEdit: function (id) {
     if (!this._ensureSignedIn()) { return; }
 
+    var router = this;
     var label = new Slipmat.Models.Label({ id: id });
-    label.fetch();
-    var view = new Slipmat.Views.LabelEdit({ model: label });
-
-    this._swapView(view);
+    label.fetch({
+      success: function (label) {
+        var view = new Slipmat.Views.LabelEdit({ model: label });
+        router._swapView(view);
+      }
+    });
   },
 
   userNew: function () {
@@ -194,16 +206,18 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   userShow: function (id, tab) {
+    var router = this;
     var user = new Slipmat.Models.User({ id: id });
-    user.fetch();
-
-    var view = new Slipmat.Views.UserShow({
-      $rootEl: this.$rootEl,
-      model: user,
-      tab: (tab || "profile")
+    user.fetch({
+      success: function (user) {
+        var view = new Slipmat.Views.UserShow({
+          $rootEl: router.$rootEl,
+          model: user,
+          tab: (tab || "profile")
+        });
+        router._swapView(view);
+      }
     });
-
-    this._swapView(view);
   },
 
   profile: function () {
