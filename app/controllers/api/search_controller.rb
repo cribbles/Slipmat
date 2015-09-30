@@ -16,7 +16,7 @@ module Api
       @records = @records.find_by_country(params[:country]) if params[:country]
       @records = @records.find_by_genre(params[:genre]) if params[:genre]
 
-      @records = @records.page(params[:page])
+      @records = @records.includes(:artist).page(params[:page])
       @params = params.slice(:year, :country, :genre)
 
       render :filter
