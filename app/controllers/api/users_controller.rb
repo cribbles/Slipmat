@@ -15,22 +15,8 @@ module Api
 
     def show
       @user = User
-        .includes(:authored_comments)
-        .includes(:contributions)
-        .includes(:collection)
-        .includes(:wantlist)
         .friendly
         .find(params[:id])
-
-      @wantlist = @user
-        .wantlist
-        .includes(:artist)
-        .page(params[:page])
-
-      @collection = @user
-        .collection
-        .includes(:artist)
-        .page(params[:page])
 
       render :show
     end

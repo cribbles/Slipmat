@@ -17,7 +17,7 @@ json.num_contributions user.user_contributions_count
 associations = [];
 
 json.wantlist do
-  json.partial! 'api/records/records', records: @wantlist
+  json.partial! 'api/records/records', records: user.wantlist.page(params[:page])
 end
 
 user.user_wants.each do |want|
@@ -30,7 +30,7 @@ user.user_wants.each do |want|
 end
 
 json.collection do
-  json.partial! 'api/records/records', records: @collection
+  json.partial! 'api/records/records', records: user.collection.page(params[:page])
 end
 
 user.user_collections.each do |want|
