@@ -695,6 +695,7 @@ li:hover > a > .sidebar-item-count {
   margin-top: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid #eee;
+  min-height: 120px;
 }
 
 .content-records > .record, .record-info > .record {

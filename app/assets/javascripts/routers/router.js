@@ -49,11 +49,15 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     var router = this;
     query = query || {};
     options = options || {};
-    collection = options.collection || this.records;
+    var collection = options.collection || this.records;
+
     collection.fetch({
       data: { page: Number(query.page) },
       success: function () {
-        var view = new Slipmat.Views.Index({ collection: collection });
+        var view = new Slipmat.Views.Index({
+          collection: collection,
+          spinner: router.spinner
+        });
         router._swapView(view);
       }
     });

@@ -19,6 +19,7 @@ Backbone.PaginatableView = Backbone.View.extend({
     }
     query.page = page;
 
+    this.transition();
     this.collection.fetch({
       data: query,
       success: function () {
@@ -55,6 +56,10 @@ Backbone.PaginatableView = Backbone.View.extend({
   remove: function () {
     this.$(".page > span").off();
     Backbone.View.prototype.remove.call(this);
+  },
+
+  transition: function () {
+    $(".content-records").html(this.spinner);
   }
 
 });

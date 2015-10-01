@@ -5,8 +5,10 @@ Slipmat.Views.Index = Backbone.PaginatableView.extend({
   template: JST["root/index"],
 
   initialize: function (options) {
+    this.spinner = options.spinner;
     this.collection = options.collection;
     this.subview = this.collection.subview;
+
     this.listenTo(this.collection, "sync", this.render);
   },
 
@@ -41,6 +43,7 @@ Slipmat.Views.Index = Backbone.PaginatableView.extend({
     this.stopListening();
     this.listenTo(this.collection, "sync", this.render);
     this.collection.fetch();
+    this.transition();
 
     Backbone.history.navigate("//" + this.collection.url.slice(4));
   },
