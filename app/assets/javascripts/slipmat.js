@@ -27,7 +27,7 @@ window.Slipmat = {
     $rootEl.html(spinner);
 
     var router = new Slipmat.Routers.Router({
-      $rootEl: $("main.content"),
+      $rootEl: $rootEl,
       records: new Slipmat.Collections.Records(),
       artists: new Slipmat.Collections.Artists(),
       labels: new Slipmat.Collections.Labels()
