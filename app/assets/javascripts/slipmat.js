@@ -22,6 +22,10 @@ window.Slipmat = {
     var footer = new Slipmat.Views.Footer();
     $("body").append(footer.render().$el);
 
+    var $rootEl = $("main.content");
+    var spinner = new Spinner().spin().el;
+    $rootEl.html(spinner);
+
     var router = new Slipmat.Routers.Router({
       $rootEl: $("main.content"),
       records: new Slipmat.Collections.Records(),

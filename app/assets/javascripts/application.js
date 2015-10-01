@@ -5,6 +5,7 @@
 //= require underscore
 //= require backbone
 //= require backbone-queryparams-rails
+//= require spin
 //= require slipmat
 //= require_tree ../templates
 //= require_tree ./utils

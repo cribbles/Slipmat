@@ -95,6 +95,12 @@ b {
   padding: 0 30px;
 }
 
+main.content {
+  display: block;
+  position: relative;
+  min-height: 160px;
+}
+
 .header-logo {
   width: 124px;
   height: inherit;
