@@ -5,6 +5,9 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     this.records = options.records;
     this.artists = options.artists;
     this.labels = options.labels;
+    this.spinner = options.spinner;
+
+    this._loadingView();
   },
 
   routes: {
@@ -105,6 +108,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
       router._swapView(view);
     }
     this.records.getOrFetch(id, callback);
+    this._loadingView();
   },
 
   recordEdit: function (id) {
@@ -279,7 +283,6 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     if (Slipmat.currentUser.isSignedIn()) {
       callback = callback || this._goHome.bind(this);
       callback();
-
       return false;
     }
     return true;
@@ -287,6 +290,11 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
   _goHome: function () {
     Backbone.history.navigate("/", { trigger: true });
+  },
+
+  _loadingView: function () {
+    this._currentView && this._currentView.remove();
+    this.$rootEl.html(this.spinner);
   },
 
   _swapView: function (view) {

@@ -22,15 +22,12 @@ window.Slipmat = {
     var footer = new Slipmat.Views.Footer();
     $("body").append(footer.render().$el);
 
-    var $rootEl = $("main.content");
-    var spinner = new Spinner().spin().el;
-    $rootEl.html(spinner);
-
     var router = new Slipmat.Routers.Router({
-      $rootEl: $rootEl,
+      $rootEl: $("main.content"),
       records: new Slipmat.Collections.Records(),
       artists: new Slipmat.Collections.Artists(),
-      labels: new Slipmat.Collections.Labels()
+      labels: new Slipmat.Collections.Labels(),
+      spinner: new Spinner().spin().el
     });
 
     Backbone.history.start();
