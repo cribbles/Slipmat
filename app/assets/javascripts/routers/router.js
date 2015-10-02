@@ -95,7 +95,8 @@ Slipmat.Routers.Router = Backbone.Router.extend({
         delete query.page;
         var view = new Slipmat.Views.RecordSearch({
           query: query,
-          collection: results
+          collection: results,
+          spinner: router.spinner
         });
         router._swapView(view);
       }
