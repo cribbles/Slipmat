@@ -7,7 +7,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     this.labels = options.labels;
     this.spinner = options.spinner;
 
-    this._loadingView();
+    this._transition();
   },
 
   routes: {
@@ -89,6 +89,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     var router = this;
     var results = new Slipmat.Collections.FilterResults();
 
+    this._transition();
     results.fetch({
       data: query,
       success: function (results) {
@@ -113,7 +114,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
       router._swapView(view);
     }
     this.records.getOrFetch(id, callback);
-    this._loadingView();
+    this._transition();
   },
 
   recordEdit: function (id) {
@@ -297,7 +298,7 @@ Slipmat.Routers.Router = Backbone.Router.extend({
     Backbone.history.navigate("/", { trigger: true });
   },
 
-  _loadingView: function () {
+  _transition: function () {
     this._currentView && this._currentView.remove();
     this.$rootEl.html(this.spinner);
   },
