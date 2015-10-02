@@ -64,15 +64,12 @@ Slipmat.Import.fetchImage = function (model, artist_name) {
 }
 
 Slipmat.Import.patchImage = function (recordId, payload) {
-  var newModel = new Slipmat.Models.Record({
+  var record = new Slipmat.Models.Record({
     id: recordId,
-    record: {
-      id: recordId,
-      image_url: payload.results[0].thumb
-    }
+    record: { image_url: payload.results[0].thumb }
   });
 
-  newModel.save({}, {
+  record.save({}, {
     success: function () {
       Backbone.history.navigate("//records/" + recordId);
     }
