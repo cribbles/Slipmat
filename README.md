@@ -127,3 +127,6 @@ displays it normally (i.e. without image leeching).
 ## License
 
 Slipmat is released under the [MIT License](/LICENSE).
+
+---
+Developed by [Chris Sloop](http://chrissloop.com/)
