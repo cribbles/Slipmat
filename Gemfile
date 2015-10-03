@@ -19,6 +19,7 @@ gem 'kaminari'
 gem 'pg_search'
 gem 'backbone-queryparams-rails'
 gem 'friendly_id'
+gem 'redis-rails'
 
 group :production do
   gem 'rails_12factor'
