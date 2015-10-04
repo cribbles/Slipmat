@@ -28,6 +28,10 @@ module Api
 
     def show
       @record = Record
+                  .includes(:artist)
+                  .includes(:label)
+                  .includes(:country)
+                  .includes(:genres)
                   .includes(:tracks)
                   .includes(:comments)
                   .includes(:contributors)
