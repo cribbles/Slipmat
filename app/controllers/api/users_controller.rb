@@ -15,6 +15,8 @@ module Api
 
     def show
       @user = User
+        .includes(wantlist: :artist)
+        .includes(collection: :artist)
         .friendly
         .find(params[:id])
 
@@ -23,7 +25,10 @@ module Api
 
     def update
       if Integer(params[:id]) == current_user.id
-        @user = User.find(params[:id])
+        @user = User
+          .includes(wantlist: :artist)
+          .includes(collection: :artist)
+          .find(params[:id])
 
         if @user.update(user_update_params)
           render json: @user
