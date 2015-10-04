@@ -16,7 +16,10 @@ module Api
     end
 
     def update
-      @record = Record.find(params[:id])
+      @record = Record
+        .includes(:artist)
+        .includes(:genres)
+        .find(params[:id])
 
       if @record.update(record_update_params)
         add_contribution(@record)
@@ -28,14 +31,14 @@ module Api
 
     def show
       @record = Record
-                  .includes(:artist)
-                  .includes(:label)
-                  .includes(:country)
-                  .includes(:genres)
-                  .includes(:tracks)
-                  .includes(:comments)
-                  .includes(:contributors)
-                  .find(params[:id])
+        .includes(:artist)
+        .includes(:label)
+        .includes(:country)
+        .includes(:genres)
+        .includes(:tracks)
+        .includes(:comments)
+        .includes(:contributors)
+        .find(params[:id])
 
       render :show
     end
