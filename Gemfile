@@ -36,4 +36,5 @@ end
 
 group :development do
   gem 'spring'
+  gem 'bullet'
 end

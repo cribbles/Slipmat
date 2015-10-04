@@ -39,5 +39,14 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
+  # Paperclip
   Paperclip.options[:command_path] = "/usr/local/bin/convert"
+
+  # Bullet
+  Bullet.enable = true
+  Bullet.alert = true
+  Bullet.bullet_logger = true
+  Bullet.rails_logger = true
+  Bullet.console = true
+  Bullet.add_footer = true
 end
