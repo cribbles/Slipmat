@@ -27,8 +27,8 @@ module Api
 
     def show
       @artist = Artist
-        .includes(:records)
         .includes(:comments)
+        .includes(:contributors)
         .find(params[:id])
 
       @records = @artist
@@ -40,7 +40,6 @@ module Api
 
     def index
       @artists = Artist
-        .includes(:records)
         .order(created_at: :desc)
         .page(params[:page])
 

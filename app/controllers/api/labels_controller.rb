@@ -27,13 +27,13 @@ module Api
 
     def show
       @label = Label
-        .includes(:records)
+        .includes(records: :artist)
         .includes(:comments)
+        .includes(:contributors)
         .find(params[:id])
 
       @records = @label
         .records
-        .includes(:artist)
         .page(params[:page])
 
       render :show
