@@ -3,6 +3,11 @@ module Api
 
     def show
       if signed_in?
+        @user = User
+          .includes(wantlist: :artist)
+          .includes(collection: :artist)
+          .find(current_user.id)
+
         render :show
       else
         render json: {}, status: 422
