@@ -15,16 +15,19 @@ module Api
     end
 
     def create
-      user = User.find_by_credentials(
+      @user = User
+        .includes(wantlist: :artist)
+        .includes(collection: :artist)
+        .find_by_credentials(
         params[:user][:username],
         params[:user][:password]
       )
 
-      if user.nil?
+      if @user.nil?
         response = ["Couldn't find a user with that username or password."]
         render json: response, status: 422
       else
-        sign_in!(user)
+        sign_in!(@user)
         render :show
       end
     end
