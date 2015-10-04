@@ -28,10 +28,9 @@ module Api
 
     def show
       @record = Record
+                  .includes(:tracks)
                   .includes(:comments)
                   .includes(:contributors)
-                  .includes(:collected)
-                  .includes(:wanted)
                   .find(params[:id])
 
       render :show
