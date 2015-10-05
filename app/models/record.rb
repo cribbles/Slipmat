@@ -41,7 +41,7 @@ class Record < ActiveRecord::Base
   }
 
   scope :find_by_user, -> (user) {
-    find_by_sql([<<-SQL, user.id])
+    find_by_sql([<<-SQL, user.id, user.id])
       SELECT
         records.* AS wantlist,
         'wantlist' AS list_type,
@@ -57,7 +57,7 @@ class Record < ActiveRecord::Base
       JOIN
         artists ON artists.id = records.artist_id
       WHERE
-        users.id = 6
+        users.id = ?
       UNION ALL
       SELECT
         records.* AS collection,
@@ -108,9 +108,7 @@ class Record < ActiveRecord::Base
   def artist_name=(artist_name)
     artist = Artist
       .where("lower(name) = ?", artist_name.downcase)
-      .first_or_create do |artist|
-        artist.name = artist_name.downcase
-      end
+      .first_or_create { |artist| artist.name = artist_name.downcase }
 
     self.artist_id = artist.id
   end
@@ -118,9 +116,7 @@ class Record < ActiveRecord::Base
   def label_name=(label_name)
     label = Label
       .where("lower(title) = ?", label_name.downcase)
-      .first_or_create do |label|
-        label.title = label_name.downcase
-      end
+      .first_or_create { |label| label.title = label_name.downcase }
 
     self.label_id = label.id
   end
