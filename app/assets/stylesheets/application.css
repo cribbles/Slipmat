@@ -1365,12 +1365,13 @@ textarea.highlight {
 }
 
 .tracklist-container > .track > .title {
-  width: 82%;
+  width: 83%;
 }
 
 .tracklist-container > .track > .length {
-  width: 8%;
+  width: 6%;
   right: 3px;
+  text-align: right;
 }
 
 .record-main > .notes > p {
