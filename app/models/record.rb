@@ -6,11 +6,11 @@ class Record < ActiveRecord::Base
   belongs_to :label
   belongs_to :country
 
+  delegate :name, to: :artist, prefix: true
   multisearchable against: [:title, :artist_name], using: {
                     tsearch: { prefix: true },
                     trigram: { threshold: 0.3 }
-                  }
-  delegate :name, to: :artist, prefix: true
+  }
 
   has_many :user_collections
   has_many :collected, through: :user_collections, source: :user
@@ -86,7 +86,7 @@ class Record < ActiveRecord::Base
     offset = 30 * (page - 1).to_i
 
     Kaminari.paginate_array(
-      Record.find_by_sql([<<-SQL, offset]), total_count: Record.count
+      find_by_sql([<<-SQL, offset]), total_count: Record.count
         SELECT
           records.*,
           artists.id AS a_id,
@@ -106,7 +106,7 @@ class Record < ActiveRecord::Base
   }
 
   def self.find_with_associated(id)
-    Record
+    self
       .includes(:genres)
       .includes(:tracks)
       .includes(comments: :author)
