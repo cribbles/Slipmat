@@ -18,11 +18,21 @@ wantlist = records.select { |record| record.list_type == "wantlist" }
 collection = records.select { |record| record.list_type == "collection" }
 
 json.wantlist do
-  json.partial! 'api/records/records', records: wantlist
+  json.partial!(
+    'api/records/records',
+    records: Kaminari
+      .paginate_array(wantlist, total_count: wantlist.count)
+      .page(params[:page])
+  )
 end
 
 json.collection do
-  json.partial! 'api/records/records', records: collection
+  json.partial!(
+    'api/records/records',
+    records: Kaminari
+      .paginate_array(collection, total_count: collection.count)
+      .page(params[:page])
+  )
 end
 
 associations = []
