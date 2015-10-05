@@ -6,6 +6,7 @@ module Api
       @user = User.new(user_params)
 
       if @user.save
+        @records = Record.find_by_user(@user)
         sign_in!(@user)
         render :show
       else
@@ -14,21 +15,16 @@ module Api
     end
 
     def show
-      @user = User
-        .includes(wantlist: :artist)
-        .includes(collection: :artist)
-        .friendly
-        .find(params[:id])
+      @user = User.friendly.find(params[:id])
+      @records = Record.find_by_user(@user)
 
       render :show
     end
 
     def update
       if Integer(params[:id]) == current_user.id
-        @user = User
-          .includes(wantlist: :artist)
-          .includes(collection: :artist)
-          .find(params[:id])
+        @user = User.find(params[:id])
+        @records = Record.find_by_user(@user)
 
         if @user.update(user_update_params)
           render json: @user

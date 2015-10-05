@@ -1,1 +1,1 @@
-json.partial! "api/users/user", user: @user
+json.partial! "user", locals: { user: @user, records: @records }

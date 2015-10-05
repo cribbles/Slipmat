@@ -44,10 +44,7 @@ module Api
     end
 
     def index
-      @records = Record
-        .includes(:artist)
-        .order(created_at: :desc)
-        .page(params[:page])
+      @records = Record.indexed(params[:page])
 
       render :index
     end

@@ -3,10 +3,8 @@ module Api
 
     def show
       if signed_in?
-        @user = User
-          .includes(wantlist: :artist)
-          .includes(collection: :artist)
-          .find(current_user.id)
+        @user = User.find(current_user.id)
+        @records = Record.find_by_user(current_user)
 
         render :show
       else
@@ -15,10 +13,7 @@ module Api
     end
 
     def create
-      @user = User
-        .includes(wantlist: :artist)
-        .includes(collection: :artist)
-        .find_by_credentials(
+      @user = User.find_by_credentials(
         params[:user][:username],
         params[:user][:password]
       )
@@ -28,6 +23,7 @@ module Api
         render json: response, status: 422
       else
         sign_in!(@user)
+        @records = Record.find_by_user(current_user)
         render :show
       end
     end

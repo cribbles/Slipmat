@@ -14,32 +14,35 @@ json.image asset_path(user.image.url)
 json.num_comments user.comments_count
 json.num_contributions user.user_contributions_count
 
-associations = [];
+wantlist = records.select { |record| record.list_type == "wantlist" }
+collection = records.select { |record| record.list_type == "collection" }
 
 json.wantlist do
-  json.partial! 'api/records/records', records: user.wantlist.page(params[:page])
-end
-
-user.user_wants.each do |want|
-  assocation = {
-    id: want.id,
-    record_id: want.record_id,
-    type: :want
-  }
-  associations << assocation
+  json.partial! 'api/records/records', records: wantlist
 end
 
 json.collection do
-  json.partial! 'api/records/records', records: user.collection.page(params[:page])
+  json.partial! 'api/records/records', records: collection
 end
 
-user.user_collections.each do |want|
-  assocation = {
-    id: want.id,
-    record_id: want.record_id,
+associations = []
+
+wantlist.each do |record|
+  association = {
+    id: record.list_id,
+    record_id: record.id,
+    type: :want
+  }
+  associations << association
+end
+
+collection.each do |record|
+  association = {
+    id: record.list_id,
+    record_id: record.id,
     type: :collection
   }
-  associations << assocation
+  associations << association
 end
 
 json.associations associations
