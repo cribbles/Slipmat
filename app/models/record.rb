@@ -30,6 +30,9 @@ class Record < ActiveRecord::Base
   has_attached_file :image, default_url: "default-record.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
+  validates :title, presence: true
+  validates :artist_id, presence: true
+
   scope :find_by_country, -> (country) {
      joins(:country)
     .where("LOWER(countries.name) = ?", country.downcase)
@@ -102,8 +105,33 @@ class Record < ActiveRecord::Base
     ).page(page)
   }
 
-  validates :title, presence: true
-  validates :artist_id, presence: true
+  def self.find_with_associated(id)
+    Record
+      .includes(:genres)
+      .includes(:tracks)
+      .includes(comments: :author)
+      .includes(:contributors)
+      .find_by_sql([<<-SQL, id.to_i]).first
+       SELECT
+         records.*,
+         artists.id AS a_id,
+         artists.name AS a_name,
+         labels.id AS l_id,
+         labels.title AS l_title,
+         countries.id AS c_id,
+         countries.name AS c_name
+       FROM
+         records
+       JOIN
+         artists ON artists.id = records.artist_id
+       LEFT OUTER JOIN
+         labels ON labels.id = records.label_id
+       LEFT OUTER JOIN
+         countries ON countries.id = records.country_id
+       WHERE
+         records.id = ?
+      SQL
+  end
 
   def artist_name=(artist_name)
     artist = Artist

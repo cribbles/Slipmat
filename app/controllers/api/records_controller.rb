@@ -30,17 +30,13 @@ module Api
     end
 
     def show
-      @record = Record
-        .includes(:artist)
-        .includes(:label)
-        .includes(:country)
-        .includes(:genres)
-        .includes(:tracks)
-        .includes(:comments)
-        .includes(:contributors)
-        .find(params[:id])
+      @record = Record.find_with_associated(params[:id])
 
-      render :show
+      if @record
+        render :show
+      else
+        render json: {}, status: 404
+      end
     end
 
     def index

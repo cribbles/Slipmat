@@ -10,8 +10,8 @@ json.extract!(
 )
 
 json.artist do
-  json.id @record.artist.id
-  json.name @record.artist.name
+  json.id @record.a_id
+  json.name @record.a_name
 end
 
 json.genres @record.genres, partial: "api/genres/genre", as: :genre
@@ -26,17 +26,17 @@ if @record.tracks
   )
 end
 
-if @record.label
+if @record.l_id
   json.label do
-    json.id @record.label.id
-    json.title @record.label.title
+    json.id @record.l_id
+    json.title @record.l_title
   end
 end
 
-if @record.country
+if @record.c_id
   json.country do
-    json.id @record.country.id
-    json.name @record.country.name
+    json.id @record.c_id
+    json.name @record.c_name
   end
 end
 
