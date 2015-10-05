@@ -1365,11 +1365,11 @@ textarea.highlight {
 }
 
 .tracklist-container > .track > .title {
-  width: 85%;
+  width: 82%;
 }
 
 .tracklist-container > .track > .length {
-  width: 5%;
+  width: 8%;
   right: 3px;
 }
 
