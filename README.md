@@ -60,16 +60,15 @@ I took great care to ensure correspondence between Backbone routes and API
 endpoints. If you're on a page that displays data, you can replace the `#` in
 the URI fragment at any time with `api` to see what's being served up for a
 given view. This includes [search](http://slipmat.xyz/api/search?query=jackson)
-and
-[sort](http://slipmat.xyz/api/records/search?year=1991&genre=rock&country=United%20States)
-results.
+and [sort](http://slipmat.xyz/api/records/search?genre=Electronic) results.
 
 Many API responses handle nested data and associations. I made extensive use of
 jbuilder to manage these. Nearly all Backbone models override the `parse` method
 to keep track of nested associations.
 
 I used Rails's counter caching and eager loading to optimize data retreival. API
-responses are structured to prevent N+1 queries.
+responses are structured to prevent N+1 queries. I used model scoping with
+`find_by_sql` as needed to minimize database fetching and keep controllers slim.
 
 I structured user comments and contributions as polymorphic associations in
 order to prevent bloat. This greatly reduced the overhead for my Rails models
