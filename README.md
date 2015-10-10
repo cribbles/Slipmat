@@ -46,7 +46,7 @@ You can:
 Slipmat provides an robust interface for browsing, searching, and sorting
 records, artists, and labels. It features:
 - Live search results in the header search bar
-- Global search indices for records, artists, and labels
+- Global, weighted search index for records, artists, and labels
 - Stackable category filtering for records
   - Sort by year, genre, or country
 - Tabbed and paginated index for records, artists, and labels
