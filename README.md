@@ -32,8 +32,7 @@ from the ground up as a single-page application.
 
 ## What can I do on this website?
 
-Slipmat provides a hand-rolled Rails user auth system managed entirely through
-Backbone. You can:
+You can:
 - Securely create an account
 - Log in using Facebook or Google
 - Edit your own profile

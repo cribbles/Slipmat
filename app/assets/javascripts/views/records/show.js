@@ -102,7 +102,6 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
   },
 
   _toggleButton: function ($button, action) {
-    debugger
     $button.data("action", action);
 
     var listType = $button.attr("id");
