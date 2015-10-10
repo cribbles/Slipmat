@@ -148,9 +148,7 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
 
   removeFromList: function (listType, record, callback) {
     var list = this._getListFromType(listType);
-    var id = list.findWhere(function (assoc) {
-      return assoc.record_id === record.id;
-    }).get("list_id");
+    var id = list.get(record.id).get("list_id");
 
     $.ajax({
       url: "/api/user_" + listType + "s/" + id,
