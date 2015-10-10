@@ -139,7 +139,7 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
       dataType: "json",
       data: { record_id: record.id },
       success: function (data) {
-        listRecord = record.clone().set({ list_id: data.list_id });
+        var listRecord = record.clone().set({ list_id: data.list_id });
         list.add(listRecord);
         callback && callback();
       }
