@@ -157,7 +157,7 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
       type: "DELETE",
       dataType: "json",
       success: function () {
-        list.remove(record);
+        list.remove(record.id);
         callback && callback();
       }
     });
