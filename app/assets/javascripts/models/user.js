@@ -21,10 +21,6 @@ Slipmat.Models.User = Backbone.Model.extend({
       this._image = payload.image;
       delete payload.image;
     }
-    if (payload.associations) {
-      this._associations = payload.associations;
-      delete payload.associations;
-    }
     if (payload.num_comments) {
       this._num_comments = payload.num_comments;
       delete payload.num_comments;
@@ -56,12 +52,6 @@ Slipmat.Models.User = Backbone.Model.extend({
       this._image = Slipmat.defaultUserImg;
     }
     return this._image;
-  },
-
-  associations: function () {
-    this._associations = this._associations || [];
-
-    return this._associations;
   },
 
   numComments: function () {
@@ -141,50 +131,44 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
   },
 
   addToList: function (listType, record, callback) {
-    var list, collection;
-    var associations = this.associations();
-    var relationship = {
-      user_id: this.id,
-      record_id: record.id
-    }
+    var list = this._getListFromType(listType);
 
-    if (listType === "collection") {
-      list = new Slipmat.Models.UserCollection();
-      collection = this.collectedRecords();
-    } else if (listType === "want") {
-      list = new Slipmat.Models.UserWant();
-      collection = this.wantedRecords();
-    }
-
-    list.save(relationship, {
+    $.ajax({
+      url: "/api/user_" + listType + "s",
+      type: "POST",
+      dataType: "json",
+      data: { record_id: record.id },
       success: function (data) {
-        var association = data.attributes;
-
-        collection.add(record);
-        associations.push(association);
+        listRecord = record.clone().set({ list_id: data.list_id });
+        list.add(listRecord);
         callback && callback();
       }
     });
   },
 
   removeFromList: function (listType, record, callback) {
-    var id = this.associations().find(function (assoc) {
-      return assoc.record_id === record.id && assoc.type === listType;
-    }).id;
-
-    var index = this.associations().findIndex(function (assoc) {
-      return assoc.id === id
-    });
-    this._associations.splice(index, 1);
+    var list = this._getListFromType(listType);
+    var id = list.findWhere(function (assoc) {
+      return assoc.record_id === record.id;
+    }).get("list_id");
 
     $.ajax({
       url: "/api/user_" + listType + "s/" + id,
       type: "DELETE",
       dataType: "json",
       success: function () {
+        list.remove(record);
         callback && callback();
       }
     });
+  },
+
+  _getListFromType: function (listType) {
+    if (listType === "collection") {
+      return this.collectedRecords();
+    } else if (listType === "want") {
+      return this.wantedRecords();
+    }
   },
 
   _signInCallback: function () {

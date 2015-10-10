@@ -8,8 +8,7 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
     this.router = options.router;
     this.trackTemplate = JST["tracks/_track"];
 
-    this.listenTo(this.model, "sync change", this.render);
-    this.listenTo(Slipmat.currentUser, "sync", this.toggleListButtons);
+    this.listenTo(this.model, "sync", this.render);
   },
 
   events: {
@@ -67,21 +66,18 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
     var $collect = this.$("button#collection");
     var wantlist = Slipmat.currentUser.wantedRecords();
     var collection = Slipmat.currentUser.collectedRecords();
+    var wantAction = (wantlist.hasRecord(this.model) ? "remove" : "add");
+    var collectAction = (collection.hasRecord(this.model) ? "remove" : "add");
 
-    if (collection) {
-      var action = (collection.hasRecord(this.model) ? "remove" : "add");
-      this._toggleButton($collect, action);
-    }
-    if (wantlist) {
-      var action = (wantlist.hasRecord(this.model) ? "remove" : "add");
-      this._toggleButton($want, action);
-    }
+    this._toggleButton($want, wantAction);
+    this._toggleButton($collect, collectAction);
   },
 
   toggleList: function (e) {
     e.preventDefault();
     if (!this._ensureSignedIn()) { return; }
 
+    var callback;
     var view = this;
     var $el = $(e.currentTarget);
     var list = $el.attr("id");
@@ -89,14 +85,14 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
     var action = $el.data("action");
 
     if (action === "add") {
-      var callback = function () {
+      callback = function () {
         var newCount = Number(listCount.text()) + 1;
         listCount.html(newCount);
         view._toggleButton($el, "remove");
       }
       Slipmat.currentUser.addToList(list, view.model, callback);
     } else if (action === "remove") {
-      var callback = function () {
+      callback = function () {
         var newCount = Number(listCount.text()) - 1;
         listCount.html(newCount);
         view._toggleButton($el, "add");
@@ -106,6 +102,7 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
   },
 
   _toggleButton: function ($button, action) {
+    debugger
     $button.data("action", action);
 
     var listType = $button.attr("id");

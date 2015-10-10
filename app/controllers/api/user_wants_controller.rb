@@ -2,15 +2,14 @@ module Api
   class UserWantsController < ApplicationController
 
     def create
-      if uw_params[:user_id] == current_user.id
-        @want = UserWant.new(uw_params)
-        if @want.save
-          render :show
-        else
-          render json: @want.errors.full_messages, status: 422
-        end
+      @want = UserWant.new(
+        user_id: current_user.id,
+        record_id: params[:record_id]
+      )
+      if @want.save
+        render json: { list_id: @want.id }
       else
-        head :forbidden
+        render json: @want.errors.full_messages, status: 422
       end
     end
 
@@ -27,14 +26,6 @@ module Api
 
     def show
       @want = UserWant.find(params[:id])
-    end
-
-    private
-
-    def uw_params
-      params
-        .require(:user_want)
-        .permit(:user_id, :record_id)
     end
   end
 end

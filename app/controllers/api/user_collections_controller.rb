@@ -2,16 +2,14 @@ module Api
   class UserCollectionsController < ApplicationController
 
     def create
-      if uc_params[:user_id] == current_user.id
-        @collection = UserCollection.new(uc_params)
-
-        if @collection.save
-          render :show
-        else
-          render json: @collection.errors.full_messages, status: 422
-        end
+      @collection = UserCollection.new(
+        user_id: current_user.id,
+        record_id: params[:record_id]
+      )
+      if @collection.save
+        render json: { list_id: @collection.id }
       else
-        head :forbidden
+        render json: @collection.errors.full_messages, status: 422
       end
     end
 
@@ -28,14 +26,6 @@ module Api
 
     def show
       @collection = UserCollection.find(params[:id])
-    end
-
-    private
-
-    def uc_params
-      params
-        .require(:user_collection)
-        .permit(:user_id, :record_id)
     end
   end
 end

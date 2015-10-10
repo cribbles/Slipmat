@@ -23,7 +23,6 @@ Slipmat.Views.LabelEdit = Backbone.ImageableView.extend({
 
   submit: function (e) {
     e.preventDefault();
-    debugger
 
     var view = this;
     var image = this.$("#image-form")[0].files[0];

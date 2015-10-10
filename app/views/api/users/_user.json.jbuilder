@@ -34,25 +34,3 @@ json.collection do
       .page(params[:page])
   )
 end
-
-associations = []
-
-wantlist.each do |record|
-  association = {
-    id: record.list_id,
-    record_id: record.id,
-    type: :want
-  }
-  associations << association
-end
-
-collection.each do |record|
-  association = {
-    id: record.list_id,
-    record_id: record.id,
-    type: :collection
-  }
-  associations << association
-end
-
-json.associations associations
