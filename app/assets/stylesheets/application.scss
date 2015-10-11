@@ -807,6 +807,17 @@ li:hover > a > .sidebar-item-count {
   width: 350px;
 }
 
+.modal-form {
+  position: absolute;
+  z-index: 1000;
+  top: 50%;
+  left: 50%;
+  margin-left: -175px;
+  transform: translateX(-50%), translateY(-50%);
+  width: 350px;
+  background: white;
+}
+
 .form-with-errors {
   width: 500px;
   display: none;
@@ -912,6 +923,8 @@ textarea.comment-form {
 
 input[type="text"].user-form,
 input[type="password"].user-form {
+  position: relative;
+  left: 0px;
   width: 310px;
 }
 
