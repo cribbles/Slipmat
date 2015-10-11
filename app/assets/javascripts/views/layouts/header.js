@@ -18,7 +18,7 @@ Slipmat.Views.Header = Backbone.View.extend({
     "click .search-result": "redirect",
     "blur .search": "clearSearchResults",
     "submit #search": "search",
-    "click button": "signIn",
+    "click #sign-in": "signIn",
     "click #sign-out": "signOut",
     "click #demo": "demo"
   },

@@ -2,7 +2,7 @@
 
 html, body, header, nav, h1, ul, li, div,
 a, input, textarea, button, small, select,
-main, section, footer, hr, strong, b, p,
+main, section, footer, hr, strong, b, p, i,
 table, th, tr, td, checkbox, label, section {
   margin: 0px;
   padding: 0px;
@@ -142,6 +142,26 @@ main.content {
 
 .header-search:focus, .header-search:hover {
   background: white;
+}
+
+.search-button {
+  display: block;
+  position: absolute;
+  margin-left: 308px;
+  height: 20px;
+  width: 20px;
+  background: image-url("search.svg");
+  background-size: 18px 18px;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 5px 13px 5px 0px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.search:hover > .search-button, .search:focus > .search-button {
+  opacity: 0.7;
 }
 
 .search-results {
@@ -906,7 +926,7 @@ select.form {
 }
 
 select.form-mini {
-  background: white:
+  background: white;
   display: block;
   position: relative;
   bottom: 1px;
