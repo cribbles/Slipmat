@@ -137,9 +137,10 @@ main.content {
   width: 100%;
   float: left;
   padding: 2px 7px;
+  transition: 0.3s;
 }
 
-.header-search:focus {
+.header-search:focus, .header-search:hover {
   background: white;
 }
 
