@@ -64,11 +64,16 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   search: function (query) {
+    var router = this;
     var results = new Slipmat.Collections.SearchResults();
-    results.fetch({ data: query });
-    var view = new Slipmat.Views.Search({ collection: results });
 
-    this._swapView(view);
+    results.fetch({
+      data: query,
+      success: function () {
+        var view = new Slipmat.Views.Search({ collection: results });
+        router._swapView(view);
+      }
+    });
   },
 
   recordsIndex: function (query) {
