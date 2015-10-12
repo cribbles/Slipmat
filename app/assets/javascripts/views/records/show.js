@@ -79,36 +79,37 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
 
     var callback;
     var view = this;
-    var $el = $(e.currentTarget);
-    var list = $el.attr("id");
+    var $button = $(e.currentTarget);
+    var list = $button.attr("id");
+    var action = $button.data("action");
     var listCount = this.$("#" + list + "Count");
-    var action = $el.data("action");
+    var count = Number(listCount.text());
 
     if (action === "add") {
       callback = function () {
-        var newCount = Number(listCount.text()) + 1;
-        listCount.html(newCount);
-        view._toggleButton($el, "remove");
+        listCount.html(++count);
+        view._toggleButton($button, "remove");
       }
       Slipmat.currentUser.addToList(list, view.model, callback);
     } else if (action === "remove") {
       callback = function () {
-        var newCount = Number(listCount.text()) - 1;
-        listCount.html(newCount);
-        view._toggleButton($el, "add");
+        listCount.html(--count);
+        view._toggleButton($button, "add");
       }
       Slipmat.currentUser.removeFromList(list, view.model, callback);
     }
+    $button.prop("disabled", true);
   },
 
   _toggleButton: function ($button, action) {
-    $button.data("action", action);
-
     var listType = $button.attr("id");
     var prependText = (action === "add" ? "Add to" : "Remove from");
     var appendText = (listType === "want" ? "Wantlist" : "Collection");
 
-    $button.text(prependText + " " + appendText);
+    $button
+      .data("action", action)
+      .text(prependText + " " + appendText)
+      .prop("disabled", false);
   },
 
   _addTrack: function (track) {
