@@ -96,7 +96,6 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
     var i,
         track,
         content = JST["tracks/form"](),
-        $el = this.$(".tracks-container"),
         numTracks = this.model.tracks().length || 4,
         tracks = _.sortBy(this.model.tracks(), function (track) {
           return track.ord;
@@ -109,7 +108,7 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
       track = tracks[i] || {};
       this._addTrack(track);
     }
-    $el.sortable({ handle: "small" });
+    this.$(".tracks-container").sortable({ handle: "small" });
   },
 
   addTrack: function (e) {
