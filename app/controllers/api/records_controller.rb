@@ -18,7 +18,6 @@ module Api
     def update
       @record = Record
         .includes(:artist)
-        .includes(:genres)
         .find(params[:id])
 
       if @record.update(record_update_params)
