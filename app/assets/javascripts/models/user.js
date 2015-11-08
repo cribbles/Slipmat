@@ -80,10 +80,11 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
     options = options || {};
     options.success = options.success || this._signInCallback;
 
-    var credentials = {
-      "user[username]": options.username,
-      "user[password]": options.password
-    };
+    var parsed,
+        credentials = {
+          "user[username]": options.username,
+          "user[password]": options.password
+        };
 
     $.ajax({
       url: this.url,
@@ -91,7 +92,7 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
       data: credentials,
       dataType: "json",
       success: function (attributes) {
-        var parsed = this.parse(attributes);
+        parsed = this.parse(attributes);
         this.set(parsed);
         options.success && options.success(attributes);
       }.bind(this),
@@ -131,7 +132,8 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
   },
 
   addToList: function (listType, record, callback) {
-    var list = this._getListFromType(listType);
+    var listRecord,
+        list = this._getListFromType(listType);
 
     $.ajax({
       url: "/api/user_" + listType + "s",
@@ -139,7 +141,7 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
       dataType: "json",
       data: { record_id: record.id },
       success: function (data) {
-        var listRecord = record.clone().set({ list_id: data.list_id });
+        listRecord = record.clone().set({ list_id: data.list_id });
         list.add(listRecord);
         callback && callback();
       }
@@ -147,8 +149,8 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
   },
 
   removeFromList: function (listType, record, callback) {
-    var list = this._getListFromType(listType);
-    var id = list.get(record.id).get("list_id");
+    var list = this._getListFromType(listType),
+        id = list.get(record.id).get("list_id");
 
     $.ajax({
       url: "/api/user_" + listType + "s/" + id,

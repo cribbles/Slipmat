@@ -4,6 +4,8 @@ window.Slipmat = {
   Views: {},
   Routers: {},
   initialize: function() {
+    var router, header, footer;
+
     this.currentUser = new Slipmat.Models.CurrentUser();
     this.currentUser.fetch();
 
@@ -17,12 +19,12 @@ window.Slipmat = {
       });
     });
 
-    var header = new Slipmat.Views.Header();
+    header = new Slipmat.Views.Header();
+    footer = new Slipmat.Views.Footer();
     $("body").prepend(header.render().$el);
-    var footer = new Slipmat.Views.Footer();
     $("body").append(footer.render().$el);
 
-    var router = new Slipmat.Routers.Router({
+    router = new Slipmat.Routers.Router({
       $rootEl: $("main.content"),
       records: new Slipmat.Collections.Records(),
       artists: new Slipmat.Collections.Artists(),
@@ -34,6 +36,6 @@ window.Slipmat = {
   }
 };
 
-$(document).ready(function(){
+$(document).ready(function (){
   Slipmat.initialize();
 });

@@ -17,9 +17,7 @@ Slipmat.Views.Index = Backbone.PaginatableView.extend({
   },
 
   render: function () {
-    var content = this.template({
-      stats: this.collection.statistics()
-    });
+    var content = this.template({ stats: this.collection.statistics() });
     this.$el.html(content);
     this.selectTab();
     this.renderCollection();
@@ -49,12 +47,14 @@ Slipmat.Views.Index = Backbone.PaginatableView.extend({
   },
 
   renderSubviews: function () {
-    this.$(".content-records").empty();
+    var content,
+        view = this,
+        $el = this.$(".content-records");
 
-    var view = this;
-    view.collection.forEach(function(record) {
-      var content = view.subview({ model: record });
-      view.$(".content-records").append(content);
+    $el.empty();
+    this.collection.forEach(function (record) {
+      content = view.subview({ model: record });
+      $el.append(content);
     });
   }
 

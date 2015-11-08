@@ -5,23 +5,21 @@ Slipmat.Models.Record = Backbone.Model.extend({
   subview: JST["records/_record"],
 
   parse: function (payload) {
-    var record = this;
-
-    var associations = [
-      "artist",
-      "label"
-    ];
-
-    var attributes = [
-      "image",
-      "country",
-      "genres",
-      "tracks",
-      "comments",
-      "contributors",
-      "num_collected",
-      "num_wanted"
-    ];
+    var record = this,
+        associations = [
+          "artist",
+          "label"
+        ],
+        attributes = [
+          "image",
+          "country",
+          "genres",
+          "tracks",
+          "comments",
+          "contributors",
+          "num_collected",
+          "num_wanted"
+        ];
 
     associations.forEach(function (association) {
       if (payload[association]) {
@@ -41,8 +39,10 @@ Slipmat.Models.Record = Backbone.Model.extend({
   },
 
   save: function (key, val, options) {
+    var year;
+
     if (key.record && key.record.year) {
-      var year = Number(key.record.year);
+      year = Number(key.record.year);
       if (!year) {
         delete key.record.year;
       } else {

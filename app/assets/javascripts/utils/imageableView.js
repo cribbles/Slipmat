@@ -3,12 +3,11 @@ Backbone.ImageableView = Backbone.View.extend({
   submitImage: function (options) {
     var image = options.image,
         param = options.param,
-        model = options.model;
+        model = options.model,
+        formData = new FormData();
+
     if (!image) { return; }
-
-    var formData = new FormData();
     formData.append(param, image);
-
     $.ajax({
       url: _.result(model, "url"),
       type: "PATCH",
@@ -28,13 +27,13 @@ Backbone.ImageableView = Backbone.View.extend({
 
   replaceFormImage: function (e) {
     e.preventDefault();
-    var files = e.currentTarget.files
+    var files = e.currentTarget.files,
+        reader = new FileReader();
     if (!files || !files.length) { return; }
 
-    var reader = new FileReader();
     reader.onload = function (readerEvent) {
       $("#form-image").attr("src", readerEvent.target.result);
-    }
+    };
     reader.readAsDataURL(files[0]);
   }
 

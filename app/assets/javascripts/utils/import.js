@@ -11,11 +11,12 @@ Slipmat.Import.import = function (id) {
       Slipmat.Import.parse(payload);
     }
   });
-}
+};
 
 Slipmat.Import.parse = function (payload) {
-  var record = new Slipmat.Models.Record();
-  var artist_name = payload.artists[0].name;
+  var newTrack,
+      record = new Slipmat.Models.Record(),
+      artist_name = payload.artists[0].name;
 
   record.attributes.record = {
     artist_name: artist_name,
@@ -30,7 +31,7 @@ Slipmat.Import.parse = function (payload) {
   };
 
   payload.tracklist.forEach(function (track) {
-    var newTrack = {
+    newTrack = {
       duration: track.duration,
       position: track.position,
       title: track.title
@@ -44,13 +45,13 @@ Slipmat.Import.parse = function (payload) {
       Slipmat.Import.fetchImage(model, artist_name);
     }
   });
-}
+};
 
 Slipmat.Import.fetchImage = function (model, artist_name) {
-  var recordId = model.id;
-  var token = Slipmat.discogsUserToken;
-  var escapedTitle = model.get("title").replace(/ /g, "+");
-  var url = "https://api.discogs.com/database/search?artist=";
+  var recordId = model.id,
+      token = Slipmat.discogsUserToken,
+      escapedTitle = model.get("title").replace(/ /g, "+"),
+      url = "https://api.discogs.com/database/search?artist=";
   url += artist_name + "&title=" + escapedTitle + "&token=" + token;
 
   $.ajax({
@@ -61,7 +62,7 @@ Slipmat.Import.fetchImage = function (model, artist_name) {
       Slipmat.Import.patchImage(recordId, payload);
     }
   });
-}
+};
 
 Slipmat.Import.patchImage = function (recordId, payload) {
   var record = new Slipmat.Models.Record({
@@ -74,6 +75,6 @@ Slipmat.Import.patchImage = function (recordId, payload) {
       Backbone.history.navigate("//records/" + recordId);
     }
   });
-}
+};
 
 Slipmat.import = Slipmat.Import.import;

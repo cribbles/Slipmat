@@ -18,9 +18,9 @@ Slipmat.Views.SessionForm = Backbone.View.extend({
   submit: function (e) {
     e.preventDefault();
 
-    var view = this;
-    var $form = $(e.currentTarget);
-    var credentials = $form.serializeJSON();
+    var view = this,
+        $form = $(e.currentTarget),
+        credentials = $form.serializeJSON();
 
     Slipmat.currentUser.signIn({
       username: credentials.username,

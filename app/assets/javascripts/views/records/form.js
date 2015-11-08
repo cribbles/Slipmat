@@ -31,12 +31,12 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
   submit: function (e) {
     e.preventDefault();
 
-    var view = this;
-    var image = this.$("#image-form")[0].files[0];
-    var attributes = this.$el.serializeJSON();
-    var callback = function (model) {
-      Backbone.history.navigate("/records/" + model.id, { trigger: true });
-    }
+    var view = this,
+        image = this.$("#image-form")[0].files[0],
+        attributes = this.$el.serializeJSON(),
+        callback = function (model) {
+          Backbone.history.navigate("/records/" + model.id, { trigger: true });
+        };
 
     this.model.save(attributes, {
       success: function (model) {
@@ -55,51 +55,61 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
   },
 
   addCountries: function () {
-    var view = this;
+    var selected,
+        template,
+        modelCountry = this.model.country(),
+        $el = this.$("#record_country");
+
     Slipmat.countries.forEach(function (country) {
-      var selected = (country.id === view.model.country().id);
-      var template = JST["records/_formOption"]({
+      selected = (country.id === modelCountry.id);
+      template = JST["records/_formOption"]({
         id: country.id,
         attribute: country.name,
         selected: selected
       });
 
-      view.$("#record_country").append(template);
+      $el.append(template);
     });
   },
 
   addGenres: function () {
-    var view = this;
+    var checked,
+        template,
+        modelGenres = this.model.genres(),
+        $el = this.$(".genre-container");
+
     Slipmat.genres.forEach(function (genre) {
-      var checked = view.model.genres().some(function (modelGenre) {
+      checked = modelGenres.some(function (modelGenre) {
         return genre.id === modelGenre.id;
       });
 
-      var template = JST["records/_genreCheckbox"]({
+      template = JST["records/_genreCheckbox"]({
         genre: genre,
         checked: checked
       });
 
-      view.$(".genre-container").append(template);
+      $el.append(template);
     });
   },
 
   addTracks: function () {
-    var tracks = _.sortBy(this.model.tracks(), function (track) {
-      return track.ord;
-    });
+    var i,
+        track,
+        content = JST["tracks/form"](),
+        $el = this.$(".tracks-container"),
+        numTracks = this.model.tracks().length || 4,
+        tracks = _.sortBy(this.model.tracks(), function (track) {
+          return track.ord;
+        });
 
-    var content = JST["tracks/form"]();
     this.$(".tracklist-form").html(content);
 
     // display all the tracks, or some initial blank fields
-    var numTracks = this.model.tracks().length || 4;
-    for (var i = 0; i < numTracks; i++) {
-      var track = tracks[i] || {};
+    for (i = 0; i < numTracks; i++) {
+      track = tracks[i] || {};
       this._addTrack(track);
     }
-
-    this.$(".tracks-container").sortable({ handle: "small" });
+    $el.sortable({ handle: "small" });
   },
 
   addTrack: function (e) {
@@ -108,37 +118,40 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
   },
 
   _addTrack: function (track) {
-    var content = JST["tracks/_formItem"]({
-      item: this.sort++,
-      track: track
-    });
+    var $el = this.$(".tracks-container"),
+        content = JST["tracks/_formItem"]({
+          item: this.sort++,
+          track: track
+        });
 
-    this.$(".tracks-container").append(content);
+    $el.append(content);
   },
 
   removeTrack: function (e) {
     e.preventDefault();
 
-    var $track = $(e.currentTarget).parents(".tracklist-form-track");
+    var $_destroy,
+        $track = $(e.currentTarget).parents(".tracklist-form-track");
 
     if (this.model.isNew()) {
       $track.remove();
     } else {
-      var $_destroy = $('<input type="hidden">')
+      $_destroy = $('<input type="hidden">')
         .attr("name", "record[tracks_attributes][][_destroy]")
         .attr("value", "true");
 
-      $track.hide();
-      $track.append($_destroy);
+      $track.hide().append($_destroy);
     }
   },
 
   updateTracklistOrder: function () {
-    var order = this.$(".tracks-container").sortable("toArray");
+    var i,
+        $input,
+        order = this.$(".tracks-container").sortable("toArray");
 
-    for (var i = 0; i < order.length; i++) {
-      var input = this.$("input.track-ord")[i];
-      $(input).val(i + 1);
+    for (i = 0; i < order.length; i++) {
+      $input = this.$("input.track-ord")[i];
+      $($input).val(i + 1);
     }
   }
 

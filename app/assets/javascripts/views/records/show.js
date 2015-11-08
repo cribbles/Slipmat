@@ -24,25 +24,28 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
       $textarea = $('<textarea class="form comment-form">');
       this.$("#new-comment").prepend($textarea);
     }
+
     this.renderGenres();
     this.renderTracks();
     this.listContributors();
     this.renderComments();
     this.toggleListButtons();
-
     return this;
   },
 
   renderGenres: function () {
-    var genres = this.model.genres();
+    var genre,
+        fragment,
+        $genre,
+        genres = this.model.genres(),
+        $genres = this.$("#genres .value");
+
     if (!genres.length) { return; }
 
-    var $genres = this.$("#genres .value");
     for (var i = 0; i < genres.length; i++) {
-      var genre = genres[i].name;
-      var genreFragment = window.encodeURIComponent(genre);
-      var fragment = "#/records/search?genre=" + genreFragment;
-      var $genre = $('<a href="' + fragment + '">').text(genre);
+      genre = genres[i].name;
+      fragment = "#/records/search?genre=" + window.encodeURIComponent(genre);
+      $genre = $('<a href="' + fragment + '">').text(genre);
       $genres.append($genre);
 
       if (i + 1 < genres.length) { $genres.append(", "); }
@@ -50,24 +53,21 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
   },
 
   renderTracks: function () {
-    var view = this;
-    var tracks = this.model.tracks();
+    var view = this, tracks = this.model.tracks();
     if (!tracks.length) { return; }
 
-    tracks.forEach(function (track) {
-      view._addTrack(track);
-    });
+    tracks.forEach(function (track) { view._addTrack(track); });
   },
 
   toggleListButtons: function () {
     if (!Slipmat.currentUser.isSignedIn()) { return; }
 
-    var $want = this.$("button#want");
-    var $collect = this.$("button#collection");
-    var wantlist = Slipmat.currentUser.wantedRecords();
-    var collection = Slipmat.currentUser.collectedRecords();
-    var wantAction = (wantlist.hasRecord(this.model) ? "remove" : "add");
-    var collectAction = (collection.hasRecord(this.model) ? "remove" : "add");
+    var $want = this.$("button#want"),
+        $collect = this.$("button#collection"),
+        wantlist = Slipmat.currentUser.wantedRecords(),
+        collection = Slipmat.currentUser.collectedRecords(),
+        wantAction = (wantlist.hasRecord(this.model) ? "remove" : "add"),
+        collectAction = (collection.hasRecord(this.model) ? "remove" : "add");
 
     this._toggleButton($want, wantAction);
     this._toggleButton($collect, collectAction);
@@ -77,34 +77,34 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
     e.preventDefault();
     if (!this._ensureSignedIn()) { return; }
 
-    var callback;
-    var view = this;
-    var $button = $(e.currentTarget);
-    var list = $button.attr("id");
-    var action = $button.data("action");
-    var listCount = this.$("#" + list + "Count");
-    var count = Number(listCount.text());
+    var callback,
+        view = this,
+        $button = $(e.currentTarget),
+        list = $button.attr("id"),
+        action = $button.data("action"),
+        listCount = this.$("#" + list + "Count"),
+        count = Number(listCount.text());
 
     if (action === "add") {
       callback = function () {
         listCount.html(++count);
         view._toggleButton($button, "remove");
-      }
+      };
       Slipmat.currentUser.addToList(list, view.model, callback);
     } else if (action === "remove") {
       callback = function () {
         listCount.html(--count);
         view._toggleButton($button, "add");
-      }
+      };
       Slipmat.currentUser.removeFromList(list, view.model, callback);
     }
     $button.prop("disabled", true);
   },
 
   _toggleButton: function ($button, action) {
-    var listType = $button.attr("id");
-    var prependText = (action === "add" ? "Add to" : "Remove from");
-    var appendText = (listType === "want" ? "Wantlist" : "Collection");
+    var listType = $button.attr("id"),
+        prependText = (action === "add" ? "Add to" : "Remove from"),
+        appendText = (listType === "want" ? "Wantlist" : "Collection");
 
     $button
       .data("action", action)

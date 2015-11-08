@@ -21,8 +21,8 @@ Slipmat.Views.RecordSearch = Backbone.PaginatableView.extend({
   },
 
   renderHeader: function () {
-    var headerText;
-    var sort = this.collection._sort;
+    var headerText,
+        sort = this.collection._sort;
 
     if (!sort) {
       headerText = "Search Results";
@@ -34,12 +34,14 @@ Slipmat.Views.RecordSearch = Backbone.PaginatableView.extend({
   },
 
   renderSubviews: function () {
-    this.$(".content-records").empty();
+    var content,
+        view = this,
+        $el = this.$(".content-records");
 
-    var view = this;
-    view.collection.forEach(function(model) {
-      var content = model.subview({ model: model });
-      view.$(".content-records").append(content);
+    $el.empty();
+    view.collection.forEach(function (model) {
+      content = model.subview({ model: model });
+      $el.append(content);
     });
   }
 

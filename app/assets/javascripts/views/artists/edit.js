@@ -24,13 +24,13 @@ Slipmat.Views.ArtistEdit = Backbone.ImageableView.extend({
   submit: function (e) {
     e.preventDefault();
 
-    var view = this;
-    var image = this.$("#image-form")[0].files[0];
-    var attributes = this.$el.serializeJSON();
-    var callback = function (artist) {
-      Slipmat.currentUser.fetch();
-      Backbone.history.navigate("#/artists/" + artist.id, { trigger: true });
-    }
+    var view = this,
+        image = this.$("#image-form")[0].files[0],
+        attributes = this.$el.serializeJSON(),
+        callback = function (artist) {
+          Slipmat.currentUser.fetch();
+          Backbone.history.navigate("#/artists/" + artist.id, { trigger: true });
+        };
 
     this.model.save(attributes, {
       success: function (artist) {

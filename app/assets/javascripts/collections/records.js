@@ -39,23 +39,19 @@ Slipmat.Collections.Records = Backbone.Collection.extend({
   },
 
   getOrFetch: function (id, callback) {
-    var model = this.get(id);
-    var onSuccess = function (model) {
-      callback && callback(model);
-    }
+    var collection = this,
+        model = this.get(id),
+        onSuccess = function (model) { callback && callback(model); },
+        onError = function () { collection.remove(model); };
 
     if (model) {
       model.fetch({ success: onSuccess });
     } else {
-      var collection = this;
       model = new this.model({ id: id });
       collection.add(model);
-
       model.fetch({
         success: onSuccess,
-        error: function () {
-          collection.remove(model);
-        }
+        error: onError
       });
     }
 

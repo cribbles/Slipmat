@@ -27,11 +27,11 @@ Slipmat.Models.SearchResult = Backbone.Model.extend({
   },
 
   artist: function () {
-    var name = _.escape(this._artist.name);
-    var artist = {
-      id: this._artist.id,
-      escape: function () { return name; }
-    }
+    var name = _.escape(this._artist.name),
+        artist = {
+          id: this._artist.id,
+          escape: function () { return name; }
+        }
     return artist;
   }
 

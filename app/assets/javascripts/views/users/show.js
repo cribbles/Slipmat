@@ -16,8 +16,8 @@ Slipmat.Views.UserShow = Backbone.View.extend({
   render: function () {
     $(".profile-header").remove();
 
-    var header = this.headerTemplate({ user: this.model });
-    var content = this.template({ user: this.model });
+    var header = this.headerTemplate({ user: this.model }),
+        content = this.template({ user: this.model });
 
     this.$rootEl.before(header);
     this.$el.html(content);
@@ -49,19 +49,18 @@ Slipmat.Views.UserShow = Backbone.View.extend({
   },
 
   renderCollection: function (collection) {
-    var view = this;
-    var recordSubview = JST["records/_record"];
+    var subview,
+        recordSubview = JST["records/_record"],
+        header = JST["layouts/_paginationHeader"]({ collection: collection }),
+        footer = JST["layouts/_paginationFooter"]({ collection: collection }),
+        $el = this.$(".content-records");
 
-    var header = JST["layouts/_paginationHeader"]({ collection: collection });
     this.$(".pagination-header").html(header);
-
-    var footer = JST["layouts/_paginationFooter"]({ collection: collection });
     this.$(".pagination-footer").html(footer);
 
-    collection.each(function(record) {
-      var subview = recordSubview({ model: record });
-
-      view.$(".content-records").append(subview);
+    collection.each(function (record) {
+      subview = recordSubview({ model: record });
+      $el.append(subview);
     });
   },
 

@@ -17,9 +17,9 @@ Slipmat.Views.UserNew = Backbone.View.extend({
   submit: function (e) {
     e.preventDefault();
 
-    var view = this;
-    var $form = $(e.currentTarget);
-    var attributes = $form.serializeJSON().user;
+    var view = this,
+        $form = $(e.currentTarget),
+        attributes = $form.serializeJSON().user;
 
     this.model.save(attributes, {
       success: function (user) {

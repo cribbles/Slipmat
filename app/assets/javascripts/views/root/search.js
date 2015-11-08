@@ -13,7 +13,8 @@ Slipmat.Views.Search = Backbone.PaginatableView.extend({
   },
 
   render: function () {
-    var content = this.template();
+    var placeholder = JST["root/_nullSearchResults"](),
+        content = this.template();
     this.$el.html(content);
     this.$("h2").text("Search Results");
     this.renderPages();
@@ -21,19 +22,18 @@ Slipmat.Views.Search = Backbone.PaginatableView.extend({
     if (this.collection.length) {
       this.renderSubviews();
     } else {
-      var content = JST["root/_nullSearchResults"]();
-      this.$(".content-records").html(content);
+      this.$(".content-records").html(placeholder);
     }
     return this;
   },
 
   renderSubviews: function () {
-    this.$(".content-records").empty();
+    var content, $el = this.$(".content-records");
+    $el.empty();
 
-    var view = this;
-    view.collection.forEach(function(model) {
-      var content = model.subview({ model: model });
-      view.$(".content-records").append(content);
+    this.collection.forEach(function (model) {
+      content = model.subview({ model: model });
+      $el.append(content);
     });
   },
 

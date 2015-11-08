@@ -3,14 +3,16 @@ Backbone.PaginatableView = Backbone.View.extend({
   paginate: function (e) {
     e.preventDefault();
 
-    var $el = $(e.currentTarget);
-    if (!$el.hasClass("link")) { return; }
+    var page,
+        fragment,
+        token,
+        query = this.query || {},
+        pages = this.collection.pages(),
+        $el = $(e.currentTarget),
+        prevPage = $el.parent().hasClass("prev-page"),
+        nextPage = $el.parent().hasClass("next-page");
 
-    var page;
-    var query = this.query || {};
-    var pages = this.collection.pages();
-    var prevPage = $el.parent().hasClass("prev-page");
-    var nextPage = $el.parent().hasClass("next-page");
+    if (!$el.hasClass("link")) { return; }
 
     if (nextPage && pages.next_page) {
       page = pages.next_page;
@@ -23,10 +25,8 @@ Backbone.PaginatableView = Backbone.View.extend({
     this.collection.fetch({
       data: query,
       success: function () {
-        var fragment = Backbone.history.getFragment();
-        var fragment = fragment.replace(/(\?|\&)page=\d/, "");
-        var token = (fragment.match(/\?/) ? "&" : "?");
-
+        fragment = Backbone.history.getFragment().replace(/(\?|\&)page=\d/, "");
+        token = (fragment.match(/\?/) ? "&" : "?");
         Backbone.history.navigate(fragment + token + "page=" + page);
       }
     });
@@ -42,14 +42,12 @@ Backbone.PaginatableView = Backbone.View.extend({
 
     var header = JST["layouts/_paginationHeader"]({
       collection: this.collection
-    });
-    this.$(".pagination-header").html(header);
-
-    var footer = JST["layouts/_paginationFooter"]({
+    }), footer = JST["layouts/_paginationFooter"]({
       collection: this.collection
     });
-    this.$(".pagination-footer").html(footer);
 
+    this.$(".pagination-header").html(header);
+    this.$(".pagination-footer").html(footer);
     this.$(".page > span").on("click", this.paginate.bind(this));
   },
 

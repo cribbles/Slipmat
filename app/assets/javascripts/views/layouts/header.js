@@ -52,27 +52,27 @@ Slipmat.Views.Header = Backbone.View.extend({
   fetchSearchResults: function (e) {
     e.preventDefault();
 
-    var userInput = $(e.currentTarget).val();
-    var query = {
-      query: userInput,
-      limit: 10
-    };
+    var userInput = $(e.currentTarget).val(),
+        query = {
+          query: userInput,
+          limit: 10
+        };
 
     this.results.fetch({ data: query });
   },
 
   renderSearchResults: function () {
-    var header = this;
-    var $results = this.$(".search-results").empty();
+    var $result,
+        view = this,
+        $results = this.$(".search-results").empty(),
+        results = this.results.slice(0, 10);
 
     if (!this.results.length) {
       $results.hide();
     } else {
       $results.show();
-
-      var results = this.results.slice(0, 10);
       results.forEach(function (result) {
-        var $result = header.resultTemplate({ result: result });
+        $result = view.resultTemplate({ result: result });
         $results.append($result);
       });
     }
@@ -98,9 +98,10 @@ Slipmat.Views.Header = Backbone.View.extend({
     e.preventDefault();
     this._clearSearchResults();
 
-    var query = $(e.currentTarget).find("input").val();
-    var queryFragment = window.encodeURIComponent(query);
-    var fragment = (query.length ? "/search?query=" + queryFragment : "");
+    var query = $(e.currentTarget).find("input").val(),
+        queryFragment = window.encodeURIComponent(query),
+        fragment = (query.length ? "/search?query=" + queryFragment : "");
+
     Backbone.history.navigate(fragment, { trigger: true });
   },
 
