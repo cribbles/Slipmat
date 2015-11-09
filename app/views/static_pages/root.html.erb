@@ -5,15 +5,15 @@
   (function () {
     Slipmat.defaultUserImg = "<%= asset_path("default-user.png") %>";
     Slipmat.defaultRecordImg = "<%= asset_path("default-record.png") %>";
-    Slipmat.defaultArtistImg = "<%= asset_path("default-record.png") %>";
-    Slipmat.defaultLabelImg = "<%= asset_path("default-record.png") %>";
+    Slipmat.defaultArtistImg = "<%= asset_path("default-artist.png") %>";
+    Slipmat.defaultLabelImg = "<%= asset_path("default-label.png") %>";
     Slipmat.discogsUserToken = "<%= ENV["discogs_user_token"] %>";
 
     Slipmat._onError = function (view, errors) {
       view.$(".form-with-errors").show();
       var $errors = $(".errors").empty();
 
-      errors.forEach(function(error) {
+      errors.forEach(function (error) {
         var $error = $("<li>").text(error);
         $errors.append($error);
       });

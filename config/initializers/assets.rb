@@ -8,4 +8,17 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-# Rails.application.config.assets.precompile += %w( search.js )
+Rails.application.config.assets.precompile += %w(
+  default-user.png
+  default-record.png
+  default-artist.png
+  default-label.png
+  favicon.ico
+  favicon-16x16.png
+  favicon-32x32.png
+  favicon-96x96.png
+  search.svg
+  application.css
+  application.scss
+  application.js
+)
