@@ -1,7 +1,10 @@
 Backbone.ImageableView = Backbone.View.extend({
 
   submitImage: function (options) {
-    var image = options.image,
+    this.stopListening();
+
+    var view = this,
+        image = options.image,
         param = options.param,
         model = options.model,
         formData = new FormData();
