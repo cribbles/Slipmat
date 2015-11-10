@@ -70,7 +70,7 @@ Slipmat.Views.Header = Backbone.View.extend({
       $results.hide();
     } else {
       $results.show();
-      results.forEach((result) => {
+      results.forEach(result => {
         $result = this.resultTemplate({ result: result });
         $results.append($result);
       });

@@ -34,12 +34,10 @@ Slipmat.Views.RecordSearch = Backbone.PaginatableView.extend({
   },
 
   renderSubviews: function () {
-    var content,
-        $el = this.$(".content-records");
+    var $el = this.$(".content-records").empty();
 
-    $el.empty();
-    this.collection.forEach((model) => {
-      content = model.subview({ model: model });
+    this.collection.forEach(model => {
+      var content = model.subview({ model: model });
       $el.append(content);
     });
   }

@@ -5,7 +5,7 @@ Slipmat.Import.import = (id) => {
     url: "http://api.discogs.com/releases/" + id,
     type: "GET",
     dataType: "json",
-    success: (payload) => { Slipmat.Import.parse(payload); }
+    success: (payload) => { Slipmat.Import.parse(payload) }
   });
 };
 
@@ -26,7 +26,7 @@ Slipmat.Import.parse = (payload) => {
     tracks_attributes: []
   };
 
-  payload.tracklist.forEach((track) => {
+  payload.tracklist.forEach(track => {
     newTrack = {
       duration: track.duration,
       position: track.position,
@@ -36,7 +36,7 @@ Slipmat.Import.parse = (payload) => {
   });
 
   record.save({}, {
-    success: (model) => { Slipmat.Import.fetchImage(model, artist_name); }
+    success: (model) => { Slipmat.Import.fetchImage(model, artist_name) }
   });
 };
 
@@ -51,7 +51,7 @@ Slipmat.Import.fetchImage = (model, artist_name) => {
     url: url,
     type: "GET",
     dataType: "json",
-    success: (payload) => { Slipmat.Import.patchImage(recordId, payload); }
+    success: (payload) => { Slipmat.Import.patchImage(recordId, payload) }
   });
 };
 
@@ -62,7 +62,7 @@ Slipmat.Import.patchImage = (recordId, payload) => {
   });
 
   record.save({}, {
-    success: () => { Backbone.history.navigate("//records/" + recordId); }
+    success: () => { Backbone.history.navigate("//records/" + recordId) }
   });
 };
 

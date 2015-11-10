@@ -9,11 +9,11 @@ window.Slipmat = {
     this.currentUser = new Slipmat.Models.CurrentUser();
     this.currentUser.fetch();
 
-    ["countries", "genres"].forEach((model) => {
+    ["countries", "genres"].forEach(model => {
       $.ajax({
         url: "/api/" + model,
         type: "GET",
-        success: (payload) => { Slipmat[model] = payload; }
+        success: (payload) => { Slipmat[model] = payload }
       });
     });
 
@@ -34,4 +34,4 @@ window.Slipmat = {
   }
 };
 
-$(document).ready(() => { Slipmat.initialize(); });
+$(document).ready(() => { Slipmat.initialize() });

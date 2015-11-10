@@ -54,7 +54,7 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
   renderTracks: function () {
     var tracks = this.model.tracks();
     if (!tracks.length) { return; }
-    tracks.forEach((track) => { this._addTrack(track); });
+    tracks.forEach(track => { this._addTrack(track) });
   },
 
   toggleListButtons: function () {

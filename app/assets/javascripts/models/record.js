@@ -20,14 +20,14 @@ Slipmat.Models.Record = Backbone.Model.extend({
           "num_wanted"
         ];
 
-    associations.forEach((association) => {
+    associations.forEach(association => {
       if (payload[association]) {
         this[association]().set(payload[association]);
         delete payload[association];
       }
     });
 
-    attributes.forEach((attribute) => {
+    attributes.forEach(attribute => {
       if (payload[attribute]) {
         this["_" + attribute] = payload[attribute];
         delete payload[attribute];

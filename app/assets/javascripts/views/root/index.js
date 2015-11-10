@@ -47,11 +47,10 @@ Slipmat.Views.Index = Backbone.PaginatableView.extend({
   },
 
   renderSubviews: function () {
-    var content,
-        $el = this.$(".content-records").empty();
+    var $el = this.$(".content-records").empty();
 
-    this.collection.forEach((record) => {
-      content = this.subview({ model: record });
+    this.collection.forEach(record => {
+      var content = this.subview({ model: record });
       $el.append(content);
     });
   }

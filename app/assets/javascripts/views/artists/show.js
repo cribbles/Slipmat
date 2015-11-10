@@ -29,8 +29,7 @@ Slipmat.Views.ArtistShow = Backbone.ModularView.extend({
   },
 
   renderRecords: function () {
-    var subview,
-        records = this.model.records(),
+    var records = this.model.records(),
         template = JST["records/_record"],
         header = JST["layouts/_paginationHeader"]({ collection: records }),
         footer = JST["layouts/_paginationFooter"]({ collection: records }),
@@ -39,8 +38,8 @@ Slipmat.Views.ArtistShow = Backbone.ModularView.extend({
     this.$(".pagination-header").html(header);
     this.$(".pagination-footer").html(footer);
 
-    records.forEach(function (record) {
-      subview = template({ model: record });
+    records.forEach(record => {
+      var subview = template({ model: record });
       $el.append(subview);
     });
   }

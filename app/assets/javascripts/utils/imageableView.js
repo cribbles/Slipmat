@@ -16,7 +16,7 @@ Backbone.ImageableView = Backbone.View.extend({
       data: formData,
       processData: false,
       contentType: false,
-      success: () => { options.success && options.success(); }
+      success: () => { options.success && options.success() }
     });
   },
 
