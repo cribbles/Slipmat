@@ -33,12 +33,12 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
 
     var image = this.$("#image-form")[0].files[0],
         attributes = this.$el.serializeJSON(),
-        callback = (model) => {
+        callback = model => {
           Backbone.history.navigate("/records/" + model.id, { trigger: true });
         };
 
     this.model.save(attributes, {
-      success: (model) => {
+      success: model => {
         if (!image) {
           callback(model);
           return;
@@ -50,47 +50,36 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
           success: callback.bind(this, model)
         });
       },
-      error: (model, resp) => {
-        Slipmat._onError(this, resp.responseJSON);
-      }
+      error: (model, resp) => { Slipmat._onError(this, resp.responseJSON); }
     });
   },
 
   addCountries: function () {
-    var selected,
-        template,
+    var template = JST["records/_formOption"],
         modelCountry = this.model.country(),
         $el = this.$("#record_country");
 
-    Slipmat.countries.forEach((country) => {
-      selected = (country.id === modelCountry.id);
-      template = JST["records/_formOption"]({
+    Slipmat.countries.forEach(country => {
+      var content = template({
         id: country.id,
         attribute: country.name,
-        selected: selected
+        selected: (country.id === modelCountry.id)
       });
-
-      $el.append(template);
+      $el.append(content);
     });
   },
 
   addGenres: function () {
-    var checked,
-        template,
+    var template = JST["records/_genreCheckbox"],
         modelGenres = this.model.genres(),
         $el = this.$(".genre-container");
 
-    Slipmat.genres.forEach((genre) => {
-      checked = modelGenres.some((modelGenre) => {
-        return genre.id === modelGenre.id;
-      });
-
-      template = JST["records/_genreCheckbox"]({
+    Slipmat.genres.forEach(genre => {
+      var content = template({
         genre: genre,
-        checked: checked
+        checked: modelGenres.some(mG => { genre.id === mG.id })
       });
-
-      $el.append(template);
+      $el.append(content);
     });
   },
 
@@ -146,10 +135,11 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
   updateTracklistOrder: function () {
     var i,
         $input,
+        tracklist = this.$("input.track-ord"),
         order = this.$(".tracks-container").sortable("toArray");
 
     for (i = 0; i < order.length; i++) {
-      $input = this.$("input.track-ord")[i];
+      $input = tracklist[i];
       $($input).val(i + 1);
     }
   }
