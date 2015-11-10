@@ -39,8 +39,7 @@ module Api
     end
 
     def index
-      @records = Record.indexed(params[:page])
-
+      @records = Record.indexed(params[:page], sort)
       render :index
     end
 
@@ -92,6 +91,24 @@ module Api
             :_destroy
           ]
         )
+    end
+
+    def sort
+      return "created_at DESC" if params[:sort].blank?
+
+      valid_tables = [
+        'created_at',
+        'title'
+      ]
+      valid_orders = [
+        'asc',
+        'desc'
+      ]
+
+      table, order = params[:sort].split(",").map(&:downcase)
+      table = (valid_tables.include?(table) ? table : "created_at")
+      order = (valid_orders.include?(order) ? order : "asc")
+      table + " " + order
     end
   end
 end

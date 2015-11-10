@@ -81,7 +81,7 @@ class Record < ActiveRecord::Base
     SQL
   }
 
-  scope :indexed, -> (page) {
+  scope :indexed, -> (page, sort) {
     page = [page.to_i, 1].max
     offset = 30 * (page - 1).to_i
 
@@ -96,7 +96,7 @@ class Record < ActiveRecord::Base
         JOIN
           artists ON artists.id = records.artist_id
         ORDER BY
-          created_at DESC
+          #{sort}
         LIMIT
           30
         OFFSET

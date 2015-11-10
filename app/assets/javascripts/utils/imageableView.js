@@ -10,6 +10,7 @@ Backbone.ImageableView = Backbone.View.extend({
 
     if (!image) { return; }
     formData.append(param, image);
+
     $.ajax({
       url: _.result(model, "url"),
       type: "PATCH",
