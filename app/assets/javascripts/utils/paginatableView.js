@@ -24,7 +24,7 @@ Backbone.PaginatableView = Backbone.View.extend({
     this.transition();
     this.collection.fetch({
       data: query,
-      success: function () {
+      success: () => {
         fragment = Backbone.history.getFragment().replace(/(\?|\&)page=\d/, "");
         token = (fragment.match(/\?/) ? "&" : "?");
         Backbone.history.navigate(fragment + token + "page=" + page);

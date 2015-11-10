@@ -18,16 +18,13 @@ Slipmat.Views.SessionForm = Backbone.View.extend({
   submit: function (e) {
     e.preventDefault();
 
-    var view = this,
-        $form = $(e.currentTarget),
+    var $form = $(e.currentTarget),
         credentials = $form.serializeJSON();
 
     Slipmat.currentUser.signIn({
       username: credentials.username,
       password: credentials.password,
-      error: function (resp) {
-        Slipmat._onError(view, resp.responseJSON);
-      }
+      error: (resp) => { Slipmat._onError(this, resp.responseJSON); }
     });
   },
 

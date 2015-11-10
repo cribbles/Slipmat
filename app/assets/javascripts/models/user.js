@@ -7,8 +7,6 @@ Slipmat.Models.User = Backbone.Model.extend({
   },
 
   parse: function (payload) {
-    var user = this;
-
     if (payload.collection) {
       this.collectedRecords().set(payload.collection, { parse: true });
       delete payload.collection;
@@ -91,14 +89,12 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
       type: "POST",
       data: credentials,
       dataType: "json",
-      success: function (attributes) {
+      success: (attributes) => {
         parsed = this.parse(attributes);
         this.set(parsed);
         options.success && options.success(attributes);
-      }.bind(this),
-      error: function (resp) {
-        options.error && options.error(resp);
-      }
+      },
+      error: (resp) => { options.error && options.error(resp); }
     });
   },
 
@@ -116,10 +112,10 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
       url: this.url,
       type: "DELETE",
       dataType: "json",
-      success: function () {
+      success: () => {
         this.clear();
         options.success && options.success();
-      }.bind(this)
+      }
     });
   },
 
@@ -140,7 +136,7 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
       type: "POST",
       dataType: "json",
       data: { record_id: record.id },
-      success: function (data) {
+      success: (data) => {
         listRecord = record.clone().set({ list_id: data.list_id });
         list.add(listRecord);
         callback && callback();
@@ -156,7 +152,7 @@ Slipmat.Models.CurrentUser = Slipmat.Models.User.extend({
       url: "/api/user_" + listType + "s/" + id,
       type: "DELETE",
       dataType: "json",
-      success: function () {
+      success: () => {
         list.remove(record.id);
         callback && callback();
       }

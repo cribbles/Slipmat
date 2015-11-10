@@ -24,29 +24,27 @@ Slipmat.Views.ArtistEdit = Backbone.ImageableView.extend({
   submit: function (e) {
     e.preventDefault();
 
-    var view = this,
-        image = this.$("#image-form")[0].files[0],
+    var image = this.$("#image-form")[0].files[0],
         attributes = this.$el.serializeJSON(),
-        callback = function (artist) {
+        callback = (artist) => {
           Slipmat.currentUser.fetch();
           Backbone.history.navigate("#/artists/" + artist.id, { trigger: true });
         };
 
     this.model.save(attributes, {
-      success: function (artist) {
+      success: (artist) => {
         if (!image) {
           callback(artist);
           return;
         }
-
-        view.submitImage({
+        this.submitImage({
           image: image,
           param: "artist[image]",
           model: artist,
-          success: callback.bind(view, artist)
+          success: callback.bind(this, artist)
         });
       },
-      error: function (model, resp) {
+      error: (model, resp) => {
         Slipmat._onError(this, resp.responseJSON);
       }
     });

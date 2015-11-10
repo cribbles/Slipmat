@@ -31,25 +31,27 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
   submit: function (e) {
     e.preventDefault();
 
-    var view = this,
-        image = this.$("#image-form")[0].files[0],
+    var image = this.$("#image-form")[0].files[0],
         attributes = this.$el.serializeJSON(),
-        callback = function (model) {
+        callback = (model) => {
           Backbone.history.navigate("/records/" + model.id, { trigger: true });
         };
 
     this.model.save(attributes, {
-      success: function (model) {
+      success: (model) => {
         if (!image) {
           callback(model);
           return;
         }
-        view.submitImage({
+        this.submitImage({
           image: image,
           param: "record[image]",
           model: model,
-          success: callback.bind(view, model)
+          success: callback.bind(this, model)
         });
+      },
+      error: (model, resp) => {
+        Slipmat._onError(this, resp.responseJSON);
       }
     });
   },
@@ -60,7 +62,7 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
         modelCountry = this.model.country(),
         $el = this.$("#record_country");
 
-    Slipmat.countries.forEach(function (country) {
+    Slipmat.countries.forEach((country) => {
       selected = (country.id === modelCountry.id);
       template = JST["records/_formOption"]({
         id: country.id,
@@ -78,8 +80,8 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
         modelGenres = this.model.genres(),
         $el = this.$(".genre-container");
 
-    Slipmat.genres.forEach(function (genre) {
-      checked = modelGenres.some(function (modelGenre) {
+    Slipmat.genres.forEach((genre) => {
+      checked = modelGenres.some((modelGenre) => {
         return genre.id === modelGenre.id;
       });
 
@@ -97,9 +99,7 @@ Slipmat.Views.RecordForm = Backbone.ImageableView.extend({
         track,
         content = JST["tracks/form"](),
         numTracks = this.model.tracks().length || 4,
-        tracks = _.sortBy(this.model.tracks(), function (track) {
-          return track.ord;
-        });
+        tracks = _.sortBy(this.model.tracks(), track => track.ord);
 
     this.$(".tracklist-form").html(content);
 

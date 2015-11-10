@@ -1,19 +1,15 @@
 Slipmat.Import = {}
 
-Slipmat.Import.import = function (id) {
-  var token = Slipmat.discogsUserToken;
-
+Slipmat.Import.import = (id) => {
   $.ajax({
     url: "http://api.discogs.com/releases/" + id,
     type: "GET",
     dataType: "json",
-    success: function (payload) {
-      Slipmat.Import.parse(payload);
-    }
+    success: (payload) => { Slipmat.Import.parse(payload); }
   });
 };
 
-Slipmat.Import.parse = function (payload) {
+Slipmat.Import.parse = (payload) => {
   var newTrack,
       record = new Slipmat.Models.Record(),
       artist_name = payload.artists[0].name;
@@ -30,24 +26,21 @@ Slipmat.Import.parse = function (payload) {
     tracks_attributes: []
   };
 
-  payload.tracklist.forEach(function (track) {
+  payload.tracklist.forEach((track) => {
     newTrack = {
       duration: track.duration,
       position: track.position,
       title: track.title
     };
-
     record.attributes.record.tracks_attributes.unshift(newTrack);
   });
 
   record.save({}, {
-    success: function (model) {
-      Slipmat.Import.fetchImage(model, artist_name);
-    }
+    success: (model) => { Slipmat.Import.fetchImage(model, artist_name); }
   });
 };
 
-Slipmat.Import.fetchImage = function (model, artist_name) {
+Slipmat.Import.fetchImage = (model, artist_name) => {
   var recordId = model.id,
       token = Slipmat.discogsUserToken,
       escapedTitle = model.get("title").replace(/ /g, "+"),
@@ -58,22 +51,18 @@ Slipmat.Import.fetchImage = function (model, artist_name) {
     url: url,
     type: "GET",
     dataType: "json",
-    success: function (payload) {
-      Slipmat.Import.patchImage(recordId, payload);
-    }
+    success: (payload) => { Slipmat.Import.patchImage(recordId, payload); }
   });
 };
 
-Slipmat.Import.patchImage = function (recordId, payload) {
+Slipmat.Import.patchImage = (recordId, payload) => {
   var record = new Slipmat.Models.Record({
     id: recordId,
     record: { image_url: payload.results[0].thumb }
   });
 
   record.save({}, {
-    success: function () {
-      Backbone.history.navigate("//records/" + recordId);
-    }
+    success: () => { Backbone.history.navigate("//records/" + recordId); }
   });
 };
 

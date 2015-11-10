@@ -5,8 +5,7 @@ Slipmat.Models.Record = Backbone.Model.extend({
   subview: JST["records/_record"],
 
   parse: function (payload) {
-    var record = this,
-        associations = [
+    var associations = [
           "artist",
           "label"
         ],
@@ -21,16 +20,16 @@ Slipmat.Models.Record = Backbone.Model.extend({
           "num_wanted"
         ];
 
-    associations.forEach(function (association) {
+    associations.forEach((association) => {
       if (payload[association]) {
-        record[association]().set(payload[association]);
+        this[association]().set(payload[association]);
         delete payload[association];
       }
     });
 
-    attributes.forEach(function (attribute) {
+    attributes.forEach((attribute) => {
       if (payload[attribute]) {
-        record["_" + attribute] = payload[attribute];
+        this["_" + attribute] = payload[attribute];
         delete payload[attribute];
       }
     });

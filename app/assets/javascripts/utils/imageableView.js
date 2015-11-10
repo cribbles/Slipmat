@@ -3,8 +3,7 @@ Backbone.ImageableView = Backbone.View.extend({
   submitImage: function (options) {
     this.stopListening();
 
-    var view = this,
-        image = options.image,
+    var image = options.image,
         param = options.param,
         model = options.model,
         formData = new FormData();
@@ -17,9 +16,7 @@ Backbone.ImageableView = Backbone.View.extend({
       data: formData,
       processData: false,
       contentType: false,
-      success: function () {
-        options.success && options.success();
-      }
+      success: () => { options.success && options.success(); }
     });
   },
 
@@ -34,7 +31,7 @@ Backbone.ImageableView = Backbone.View.extend({
         reader = new FileReader();
     if (!files || !files.length) { return; }
 
-    reader.onload = function (readerEvent) {
+    reader.onload = (readerEvent) => {
       $("#form-image").attr("src", readerEvent.target.result);
     };
     reader.readAsDataURL(files[0]);

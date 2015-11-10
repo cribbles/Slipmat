@@ -24,27 +24,28 @@ Slipmat.Views.LabelEdit = Backbone.ImageableView.extend({
   submit: function (e) {
     e.preventDefault();
 
-    var view = this,
-        image = this.$("#image-form")[0].files[0],
+    var image = this.$("#image-form")[0].files[0],
         attributes = this.$el.serializeJSON(),
-        callback = function (label) {
+        callback = (label) => {
           Slipmat.currentUser.fetch();
           Backbone.history.navigate("#/labels/" + label.id, { trigger: true });
         };
 
     this.model.save(attributes, {
-      success: function (label) {
+      success: (label) => {
         if (!image) {
           callback(label);
           return;
         }
-
-        view.submitImage({
+        this.submitImage({
           image: image,
           param: "label[image]",
           model: label,
-          success: callback.bind(view, label)
+          success: callback.bind(this, label)
         });
+      },
+      error: (model, resp) => {
+        Slipmat._onError(this, resp.responseJSON);
       }
     });
   }

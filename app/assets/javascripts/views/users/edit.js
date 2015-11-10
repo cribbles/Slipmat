@@ -21,30 +21,28 @@ Slipmat.Views.UserEdit = Backbone.ImageableView.extend({
     e.preventDefault();
 
     var fragment,
-        view = this,
         image = this.$("#image-form")[0].files[0],
         attributes = this.$el.serializeJSON(),
-        callback = function (user) {
+        callback = (user) => {
           fragment = "//users/" + user.get("slug");
           Slipmat.currentUser.fetch();
           Backbone.history.navigate(fragment, { trigger: true });
         };
 
     this.model.save(attributes, {
-      success: function (user) {
+      success: (user) => {
         if (!image) {
           callback(user);
           return;
         }
-
-        view.submitImage({
+        this.submitImage({
           image: image,
           param: "user[image]",
           model: user,
-          success: callback.bind(view, user)
+          success: callback.bind(this, user)
         });
       },
-      error: function (model, resp) {
+      error: (model, resp) => {
         Slipmat._onError(this, resp.responseJSON);
       }
     });

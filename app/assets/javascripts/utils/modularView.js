@@ -5,21 +5,18 @@ Backbone.ModularView = Backbone.View.extend({
     if (!contributors.length) { return; }
 
     var $contributors = this.$(".contributors-container");
-    contributors.forEach(function (contributor) {
-      var $contributor = $('<a href="#/users/' + contributor.slug + '">');
-      $contributor.text(_.escape(contributor.username));
-
-      $contributors.append($contributor);
+    contributors.forEach((contributor) => {
+      $contributors.append(
+        $('<a href="#/users/' + contributor.slug + '">')
+          .text(_.escape(contributor.username))
+      );
     });
   },
 
   renderComments: function () {
     var comments = this.model.comments();
     if (!comments.length) { return; }
-
-    comments.forEach(function (comment) {
-      this._addComment(comment);
-    }, this);
+    comments.forEach((comment) => { this._addComment(comment); });
   },
 
   addComment: function (e) {
@@ -38,10 +35,10 @@ Backbone.ModularView = Backbone.View.extend({
       type: "POST",
       dataType: "json",
       data: comment,
-      success: function (comment) {
+      success: (comment) => {
         this.$(".comment-form").val("");
         this._addComment(comment);
-      }.bind(this)
+      }
     });
   },
 

@@ -46,34 +46,30 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   index: function (query, options) {
-    var view,
-        router = this,
-        query = query || {},
+    var query = query || {},
         options = options || {},
         collection = options.collection || this.records;
 
     collection.fetch({
       data: { page: Number(query.page) },
-      success: function () {
-        view = new Slipmat.Views.Index({
+      success: () => {
+        var view = new Slipmat.Views.Index({
           collection: collection,
-          spinner: router.spinner
+          spinner: this.spinner
         });
-        router._swapView(view);
+        this._swapView(view);
       }
     });
   },
 
   search: function (query) {
-    var view,
-        router = this,
-        results = new Slipmat.Collections.SearchResults();
+    var results = new Slipmat.Collections.SearchResults();
 
     results.fetch({
       data: query,
-      success: function () {
-        view = new Slipmat.Views.Search({ collection: results });
-        router._swapView(view);
+      success: () => {
+        var view = new Slipmat.Views.Search({ collection: results });
+        this._swapView(view);
       }
     });
   },
@@ -93,33 +89,30 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   recordSearch: function (query) {
-    var view,
-        router = this,
-        results = new Slipmat.Collections.FilterResults();
+    var results = new Slipmat.Collections.FilterResults();
 
     this._transition();
     results.fetch({
       data: query,
-      success: function (results) {
+      success: (results) => {
         delete query.page;
-        view = new Slipmat.Views.RecordSearch({
+        var view = new Slipmat.Views.RecordSearch({
           query: query,
           collection: results,
-          spinner: router.spinner
+          spinner: this.spinner
         });
-        router._swapView(view);
+        this._swapView(view);
       }
     });
   },
 
   recordShow: function (id) {
-    var view, router = this;
-    this.records.getOrFetch(id, function (record) {
-      view = new Slipmat.Views.RecordShow({
+    this.records.getOrFetch(id, (record) => {
+      var view = new Slipmat.Views.RecordShow({
         model: record,
-        router: router
+        router: this
       });
-      router._swapView(view);
+      this._swapView(view);
     });
     this._transition();
   },
@@ -127,10 +120,9 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   recordEdit: function (id) {
     if (!this._ensureSignedIn()) { return; }
 
-    var view, router = this;
-    this.records.getOrFetch(id, function (record) {
-      view = new Slipmat.Views.RecordForm({ model: record });
-      router._swapView(view);
+    this.records.getOrFetch(id, (record) => {
+      var view = new Slipmat.Views.RecordForm({ model: record });
+      this._swapView(view);
     });
   },
 
@@ -140,32 +132,27 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   artistShow: function (id) {
-    var view,
-        router = this,
-        artist = new Slipmat.Models.Artist({ id: id });
+    var artist = new Slipmat.Models.Artist({ id: id });
 
     artist.fetch({
-      success: function (artist) {
-        view = new Slipmat.Views.ArtistShow({
+      success: (artist) => {
+        var view = new Slipmat.Views.ArtistShow({
           model: artist,
-          router: router
+          router: this
         });
-        router._swapView(view);
+        this._swapView(view);
       }
     });
   },
 
   artistEdit: function (id) {
     if (!this._ensureSignedIn()) { return; }
-
-    var view,
-        router = this,
-        artist = new Slipmat.Models.Artist({ id: id });
+    var artist = new Slipmat.Models.Artist({ id: id });
 
     artist.fetch({
-      success: function (artist) {
-        view = new Slipmat.Views.ArtistEdit({ model: artist });
-        router._swapView(view);
+      success: (artist) => {
+        var view = new Slipmat.Views.ArtistEdit({ model: artist });
+        this._swapView(view);
       }
     });
   },
@@ -176,32 +163,27 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   labelShow: function (id) {
-    var view,
-        router = this,
-        label = new Slipmat.Models.Label({ id: id });
+    var label = new Slipmat.Models.Label({ id: id });
 
     label.fetch({
-      success: function (label) {
-        view = new Slipmat.Views.LabelShow({
+      success: (label) => {
+        var view = new Slipmat.Views.LabelShow({
           model: label,
-          router: router
+          router: this
         });
-        router._swapView(view);
+        this._swapView(view);
       }
     });
   },
 
   labelEdit: function (id) {
     if (!this._ensureSignedIn()) { return; }
-
-    var view,
-        router = this,
-        label = new Slipmat.Models.Label({ id: id });
+    var label = new Slipmat.Models.Label({ id: id });
 
     label.fetch({
-      success: function (label) {
-        view = new Slipmat.Views.LabelEdit({ model: label });
-        router._swapView(view);
+      success: (label) => {
+        var view = new Slipmat.Views.LabelEdit({ model: label });
+        this._swapView(view);
       }
     });
   },
@@ -232,18 +214,16 @@ Slipmat.Routers.Router = Backbone.Router.extend({
   },
 
   userShow: function (id, tab) {
-    var view,
-        router = this,
-        user = new Slipmat.Models.User({ id: id });
+    var user = new Slipmat.Models.User({ id: id });
 
     user.fetch({
-      success: function (user) {
-        view = new Slipmat.Views.UserShow({
-          $rootEl: router.$rootEl,
+      success: (user) => {
+        var view = new Slipmat.Views.UserShow({
+          $rootEl: this.$rootEl,
           model: user,
           tab: (tab || "profile")
         });
-        router._swapView(view);
+        this._swapView(view);
       }
     });
   },
@@ -281,21 +261,20 @@ Slipmat.Routers.Router = Backbone.Router.extend({
 
   _ensureSignedIn: function (options) {
     options = options || {};
-    var view, router, fragment;
+    var view, fragment;
 
     if (!Slipmat.currentUser.isSignedIn()) {
       if (!options.success) {
         fragment = Backbone.history.fragment;
-        options.success = function () {
+        options.success = () => {
           Backbone.history.fragment = null;
           Backbone.history.navigate(fragment, { trigger: true });
         };
       }
       if (!options.error) {
-        router = this;
-        options.error = function () {
+        options.error = () => {
           view = new Slipmat.Views.SessionForm();
-          router._swapView(view);
+          this._swapView(view);
         };
       }
       Slipmat.currentUser.fetch(options);

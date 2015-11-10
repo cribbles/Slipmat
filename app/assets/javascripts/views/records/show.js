@@ -47,16 +47,14 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
       fragment = "#/records/search?genre=" + window.encodeURIComponent(genre);
       $genre = $('<a href="' + fragment + '">').text(genre);
       $genres.append($genre);
-
       if (i + 1 < genres.length) { $genres.append(", "); }
     }
   },
 
   renderTracks: function () {
-    var view = this, tracks = this.model.tracks();
+    var tracks = this.model.tracks();
     if (!tracks.length) { return; }
-
-    tracks.forEach(function (track) { view._addTrack(track); });
+    tracks.forEach((track) => { this._addTrack(track); });
   },
 
   toggleListButtons: function () {
@@ -78,7 +76,6 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
     if (!this._ensureSignedIn()) { return; }
 
     var callback,
-        view = this,
         $button = $(e.currentTarget),
         list = $button.attr("id"),
         action = $button.data("action"),
@@ -86,17 +83,17 @@ Slipmat.Views.RecordShow = Backbone.ModularView.extend({
         count = Number(listCount.text());
 
     if (action === "add") {
-      callback = function () {
+      callback = () => {
         listCount.html(++count);
-        view._toggleButton($button, "remove");
+        this._toggleButton($button, "remove");
       };
-      Slipmat.currentUser.addToList(list, view.model, callback);
+      Slipmat.currentUser.addToList(list, this.model, callback);
     } else if (action === "remove") {
-      callback = function () {
+      callback = () => {
         listCount.html(--count);
-        view._toggleButton($button, "add");
+        this._toggleButton($button, "add");
       };
-      Slipmat.currentUser.removeFromList(list, view.model, callback);
+      Slipmat.currentUser.removeFromList(list, this.model, callback);
     }
     $button.prop("disabled", true);
   },

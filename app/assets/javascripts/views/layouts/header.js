@@ -63,7 +63,6 @@ Slipmat.Views.Header = Backbone.View.extend({
 
   renderSearchResults: function () {
     var $result,
-        view = this,
         $results = this.$(".search-results").empty(),
         results = this.results.slice(0, 10);
 
@@ -71,8 +70,8 @@ Slipmat.Views.Header = Backbone.View.extend({
       $results.hide();
     } else {
       $results.show();
-      results.forEach(function (result) {
-        $result = view.resultTemplate({ result: result });
+      results.forEach((result) => {
+        $result = this.resultTemplate({ result: result });
         $results.append($result);
       });
     }
@@ -115,7 +114,7 @@ Slipmat.Views.Header = Backbone.View.extend({
 
     var fragment = Backbone.history.fragment;
     Slipmat.currentUser.signOut({
-      success: function () {
+      success: () => {
         Backbone.history.fragment = null;
         Backbone.history.navigate(fragment, { trigger: true });
       }

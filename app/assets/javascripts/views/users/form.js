@@ -17,16 +17,15 @@ Slipmat.Views.UserNew = Backbone.View.extend({
   submit: function (e) {
     e.preventDefault();
 
-    var view = this,
-        $form = $(e.currentTarget),
+    var $form = $(e.currentTarget),
         attributes = $form.serializeJSON().user;
 
     this.model.save(attributes, {
-      success: function (user) {
+      success: (user) => {
         Slipmat.currentUser.fetch();
         Backbone.history.navigate("", { trigger: true });
       },
-      error: function (model, resp) {
+      error: (model, resp) => {
         Slipmat._onError(this, resp.responseJSON);
       }
     });
