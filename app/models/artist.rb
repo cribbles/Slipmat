@@ -1,5 +1,9 @@
 class Artist < ActiveRecord::Base
   include PgSearch
+  extend Sortable
+
+  sortable_by :created_at, :name
+
   multisearchable against: :name, using: {
                     tsearch: { prefix: true },
                     trigram: { threshold: 0.3 }

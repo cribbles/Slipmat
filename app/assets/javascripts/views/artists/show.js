@@ -14,7 +14,8 @@ Slipmat.Views.ArtistShow = Backbone.ModularView.extend({
   },
 
   render: function () {
-    var content = this.template({ artist: this.model });
+    var $textarea,
+        content = this.template({ artist: this.model });
     this.$el.html(content);
 
     if (Slipmat.currentUser.isSignedIn()) {

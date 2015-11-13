@@ -1,6 +1,9 @@
 class Record < ActiveRecord::Base
   include Formattable
   include PgSearch
+  extend Sortable
+
+  sortable_by :created_at, :title
 
   belongs_to :artist
   belongs_to :label
@@ -81,9 +84,10 @@ class Record < ActiveRecord::Base
     SQL
   }
 
-  scope :indexed, -> (page, sort) {
+  scope :indexed, -> (page: page, order: order) {
     page = [page.to_i, 1].max
     offset = 30 * (page - 1).to_i
+    order = parse_order(order)
 
     Kaminari.paginate_array(
       find_by_sql([<<-SQL, offset]), total_count: Record.count
@@ -96,7 +100,7 @@ class Record < ActiveRecord::Base
         JOIN
           artists ON artists.id = records.artist_id
         ORDER BY
-          #{sort}
+          #{order}
         LIMIT
           30
         OFFSET

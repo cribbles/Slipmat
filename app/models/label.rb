@@ -1,5 +1,9 @@
 class Label < ActiveRecord::Base
   include PgSearch
+  extend Sortable
+
+  sortable_by :created_at, :title
+
   multisearchable against: :title, using: {
                     tsearch: { prefix: true },
                     trigram: { threshold: 0.3 }

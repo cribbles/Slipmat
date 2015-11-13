@@ -40,7 +40,7 @@ module Api
 
     def index
       @artists = Artist
-        .order(created_at: :desc)
+        .order_by(params[:order])
         .page(params[:page])
 
       render :index
