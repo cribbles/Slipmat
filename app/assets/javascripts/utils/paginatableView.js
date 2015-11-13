@@ -3,31 +3,20 @@ Backbone.PaginatableView = Backbone.View.extend({
   paginate: function (e) {
     e.preventDefault();
 
-    var page,
-        fragment,
-        token,
-        query = this.query || {},
-        pages = this.collection.pages(),
-        $el = $(e.currentTarget),
-        prevPage = $el.parent().hasClass("prev-page"),
-        nextPage = $el.parent().hasClass("next-page");
+    var query = this.query || {},
+        $el = $(e.currentTarget);
 
     if (!$el.hasClass("link")) { return; }
 
-    if (nextPage && pages.next_page) {
-      page = pages.next_page;
-    } else if (prevPage && pages.prev_page) {
-      page = pages.prev_page;
-    }
-    query.page = page;
+    query.page = this._page($el);
+    query.order = this._order();
 
     this.transition();
     this.collection.fetch({
       data: query,
       success: () => {
-        fragment = Backbone.history.getFragment().replace(/(\?|\&)page=\d/, "");
-        token = (fragment.match(/\?/) ? "&" : "?");
-        Backbone.history.navigate(fragment + token + "page=" + page);
+        var fragment = this._newFragment(query.page);
+        Backbone.history.navigate(fragment);
       }
     });
   },
@@ -58,6 +47,35 @@ Backbone.PaginatableView = Backbone.View.extend({
 
   transition: function () {
     $(".content-records").html(this.spinner);
+    return this;
+  },
+
+  _page: function ($el) {
+    var pages = this.collection.pages(),
+      prevPage = $el.parent().hasClass("prev-page"),
+      nextPage = $el.parent().hasClass("next-page");
+
+    if (nextPage && pages.next_page) {
+      return pages.next_page;
+    } else if (prevPage && pages.prev_page) {
+      return pages.prev_page;
+    }
+  },
+
+  _order: function () {
+    var matchData = Backbone.history.getFragment().match(/order=([a-z\,]+)/i);
+    return matchData && matchData[1];
+  },
+
+  _newFragment: function (page) {
+    var fragment = Backbone.history.getFragment(),
+        pageRegExp = /((\?|\&)page=)\d/;
+
+    if (!fragment.match(pageRegExp)) {
+      return fragment + (fragment.match(/\?/) ? "&" : "?") + "page=" + page;
+    } else {
+      return fragment.replace(pageRegExp, "$1" + page);
+    }
   }
 
 });
