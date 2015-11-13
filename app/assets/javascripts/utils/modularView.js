@@ -5,7 +5,7 @@ Backbone.ModularView = Backbone.View.extend({
     if (!contributors.length) { return; }
 
     var $contributors = this.$(".contributors-container");
-    contributors.forEach((contributor) => {
+    contributors.forEach(contributor => {
       $contributors.append(
         $('<a href="#/users/' + contributor.slug + '">')
           .text(_.escape(contributor.username))
@@ -16,7 +16,7 @@ Backbone.ModularView = Backbone.View.extend({
   renderComments: function () {
     var comments = this.model.comments();
     if (!comments.length) { return; }
-    comments.forEach((comment) => { this._addComment(comment); });
+    comments.forEach(comment => { this._addComment(comment) });
   },
 
   addComment: function (e) {

@@ -51,7 +51,10 @@ Slipmat.Routers.Router = Backbone.Router.extend({
         collection = options.collection || this.records;
 
     collection.fetch({
-      data: { page: Number(query.page) },
+      data: {
+        order: query.order,
+        page: Number(query.page)
+      },
       success: () => {
         var view = new Slipmat.Views.Index({
           collection: collection,
