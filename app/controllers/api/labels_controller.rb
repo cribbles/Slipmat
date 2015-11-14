@@ -1,7 +1,6 @@
 module Api
   class LabelsController < ApplicationController
     include Contributable
-
     before_action :ensure_signed_in, except: [:index, :show]
 
     def create
@@ -41,7 +40,7 @@ module Api
 
     def index
       @labels = Label
-        .order(created_at: :desc)
+        .order_by(params[:order])
         .page(params[:page])
 
       render :index

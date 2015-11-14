@@ -1,5 +1,29 @@
 Backbone.PaginatableView = Backbone.View.extend({
 
+  renderCollection: function () {
+    this.renderPages();
+    this.renderSubviews();
+  },
+
+  renderPages: function () {
+    this.$(".page > span").off();
+
+    var header = JST["layouts/_paginationHeader"]({
+      collection: this.collection
+    }), footer = JST["layouts/_paginationFooter"]({
+      collection: this.collection
+    });
+    this.$(".pagination-header").html(header);
+    this.$(".pagination-footer").html(footer);
+
+    this.$("option")
+      .filter((_, el) => { return el.value === this._order() })
+      .prop("selected", true);
+
+    this.$(".page > span").on("click", this.paginate.bind(this));
+    this.$("select").on("change", this.changeOrder.bind(this));
+  },
+
   paginate: function (e) {
     e.preventDefault();
 
@@ -21,27 +45,20 @@ Backbone.PaginatableView = Backbone.View.extend({
     });
   },
 
-  renderCollection: function () {
-    this.renderPages();
-    this.renderSubviews();
-  },
+  changeOrder: function (e) {
+    e.preventDefault();
 
-  renderPages: function () {
-    this.$(".page > span").off();
+    var fragment = Backbone.history.getFragment(),
+        order = $(e.currentTarget).children(":selected").val(),
+        newFragment = fragment.replace(/((\?|\&)(page|order)=[^\?\&]+)/g, ""),
+        orderClause = (newFragment.match(/\?/) ? "&" : "?") + "order=" + order;
 
-    var header = JST["layouts/_paginationHeader"]({
-      collection: this.collection
-    }), footer = JST["layouts/_paginationFooter"]({
-      collection: this.collection
-    });
-
-    this.$(".pagination-header").html(header);
-    this.$(".pagination-footer").html(footer);
-    this.$(".page > span").on("click", this.paginate.bind(this));
+    Backbone.history.navigate(newFragment + orderClause, { trigger: true });
   },
 
   remove: function () {
     this.$(".page > span").off();
+    this.$("select").off();
     Backbone.View.prototype.remove.call(this);
   },
 

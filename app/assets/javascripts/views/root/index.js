@@ -43,7 +43,7 @@ Slipmat.Views.Index = Backbone.PaginatableView.extend({
     this.collection.fetch();
     this.transition();
 
-    Backbone.history.navigate("//" + this.collection.url.slice(4));
+    Backbone.history.navigate("#/" + this.collection.url.slice(4));
   },
 
   renderSubviews: function () {
