@@ -187,7 +187,7 @@ main.content {
   z-index: 1000;
 }
 
-.search-result:hover {
+.search-result:hover, .search-results > .selected {
   background: #eee;
 }
 

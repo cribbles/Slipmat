@@ -70,11 +70,61 @@ Slipmat.Views.Header = Backbone.View.extend({
       $results.hide();
     } else {
       $results.show();
-      results.forEach(result => {
-        $result = this.resultTemplate({ result: result });
+      results.forEach((result, i) => {
+        $result = this.resultTemplate({
+          result: result,
+          resultID: i
+        });
         $results.append($result);
       });
+      this.bindResultsNavigation();
     }
+  },
+
+  bindResultsNavigation: function () {
+    this.$(".header-search")
+      .off("keydown")
+      .on("keydown", e => {
+        var resultID,
+            nextResult,
+            fragment,
+            $results = this.$(".search-result");
+            selected = this.$(".search-results").find(".selected");
+
+        switch (e.which) {
+          case 40: // down
+            e.preventDefault();
+            if (selected.length) {
+              resultID = selected.data("result-id") + 1;
+            } else {
+              resultID = 0;
+            }
+            break;
+          case 38: // up
+            e.preventDefault();
+            if (selected.length) {
+              resultID = selected.data("result-id") - 1;
+            } else {
+              resultID = $results.length - 1;
+            }
+            break;
+          case 13: // enter
+            e.preventDefault();
+            if (selected.length) {
+              fragment = selected.data("fragment");
+              Backbone.history.navigate(fragment, { trigger: true });
+              this._clearSearchResults();
+              this.$(".header-search").off("keydown");
+            }
+            break;
+        }
+
+        if (typeof resultID !== "undefined") {
+          selected.removeClass("selected");
+          nextResult = $results.filter("[data-result-id=" + resultID + "]");
+          nextResult.addClass("selected");
+        }
+      });
   },
 
   clearSearchResults: function () {
