@@ -21,7 +21,7 @@ gem 'pg_search'
 gem 'backbone-queryparams-rails'
 gem 'friendly_id'
 gem 'redis-rails'
-gem 'babel-transpiler'
+gem 'sprockets-es6'
 
 group :production do
   gem 'rails_12factor'

@@ -46,7 +46,7 @@ GEM
     aws-sdk-v1 (1.66.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
-    babel-source (5.8.33)
+    babel-source (5.8.34)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
@@ -229,6 +229,10 @@ GEM
     spring (1.4.0)
     sprockets (3.4.0)
       rack (> 1, < 3)
+    sprockets-es6 (0.8.2)
+      babel-source (>= 5.8.11)
+      babel-transpiler
+      sprockets (>= 3.0.0)
     sprockets-rails (2.3.3)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -249,7 +253,6 @@ PLATFORMS
 DEPENDENCIES
   annotate
   aws-sdk (< 2.0)
-  babel-transpiler
   backbone-on-rails
   backbone-queryparams-rails
   bcrypt
@@ -276,4 +279,5 @@ DEPENDENCIES
   sass-rails
   sdoc
   spring
+  sprockets-es6
   uglifier
