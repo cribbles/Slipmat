@@ -114,7 +114,7 @@ Slipmat.Views.Header = Backbone.View.extend({
               fragment = selected.data("fragment");
               Backbone.history.navigate(fragment, { trigger: true });
               this._clearSearchResults();
-              this.$(".header-search").off("keydown");
+              this.$(".header-search").off("keydown").blur();
             }
             break;
         }
