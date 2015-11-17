@@ -109,8 +109,8 @@ Slipmat.Views.Header = Backbone.View.extend({
             }
             break;
           case 13: // enter
-            e.preventDefault();
             if (selected.length) {
+              e.preventDefault();
               fragment = selected.data("fragment");
               Backbone.history.navigate(fragment, { trigger: true });
               this._clearSearchResults();
